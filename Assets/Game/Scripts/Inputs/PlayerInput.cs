@@ -1,4 +1,3 @@
-using System;
 using Game.Scripts.Core;
 using Game.Scripts.Levels;
 using Game.Scripts.Player;
@@ -9,70 +8,70 @@ namespace Game.Scripts.Inputs
     [RequireComponent(typeof(PlayerController))]
     public class PlayerInput : MonoBehaviour
     {
-        [Header("Player")]
-        [SerializeField] private Vector2 moveInput = Vector2.zero;
-        [SerializeField] private float rotateInput = 0f;
-        [SerializeField] private float jetInput = 0f;
-        [SerializeField] private bool holdPosition = false;
-        [SerializeField] private bool holdRotation = false;
-        
-        [Header("Player")]
-        [SerializeField] private bool nextCamera = false;
-        [SerializeField] private float zoomDelta = 0f;
+        [Header("Settings")]
         [SerializeField] private float zoomRate = 1f;
+
+        private Vector2 _inputMove = Vector2.zero;
+        private float _inputRotate = 0f;
+        private float _inputJet = 0f;
+        private bool _inputStabilizePosition = false;
+        private bool _inputStabilizeRotation = false;
+        private bool _inputNextCamera = false;
+        private float _inputZoom = 0f;
+        
+        private float _orthographicSize = 6f;
         
         private LazyComponent<PlayerController> _lazyPlayer;
 
         public PlayerController Player => (_lazyPlayer ??= new LazyComponent<PlayerController>(gameObject)).Value;
-
-        [SerializeField] private float _orthographicSize = 6f;
         
-        private void HandleInput()
+        private void HandleInput(float deltaTime)
         {
-            moveInput.x = Input.GetAxisRaw("Horizontal");
-            moveInput.y = Input.GetAxisRaw("Vertical");
+            _inputMove.x = Input.GetAxisRaw("Horizontal");
+            _inputMove.y = Input.GetAxisRaw("Vertical");
             
-            rotateInput = 0f;
-            rotateInput += Input.GetKey(KeyCode.E) ? -1f : 0f;
-            rotateInput += Input.GetKey(KeyCode.Q) ? 1f : 0f;
+            _inputRotate = 0f;
+            _inputRotate += Input.GetKey(KeyCode.E) ? -1f : 0f;
+            _inputRotate += Input.GetKey(KeyCode.Q) ? 1f : 0f;
             
-            jetInput = Input.GetAxisRaw("Jump");
+            _inputJet = Input.GetAxisRaw("Jump");
+            
+            _inputStabilizeRotation = Input.GetKeyDown(KeyCode.R);
+            _inputStabilizePosition = Input.GetKeyDown(KeyCode.T);
+            
+            _inputNextCamera = Input.GetKeyDown(KeyCode.V);
 
-            holdPosition = Input.GetKeyDown(KeyCode.X);
-            holdRotation = Input.GetKeyDown(KeyCode.R);
-            
-            nextCamera = Input.GetKeyDown(KeyCode.V);
-
-            zoomDelta = Input.mouseScrollDelta.y;
+            _inputZoom = Input.mouseScrollDelta.y +
+                         10 * deltaTime * ((Input.GetKey(KeyCode.Z) ? 1f : 0f) + (Input.GetKey(KeyCode.X) ? -1f : 0f));
         }
         
         private void HandlePlayer()
         {
-            Player.Spaceship.Jet(jetInput);
-            Player.Spaceship.Move(moveInput);
-            Player.Spaceship.Rotate(rotateInput);
-
-            if (holdPosition)
+            if (_inputStabilizePosition)
             {
-                Player.Spaceship.HoldPosition = !Player.Spaceship.HoldPosition;
+                Player.Spaceship.StabilizationPosition = !Player.Spaceship.StabilizationPosition;
             }
             
-            if (holdRotation)
+            if (_inputStabilizeRotation)
             {
-                Player.Spaceship.HoldRotation = !Player.Spaceship.HoldRotation;
+                Player.Spaceship.StabilizationRotation = !Player.Spaceship.StabilizationRotation;
             }
+            
+            Player.Spaceship.Move(_inputMove);
+            Player.Spaceship.Rotate(_inputRotate);
+            Player.Spaceship.Jet(_inputJet);
         }
 
         private void HandleCamera(float deltaTime)
         {
-            if (nextCamera)
+            if (_inputNextCamera)
             {
                 VCam.NextCamera();
             }
             
             if (VCam.ActiveCamera)
             {
-                _orthographicSize += -zoomDelta * _orthographicSize * zoomRate;
+                _orthographicSize += -_inputZoom * _orthographicSize * zoomRate;
 
                 _orthographicSize = Mathf.Clamp(_orthographicSize, 1f, 20f);
                 
@@ -82,7 +81,7 @@ namespace Game.Scripts.Inputs
 
         private void Update()
         {
-            HandleInput();
+            HandleInput(Time.deltaTime);
 
             HandlePlayer();
             

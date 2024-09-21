@@ -1,10 +1,8 @@
 {
-    "name": "Game.Player",
+    "name": "Game.Combat",
     "rootNamespace": "",
     "references": [
-        "GUID:bb9596abc2f0be64d9880dcdd1db2c09",
-        "GUID:177b8023c6e8ee345b8ae2611ba2581a",
-        "GUID:326629e5dfe8811449a132097891f27d"
+        "GUID:bb9596abc2f0be64d9880dcdd1db2c09"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

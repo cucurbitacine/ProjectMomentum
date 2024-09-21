@@ -12,31 +12,30 @@ namespace Game.Scripts.UI
         [SerializeField] private Image horizontalImage;
         [SerializeField] private Image northImage;
 
-        private Vector2 _screenCenter;
+        private static Camera CameraMain => Camera.main;
+        private static Vector2 ScreenSize => new Vector2(Screen.width, Screen.height);
+        private static Vector2 ScreenCenter => ScreenSize * 0.5f;
+        private static Vector2 WorldPointScreenCenter => CameraMain.ScreenToWorldPoint(ScreenCenter);
+        
+        private static Vector2 WorldToScreenVector(Vector2 vector)
+        {
+            return ((Vector2)CameraMain.WorldToScreenPoint(WorldPointScreenCenter + vector) - ScreenCenter).normalized;
+        }
         
         private void LateUpdate()
         {
-            _screenCenter.x = Screen.width;
-            _screenCenter.y = Screen.height;
-            _screenCenter *= 0.5f;
-
-            var originPosition = origin.position;
+            var originWorldPoint = origin.position;
             
-            var screenOriginPosition = (Vector2)Camera.main.WorldToScreenPoint(originPosition) - _screenCenter;
-            var screenOriginUpPosition = (Vector2)Camera.main.WorldToScreenPoint(originPosition + origin.up) - _screenCenter;
-            var screenOriginUp = (screenOriginUpPosition - screenOriginPosition).normalized;
-
-            var screenRotation = Quaternion.LookRotation(Vector3.forward, screenOriginUp);
+            var originScreenPosition = (Vector2)CameraMain.WorldToScreenPoint(originWorldPoint) - ScreenCenter;
             
-            verticalImage.rectTransform.rotation = screenRotation;
-            horizontalImage.rectTransform.rotation = screenRotation;
+            verticalImage.rectTransform.anchoredPosition = originScreenPosition;
+            horizontalImage.rectTransform.anchoredPosition = originScreenPosition;
             
-            verticalImage.rectTransform.anchoredPosition = screenOriginPosition;
-            horizontalImage.rectTransform.anchoredPosition = screenOriginPosition;
+            var rotation = Quaternion.LookRotation(Vector3.forward, WorldToScreenVector(origin.up));
+            verticalImage.rectTransform.rotation = rotation;
+            horizontalImage.rectTransform.rotation = rotation;
             
-            var screenWorldUpPosition = (Vector2)Camera.main.WorldToScreenPoint(originPosition + Vector3.up) - _screenCenter;
-            var screenWorldUp = (screenWorldUpPosition - screenOriginPosition).normalized;
-            northImage.rectTransform.rotation = Quaternion.LookRotation(Vector3.forward, screenWorldUp);
+            northImage.rectTransform.rotation = Quaternion.LookRotation(Vector3.forward, WorldToScreenVector(Vector2.up));
         }
     }
 }

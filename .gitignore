@@ -75,3 +75,4 @@ crashlytics-build.properties
 # WebGL
 /[Ww]eb[Gg][Ll] [Bb]uilds/
 connectwebgl.zip
+[Pp]roject[Ss]ettings/[Pp]ackages/com.unity.connect.share/[Ss]ettings.json
