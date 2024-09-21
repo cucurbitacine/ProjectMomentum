@@ -1,0 +1,16 @@
+{
+    "name": "Game.Control",
+    "rootNamespace": "",
+    "references": [
+        "GUID:bb9596abc2f0be64d9880dcdd1db2c09"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
