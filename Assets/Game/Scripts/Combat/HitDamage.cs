@@ -1,4 +1,4 @@
-using System;
+using Game.Scripts.Core;
 using UnityEngine;
 
 namespace Game.Scripts.Combat
@@ -6,6 +6,7 @@ namespace Game.Scripts.Combat
     public class HitDamage : MonoBehaviour
     {
         [SerializeField] [Min(1)] private int damagePerMomentum = 1;
+        [SerializeField] private ParticleSystem hitEffectPrefab;
         
         [Header("References")]
         [SerializeField] private Health health;
@@ -22,15 +23,29 @@ namespace Game.Scripts.Combat
 
             if (other.rigidbody)
             {
-                var momentum = other.relativeVelocity.magnitude * other.rigidbody.mass;
+                var relativeSpeed = other.relativeVelocity.magnitude;
+                var momentum = relativeSpeed * other.rigidbody.mass;
 
-                var damageAmount = momentum * damagePerMomentum;
+                var damageAmount = (int)(momentum * damagePerMomentum);
 
                 if (damageAmount > 0)
                 {
-                    health.Damage((int)damageAmount);
-                
-                    Debug.Log($"Damage: [{damageAmount:F1}] \"{other.rigidbody.name}\" > \"{health.name}\"");
+                    health.Damage(damageAmount);
+
+                    if (hitEffectPrefab)
+                    {
+                        var hitEffect = SmartObject.SmartInstantiate(hitEffectPrefab);
+                        hitEffect.transform.position = other.GetContact(0).point;
+                        
+                        var mainModule = hitEffect.main;
+                        var startSpeedParam = mainModule.startSpeed;
+                        startSpeedParam.constantMax = relativeSpeed;
+                        mainModule.startSpeed = startSpeedParam;
+                        
+                        hitEffect.Play();
+                    }
+                    
+                    //Debug.Log($"Damage: [{damageAmount:F1}] \"{other.rigidbody.name}\" > \"{health.name}\"");
                 }
             }
         }

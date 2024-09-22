@@ -1,3 +1,4 @@
+using System;
 using Game.Scripts.Core;
 using Game.Scripts.Levels;
 using Game.Scripts.Player;
@@ -18,6 +19,8 @@ namespace Game.Scripts.Inputs
         private bool _inputStabilizeRotation = false;
         private bool _inputNextCamera = false;
         private float _inputZoom = 0f;
+        private bool _inputBeginInteract;
+        private bool _inputEndInteract;
         
         private float _orthographicSize = 6f;
         
@@ -43,10 +46,15 @@ namespace Game.Scripts.Inputs
 
             _inputZoom = Input.mouseScrollDelta.y +
                          10 * deltaTime * ((Input.GetKey(KeyCode.Z) ? 1f : 0f) + (Input.GetKey(KeyCode.X) ? -1f : 0f));
+
+            _inputBeginInteract = Input.GetKeyDown(KeyCode.F);
+            _inputEndInteract = Input.GetKeyUp(KeyCode.F);
         }
         
         private void HandlePlayer()
         {
+            if (Player.Health.IsDead) return;
+            
             if (_inputStabilizePosition)
             {
                 Player.Spaceship.StabilizationPosition = !Player.Spaceship.StabilizationPosition;
@@ -60,6 +68,15 @@ namespace Game.Scripts.Inputs
             Player.Spaceship.Move(_inputMove);
             Player.Spaceship.Rotate(_inputRotate);
             Player.Spaceship.Jet(_inputJet);
+
+            if (_inputBeginInteract)
+            {
+                Player.Interactor.BeginInteract();
+            }
+            else if (_inputEndInteract)
+            {
+                Player.Interactor.EndInteract();
+            }
         }
 
         private void HandleCamera(float deltaTime)
@@ -77,6 +94,28 @@ namespace Game.Scripts.Inputs
                 
                 VCam.ActiveCamera.virtualCamera.m_Lens.OrthographicSize = _orthographicSize;
             }
+        }
+
+        private void HandlePlayerDeath()
+        {
+            Player.Spaceship.Move(Vector2.zero);
+            Player.Spaceship.Rotate(0f);
+            Player.Spaceship.Jet(0f);
+
+            Player.Spaceship.StabilizationPosition = false;
+            Player.Spaceship.StabilizationRotation = false;
+            
+            Player.Interactor.EndInteract();
+        }
+        
+        private void OnEnable()
+        {
+            Player.Health.OnDied += HandlePlayerDeath;
+        }
+
+        private void OnDisable()
+        {
+            Player.Health.OnDied -= HandlePlayerDeath;
         }
 
         private void Update()

@@ -11,6 +11,7 @@ namespace Game.Scripts.Combat
 
         [field: Space]
         [field: SerializeField] public bool IsDead { get; private set; } = false;
+        [field: SerializeField] public bool Immortal { get; set; } = false;
         
         public event Action<int> OnMaxChanged;
         public event Action<int> OnValueChanged; 
@@ -19,6 +20,7 @@ namespace Game.Scripts.Combat
         public event Action<int> OnHealed; 
         
         public event Action OnDied; 
+        public event Action OnRevived; 
         
         public void SetValue(int newValue)
         {
@@ -34,9 +36,7 @@ namespace Game.Scripts.Combat
 
             if (Value == 0)
             {
-                IsDead = true;
-
-                OnDied?.Invoke();
+               Die();
             }
         }
         
@@ -56,6 +56,8 @@ namespace Game.Scripts.Combat
         public void Damage(int amount)
         {
             if (IsDead) return;
+
+            if (Immortal) return;
             
             amount = Mathf.Min(amount, Value);
             
@@ -79,6 +81,31 @@ namespace Game.Scripts.Combat
             OnHealed?.Invoke(amount);
         }
 
+        public void Die()
+        {
+            if (IsDead) return;
+            
+            if (Immortal) return;
+            
+            IsDead = true;
+
+            OnDied?.Invoke();
+        }
+
+        public void Revive()
+        {
+            if (!IsDead) return;
+            
+            IsDead = false;
+            
+            if (Value == 0)
+            {
+                Heal(1);
+            }
+            
+            OnRevived?.Invoke();
+        }
+        
         private void OnValidate()
         {
             if (Value < 0) Value = 0;

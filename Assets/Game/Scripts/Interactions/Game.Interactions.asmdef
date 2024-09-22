@@ -1,11 +1,8 @@
 {
-    "name": "Game.Player",
+    "name": "Game.Interactions",
     "rootNamespace": "",
     "references": [
-        "GUID:bb9596abc2f0be64d9880dcdd1db2c09",
-        "GUID:177b8023c6e8ee345b8ae2611ba2581a",
-        "GUID:326629e5dfe8811449a132097891f27d",
-        "GUID:eda1fd7f332991e44b1e30358c53b27b"
+        "GUID:bb9596abc2f0be64d9880dcdd1db2c09"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

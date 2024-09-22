@@ -1,5 +1,6 @@
 using System;
 using Game.Scripts.Combat;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,14 @@ namespace Game.Scripts.UI
         [SerializeField] private Health health;
 
         [Header("UI")]
-        [SerializeField] private Slider slider;
+        [SerializeField] private TMP_Text healthText;
+        [SerializeField] private Slider healthSlider;
         
         private void HandleHealth(int value)
         {
-            slider.value = (float)health.Value / health.Max;
+            healthSlider.value = (float)health.Value / health.Max;
+
+            healthText.text = $"{(healthSlider.value * 100):F1}%";
         }
         
         private void OnEnable()
