@@ -1,3 +1,4 @@
+using System;
 using Game.Scripts.Core;
 using UnityEngine;
 
@@ -41,7 +42,15 @@ namespace Game.Scripts.Control
         {
             _movement = value;
         }
-        
+
+        private void Awake()
+        {
+            if (spaceship == null)
+            {
+                spaceship = GetComponentInParent<SpaceshipController>();
+            }
+        }
+
         private void OnEnable()
         {
             spaceship.OnJetChanged += HandleJetEngine;

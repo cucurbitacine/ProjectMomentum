@@ -101,7 +101,7 @@ namespace Game.Scripts.Interactions
                 {
                     Amount -= 1;
 
-                    var item = SmartObject.SmartInstantiate(itemPrefab);
+                    var item = SmartPrefab.SmartInstantiate(itemPrefab);
                     item.transform.rotation = Quaternion.Euler(0f, 0f, Random.value * 360f);
 
                     StartCoroutine(Throw(item, this, agent));
@@ -113,7 +113,7 @@ namespace Game.Scripts.Interactions
                 {
                     agent.Amount -= 1;
                     
-                    var item = SmartObject.SmartInstantiate(itemPrefab);
+                    var item = SmartPrefab.SmartInstantiate(itemPrefab);
                     item.transform.rotation = Quaternion.Euler(0f, 0f, Random.value * 360f);
                     
                     StartCoroutine(Throw(item, agent, this));
@@ -146,7 +146,7 @@ namespace Game.Scripts.Interactions
 
             receiver.Amount += 1;
             
-            SmartObject.SmartDestroy(item);
+            SmartPrefab.SmartDestroy(item);
         }
     }
 }

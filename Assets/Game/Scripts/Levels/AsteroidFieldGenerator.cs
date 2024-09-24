@@ -20,7 +20,7 @@ namespace Game.Scripts.Levels
         [SerializeField] private LayerMask obstacleLayer = 1;
 
         [Space]
-        [SerializeField] private GameObject asteroidPrefab;
+        [SerializeField] private PrefabList prefabList;
         [SerializeField] private Color gridColor = Color.white;
         
         private Vector2 fieldCenter => transform.position;
@@ -44,7 +44,7 @@ namespace Game.Scripts.Levels
                             continue;
                         }
 
-                        var asteroid = SmartObject.SmartInstantiate(prefab);
+                        var asteroid = SmartPrefab.SmartInstantiate(prefab);
                         asteroid.transform.SetPositionAndRotation(point, Quaternion.Euler(0, 0, rotation));
                         asteroid.transform.SetParent(transform, true);
 
@@ -87,7 +87,7 @@ namespace Game.Scripts.Levels
 
         private GameObject GetPrefab()
         {
-            return asteroidPrefab;
+            return prefabList.GetRandomPrefab();
         }
 
         private Vector2 GetSize(GameObject prefab)
@@ -107,6 +107,12 @@ namespace Game.Scripts.Levels
 
         private void OnDrawGizmos()
         {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(fieldCenter, fieldSize);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
             var cellSize = GetCellSize();
             
             Gizmos.color = gridColor;
@@ -117,9 +123,6 @@ namespace Game.Scripts.Levels
                     Gizmos.DrawWireCube(GetCellCenter(i, j), cellSize);
                 }
             }
-
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(fieldCenter, fieldSize);
         }
     }
 }

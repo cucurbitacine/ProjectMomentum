@@ -1,28 +1,20 @@
 using System;
-using Game.Scripts.Interactions;
 using Game.Scripts.Levels;
 using TMPro;
 using UnityEngine;
 
 namespace Game.Scripts.UI
 {
-    public class TestTimeDisplay : MonoBehaviour
+    public class MissionStatusDisplay : MonoBehaviour
     {
-        [SerializeField] private GameObject storage;
         [SerializeField] private LevelController level;
          
         [Header("UI")]
+        [SerializeField] private TMP_Text savedText;
         [SerializeField] private TMP_Text timeText;
         
-        private IStorage _storage;
-
         [SerializeField] private float _timeInSeconds;
-
-        private void Awake()
-        {
-            storage.TryGetComponent(out _storage);
-        }
-
+        
         private void Start()
         {
             _timeInSeconds = 0f;
@@ -30,11 +22,13 @@ namespace Game.Scripts.UI
         
         private void Update()
         {
-            if (_storage.Amount < level.TotalAmount)
+            savedText.text = $"{level.SavedAmount:00}/{level.TotalAmount:00} saved";
+            
+            if (level.SavedAmount < level.TotalAmount)
             {
                 var time = TimeSpan.FromSeconds(_timeInSeconds);
                 
-                timeText.text = $"{DateTime.FromFileTime(time.Ticks):HH:mm:ss}";
+                timeText.text = $"Mission time: {DateTime.FromFileTime(time.Ticks):HH:mm:ss}";
                 
                 _timeInSeconds += Time.deltaTime;
             }

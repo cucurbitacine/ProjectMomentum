@@ -83,6 +83,7 @@ namespace Game.Scripts.UI
 
             var arrowScreenPosition = Vector2.ClampMagnitude(targetScreenPosition, RadiusDisplayArrow * radiusScale);
             
+            infoPanel.anchoredPosition = arrowScreenPosition;
             arrowImage.rectTransform.anchoredPosition = arrowScreenPosition;
             arrowImage.rectTransform.rotation = Quaternion.LookRotation(Vector3.forward, targetScreenPosition - spaceshipScreenPosition);
 /*
@@ -91,10 +92,9 @@ namespace Game.Scripts.UI
             pivot.y = arrowScreenPosition.y > 0f ? 1f : 0f;
             distanceText.rectTransform.pivot = pivot;
 */
+
             titleText.text = $"{displayName}";
             distanceText.text = $"{distance:F1} units";
-            
-            infoPanel.anchoredPosition = arrowScreenPosition;
         }
     }
 }

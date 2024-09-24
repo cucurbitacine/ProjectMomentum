@@ -5,22 +5,22 @@ using UnityEngine;
 namespace Game.Scripts.Core
 {
     [DisallowMultipleComponent]
-    public sealed class SmartObject : MonoBehaviour
+    public sealed class SmartPrefab : MonoBehaviour
     {
-        private static readonly Dictionary<GameObject, List<SmartObject>> PrefabToObject = new Dictionary<GameObject, List<SmartObject>>();
+        private static readonly Dictionary<GameObject, List<SmartPrefab>> PrefabToObject = new Dictionary<GameObject, List<SmartPrefab>>();
 
-        public static event Action<SmartObject> OnInstantiated;
+        public static event Action<SmartPrefab> OnInstantiated;
 
         public static GameObject SmartInstantiate(GameObject prefab)
         {
-            if (!prefab.TryGetComponent<SmartObject>(out var smartPrefab))
+            if (!prefab.TryGetComponent<SmartPrefab>(out var smartPrefab))
             {
                 return Instantiate(prefab);
             }
             
             if (!PrefabToObject.TryGetValue(smartPrefab.gameObject, out var list))
             {
-                list = new List<SmartObject>();
+                list = new List<SmartPrefab>();
                 
                 PrefabToObject.Add(smartPrefab.gameObject, list);
             }
@@ -52,7 +52,7 @@ namespace Game.Scripts.Core
 
         public static void SmartDestroy(GameObject gameObject)
         {
-            if (gameObject.TryGetComponent<SmartObject>(out var smartObject))
+            if (gameObject.TryGetComponent<SmartPrefab>(out var smartObject))
             {
                 smartObject.Release();
                 smartObject.gameObject.SetActive(false);
@@ -63,7 +63,7 @@ namespace Game.Scripts.Core
             }
         }
         
-        private static void HandleDestroy(SmartObject value)
+        private static void HandleDestroy(SmartPrefab value)
         {
             if (value.Prefab && PrefabToObject.TryGetValue(value.Prefab, out var list))
             {

@@ -8,6 +8,10 @@ namespace Game.Scripts.Control
     public class SpaceshipController : MonoBehaviour
     {
         [Header("Settings")]
+        [SerializeField, Min(0f)] private float fuel = 1000f;
+        [field: SerializeField, Min(0f)] public float FuelMax { get; private set; } = 1000f;
+        
+        [Space]
         [SerializeField] private float powerJetEngine = 1f;
         [SerializeField] private float powerMovement = 1f;
         [SerializeField] private float powerRotation = 1f;
@@ -41,8 +45,25 @@ namespace Game.Scripts.Control
         
         public event Action<Vector2> OnMovementChanged; 
         public event Action<float> OnRotationChanged; 
-        public event Action<float> OnJetChanged; 
+        public event Action<float> OnJetChanged;
+        public event Action<float> OnFuelChanged;
         
+        public float Fuel
+        {
+            get => fuel;
+            private set
+            {
+                if (Mathf.Approximately(Mathf.Abs(fuel - value), 0f))
+                {
+                    return;
+                }
+
+                fuel = value;
+                
+                OnFuelChanged?.Invoke(fuel);
+            }
+        }
+
         public void Move(Vector2 value)
         {
             _localMovement = value;
@@ -66,6 +87,19 @@ namespace Game.Scripts.Control
             _localForce = HoldPosition ? Vector2.ClampMagnitude(rigid2d.transform.InverseTransformVector(-rigid2d.velocity), 1f) : _localMovement;
             _torque = HoldRotation ? -rigid2d.angularVelocity * Time.fixedDeltaTime : _rotation;
             
+            var deltaFuel = Time.deltaTime * (_localForce.magnitude * powerMovement +
+                                           Mathf.Abs(_torque) * powerRotation +
+                                           _jet * powerJetEngine);
+            
+            Fuel = Mathf.Max(0f, Fuel - deltaFuel);
+
+            if (Fuel <= 0f)
+            {
+                _localForce = Vector2.zero;
+                _torque = 0f;
+                _jet = 0f;
+            }
+            
             OnMovementChanged?.Invoke(_localForce);
             OnRotationChanged?.Invoke(_torque);
             OnJetChanged?.Invoke(_jet);
@@ -79,6 +113,16 @@ namespace Game.Scripts.Control
             if (_jet > 0f)
             {
                 rigid2d.AddForce(rigid2d.transform.TransformVector(Vector2.up) * powerJetEngine);
+            }
+        }
+
+        public void AddFuel(float fuelAmount)
+        {
+            fuelAmount = Mathf.Min(fuelAmount, FuelMax - Fuel);
+
+            if (fuelAmount > 0)
+            {
+                Fuel += fuelAmount;
             }
         }
     }

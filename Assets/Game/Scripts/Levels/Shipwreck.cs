@@ -16,6 +16,8 @@ namespace Game.Scripts.Levels
         
         public void Sos(bool value)
         {
+            if (value && Amount == 0) return;
+            
             pointer.Show(value);
         }
         

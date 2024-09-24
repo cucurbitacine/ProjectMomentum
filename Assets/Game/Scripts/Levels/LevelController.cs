@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Scripts.Interactions;
 using UnityEngine;
 
 namespace Game.Scripts.Levels
@@ -7,6 +8,8 @@ namespace Game.Scripts.Levels
     public class LevelController : MonoBehaviour
     {
         [field: SerializeField] public int TotalAmount { get; private set; }
+
+        [SerializeField] private CatsStorage evacuatedStorage;
         
         [Header("Level Building")]
         [SerializeField] private bool buildOnStart = false;
@@ -14,8 +17,9 @@ namespace Game.Scripts.Levels
         [SerializeField] private List<AsteroidFieldGenerator> asteroidGenerators = new List<AsteroidFieldGenerator>();
 
         private readonly List<List<Shipwreck>> _shipwreckQueue = new List<List<Shipwreck>>();
-        
         private int _currentIndex = -1;
+        
+        public int SavedAmount => evacuatedStorage?.Amount ?? 0;
         
         public void Build()
         {

@@ -13,7 +13,6 @@ namespace Game.Scripts.Combat
 
         private void Awake()
         {
-            if (health == null) health = GetComponent<Health>();
             if (health == null) health = GetComponentInParent<Health>();
         }
 
@@ -34,7 +33,7 @@ namespace Game.Scripts.Combat
 
                     if (hitEffectPrefab)
                     {
-                        var hitEffect = SmartObject.SmartInstantiate(hitEffectPrefab);
+                        var hitEffect = SmartPrefab.SmartInstantiate(hitEffectPrefab);
                         hitEffect.transform.position = other.GetContact(0).point;
                         
                         var mainModule = hitEffect.main;

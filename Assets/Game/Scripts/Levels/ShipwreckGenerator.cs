@@ -28,7 +28,7 @@ namespace Game.Scripts.Levels
                 var point = GetRandomPoint();
                 var rotation = Random.value * 180f;
                 
-                var ship = SmartObject.SmartInstantiate(GetPrefab());
+                var ship = SmartPrefab.SmartInstantiate(GetPrefab());
 
                 ship.transform.SetPositionAndRotation(point, Quaternion.Euler(0f, 0f, rotation));
                 ship.transform.SetParent(transform, true);

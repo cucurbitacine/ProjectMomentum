@@ -1,4 +1,3 @@
-using System;
 using Game.Scripts.Interactions;
 using TMPro;
 using UnityEngine;

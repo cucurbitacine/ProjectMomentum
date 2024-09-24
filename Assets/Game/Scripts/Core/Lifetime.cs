@@ -16,7 +16,7 @@ namespace Game.Scripts.Core
 
             _destroying = null;
             
-            SmartObject.SmartDestroy(gameObject);
+            SmartPrefab.SmartDestroy(gameObject);
         }
 
         private void Destroying()
@@ -27,7 +27,7 @@ namespace Game.Scripts.Core
             }
         }
         
-        private void HandleInstantiation(SmartObject smartObject)
+        private void HandleInstantiation(SmartPrefab smartObject)
         {
             if (smartObject.gameObject == gameObject)
             {
@@ -37,12 +37,12 @@ namespace Game.Scripts.Core
         
         private void OnEnable()
         {
-            SmartObject.OnInstantiated += HandleInstantiation;
+            SmartPrefab.OnInstantiated += HandleInstantiation;
         }
 
         private void OnDisable()
         {
-            SmartObject.OnInstantiated -= HandleInstantiation;
+            SmartPrefab.OnInstantiated -= HandleInstantiation;
 
             if (_destroying != null) StopCoroutine(_destroying);
             _destroying = null;

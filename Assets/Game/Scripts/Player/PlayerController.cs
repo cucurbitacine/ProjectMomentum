@@ -16,6 +16,11 @@ namespace Game.Scripts.Player
 
         [SerializeField] [Min(0)] private int amount = 0;
         
+        [Header("Mass")]
+        [SerializeField] [Min(0f)] private float massShip = 50f;
+        [SerializeField] [Min(0f)] private float massPerUnit = 5f;
+        [SerializeField] [Min(0f)] private float massPerUnitFuel = 0.05f;
+        
         public event Action<int> OnAmountChanged;
         
         public int Amount
@@ -26,8 +31,6 @@ namespace Game.Scripts.Player
                 if (amount == value) return;
 
                 amount = value;
-
-                Spaceship.mass = 1 + amount / 10f;
                 
                 OnAmountChanged?.Invoke(amount);
             }
@@ -43,9 +46,36 @@ namespace Game.Scripts.Player
 
         public Vector3 Gateway => Spaceship.position;
 
+        private void HandleStorage(int value)
+        {
+            Spaceship.mass = (massShip + value * massPerUnit + Spaceship.Fuel * massPerUnitFuel) * 0.01f;
+        }
+        
+        private void HandleFuel(float fuel)
+        {
+            Spaceship.mass = (massShip + Amount * massPerUnit + fuel * massPerUnitFuel) * 0.01f;
+        }
+        
         private void Awake()
         {
             Player = this;
+        }
+
+        private void OnEnable()
+        {
+            OnAmountChanged += HandleStorage;
+            Spaceship.OnFuelChanged += HandleFuel;
+        }
+        
+        private void OnDisable()
+        {
+            OnAmountChanged -= HandleStorage;
+            Spaceship.OnFuelChanged -= HandleFuel;
+        }
+
+        private void Start()
+        {
+            HandleStorage(Amount);
         }
     }
 }

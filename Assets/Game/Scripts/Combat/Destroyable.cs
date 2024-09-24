@@ -13,7 +13,7 @@ namespace Game.Scripts.Combat
 
         private void HandleDeath()
         {
-            SmartObject.SmartDestroy(gameObject);
+            SmartPrefab.SmartDestroy(gameObject);
         }
         
         private void OnEnable()
