@@ -45,11 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215ad7addc3c40e69d7940fd52f14254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsPointing>k__BackingField: 0
   displayName: Target
   target: {fileID: 0}
   radiusScale: 0.8
   minDistance: 5
-  spaceship: {fileID: 0}
+  canvas: {fileID: 5322060596813069326}
   arrowImage: {fileID: 6085023651091769038}
   titleText: {fileID: 1254503282812940507}
   distanceText: {fileID: 8518629560819076644}

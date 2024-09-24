@@ -33,6 +33,11 @@ namespace Game.Scripts.Control
         public Vector2 position => transform.position;
         public Vector2 velocity => rigid2d.velocity;
         public float angularVelocity => rigid2d.angularVelocity;
+        public float mass
+        {
+            get => rigid2d.mass;
+            set => rigid2d.mass = value;
+        }
         
         public event Action<Vector2> OnMovementChanged; 
         public event Action<float> OnRotationChanged; 

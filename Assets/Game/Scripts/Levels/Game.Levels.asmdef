@@ -2,8 +2,9 @@
     "name": "Game.Levels",
     "rootNamespace": "",
     "references": [
+        "GUID:4307f53044263cf4b835bd812fc161a4",
         "GUID:bb9596abc2f0be64d9880dcdd1db2c09",
-        "GUID:4307f53044263cf4b835bd812fc161a4"
+        "GUID:eda1fd7f332991e44b1e30358c53b27b"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

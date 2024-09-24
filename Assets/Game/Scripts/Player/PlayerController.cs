@@ -1,3 +1,4 @@
+using System;
 using Game.Scripts.Combat;
 using Game.Scripts.Control;
 using Game.Scripts.Core;
@@ -11,7 +12,26 @@ namespace Game.Scripts.Player
     [RequireComponent(typeof(Interactor))]
     public class PlayerController : MonoBehaviour, IStorage
     {
-        [field: SerializeField] public int Amount { get; set; }
+        public static PlayerController Player { get; private set; }
+
+        [SerializeField] [Min(0)] private int amount = 0;
+        
+        public event Action<int> OnAmountChanged;
+        
+        public int Amount
+        {
+            get => amount;
+            set
+            {
+                if (amount == value) return;
+
+                amount = value;
+
+                Spaceship.mass = 1 + amount / 10f;
+                
+                OnAmountChanged?.Invoke(amount);
+            }
+        }
         
         private LazyComponent<SpaceshipController> _lazySpaceship;
         private LazyComponent<Health> _lazyHealth;
@@ -22,5 +42,10 @@ namespace Game.Scripts.Player
         public Interactor Interactor => (_lazyInteractor ??= new LazyComponent<Interactor>(gameObject)).Value;
 
         public Vector3 Gateway => Spaceship.position;
+
+        private void Awake()
+        {
+            Player = this;
+        }
     }
 }

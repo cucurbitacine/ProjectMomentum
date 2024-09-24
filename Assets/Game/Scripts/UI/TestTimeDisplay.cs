@@ -1,5 +1,6 @@
 using System;
 using Game.Scripts.Interactions;
+using Game.Scripts.Levels;
 using TMPro;
 using UnityEngine;
 
@@ -8,16 +9,14 @@ namespace Game.Scripts.UI
     public class TestTimeDisplay : MonoBehaviour
     {
         [SerializeField] private GameObject storage;
-
-        [Header("Settings")]
-        [SerializeField] private int totalAmount = 10;
-        
+        [SerializeField] private LevelController level;
+         
         [Header("UI")]
         [SerializeField] private TMP_Text timeText;
         
         private IStorage _storage;
 
-        private DateTime _startTime;
+        [SerializeField] private float _timeInSeconds;
 
         private void Awake()
         {
@@ -26,16 +25,18 @@ namespace Game.Scripts.UI
 
         private void Start()
         {
-            _startTime = DateTime.Now;
+            _timeInSeconds = 0f;
         }
         
         private void Update()
         {
-            if (_storage.Amount < totalAmount)
+            if (_storage.Amount < level.TotalAmount)
             {
-                var time = DateTime.Now - _startTime;
-
+                var time = TimeSpan.FromSeconds(_timeInSeconds);
+                
                 timeText.text = $"{DateTime.FromFileTime(time.Ticks):HH:mm:ss}";
+                
+                _timeInSeconds += Time.deltaTime;
             }
         }
     }

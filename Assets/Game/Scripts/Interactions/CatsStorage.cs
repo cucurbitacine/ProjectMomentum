@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Game.Scripts.Core;
 using UnityEngine;
@@ -14,9 +15,9 @@ namespace Game.Scripts.Interactions
         }
         
         [SerializeField] private bool interacting = false;
-
-        [field: Space]
-        [field: SerializeField] public int Amount { get; set; }
+        
+        [Space]
+        [SerializeField] [Min(0)] private int amount = 0;
         [SerializeField] private StorageMode mode = StorageMode.Receiver;
         
         [Space]
@@ -30,9 +31,24 @@ namespace Game.Scripts.Interactions
         private float _timerLoading;
         private Coroutine _loading = null;
         private IStorage _agent;
-        
+
         private float loadingPeriod => loadingRate > 0f ? 1f / loadingRate : 1f;
 
+        public event Action<int> OnAmountChanged;
+        
+        public int Amount
+        {
+            get => amount;
+            set
+            {
+                if (amount == value) return;
+
+                amount = value;
+
+                OnAmountChanged?.Invoke(amount);
+            }
+        }
+        
         public Vector3 Gateway => originFollow ? originFollow.position : transform.position;
         
         public void BeginInteraction(GameObject actor)
