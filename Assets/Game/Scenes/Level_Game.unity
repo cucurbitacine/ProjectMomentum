@@ -155,6 +155,7 @@ MonoBehaviour:
   fieldSize: {x: 200, y: 100}
   fieldGrid: {x: 16, y: 8}
   amountPerCell: 6
+  doPhysics: 1
   torqueMax: 0.1
   forceMax: 0.2
   obstacleLayer:
@@ -364,6 +365,7 @@ MonoBehaviour:
   fieldSize: {x: 200, y: 100}
   fieldGrid: {x: 16, y: 8}
   amountPerCell: 6
+  doPhysics: 1
   torqueMax: 0.1
   forceMax: 0.2
   obstacleLayer:
@@ -419,6 +421,7 @@ MonoBehaviour:
   fieldSize: {x: 100, y: 100}
   fieldGrid: {x: 8, y: 8}
   amountPerCell: 2
+  doPhysics: 1
   torqueMax: 0.1
   forceMax: 0.5
   obstacleLayer:
@@ -576,6 +579,7 @@ MonoBehaviour:
   fieldSize: {x: 400, y: 100}
   fieldGrid: {x: 32, y: 8}
   amountPerCell: 12
+  doPhysics: 0
   torqueMax: 0.1
   forceMax: 0.1
   obstacleLayer:
@@ -631,6 +635,7 @@ MonoBehaviour:
   fieldSize: {x: 100, y: 400}
   fieldGrid: {x: 8, y: 32}
   amountPerCell: 12
+  doPhysics: 0
   torqueMax: 0.1
   forceMax: 0.1
   obstacleLayer:
@@ -834,6 +839,7 @@ MonoBehaviour:
   fieldSize: {x: 100, y: 400}
   fieldGrid: {x: 8, y: 32}
   amountPerCell: 12
+  doPhysics: 0
   torqueMax: 0.1
   forceMax: 0.1
   obstacleLayer:
@@ -1072,6 +1078,7 @@ MonoBehaviour:
   fieldSize: {x: 100, y: 200}
   fieldGrid: {x: 8, y: 16}
   amountPerCell: 6
+  doPhysics: 1
   torqueMax: 0.1
   forceMax: 0.2
   obstacleLayer:
@@ -1383,6 +1390,7 @@ MonoBehaviour:
   fieldSize: {x: 400, y: 100}
   fieldGrid: {x: 32, y: 8}
   amountPerCell: 12
+  doPhysics: 0
   torqueMax: 0.1
   forceMax: 0.1
   obstacleLayer:
@@ -1548,6 +1556,7 @@ MonoBehaviour:
   fieldSize: {x: 100, y: 200}
   fieldGrid: {x: 8, y: 16}
   amountPerCell: 6
+  doPhysics: 1
   torqueMax: 0.1
   forceMax: 0.2
   obstacleLayer:

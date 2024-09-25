@@ -15,6 +15,7 @@ namespace Game.Scripts.Levels
         [SerializeField] [Min(1)] private int amountPerCell = 4;
 
         [Space]
+        [SerializeField] private bool doPhysics = true;
         [SerializeField] [Min(0f)] private float torqueMax = 1f;
         [SerializeField] [Min(0f)] private float forceMax = 1f;
         [SerializeField] private LayerMask obstacleLayer = 1;
@@ -48,7 +49,7 @@ namespace Game.Scripts.Levels
                         asteroid.transform.SetPositionAndRotation(point, Quaternion.Euler(0, 0, rotation));
                         asteroid.transform.SetParent(transform, true);
 
-                        if (asteroid.TryGetComponent<Rigidbody2D>(out var rigid2d))
+                        if (doPhysics && asteroid.TryGetComponent<Rigidbody2D>(out var rigid2d))
                         {
                             rigid2d.AddTorque((Random.value * 2f - 1f) * torqueMax, ForceMode2D.Impulse);
                             rigid2d.AddForce(Random.insideUnitCircle * forceMax, ForceMode2D.Impulse);
