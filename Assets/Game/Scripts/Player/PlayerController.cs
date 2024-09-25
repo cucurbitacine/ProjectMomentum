@@ -10,7 +10,7 @@ namespace Game.Scripts.Player
     [RequireComponent(typeof(Health))]
     [RequireComponent(typeof(SpaceshipController))]
     [RequireComponent(typeof(Interactor))]
-    public class PlayerController : MonoBehaviour, IStorage
+    public class PlayerController : MonoBehaviour, IStorageWithGateway
     {
         public static PlayerController Player { get; private set; }
 
@@ -46,7 +46,7 @@ namespace Game.Scripts.Player
         public Health Health => (_lazyHealth ??= new LazyComponent<Health>(gameObject)).Value;
         public Interactor Interactor => (_lazyInteractor ??= new LazyComponent<Interactor>(gameObject)).Value;
 
-        public Vector3 Gateway => Spaceship.position;
+        public Transform Gateway => Spaceship.transform;
 
         private void UpdateMass()
         {
@@ -93,31 +93,6 @@ namespace Game.Scripts.Player
         private void Start()
         {
             UpdateMass();
-        }
-
-        [SerializeField] private float bombRadiusActivation = 4f;
-        [SerializeField] private LayerMask bombLayer = 1;
-        
-        private void FixedUpdate()
-        {
-            var overlap = Physics2D.OverlapCircle(Spaceship.position, bombRadiusActivation, bombLayer);
-            var bombTransform = overlap
-                ? (overlap.attachedRigidbody ? overlap.attachedRigidbody.transform : overlap.transform)
-                : null;
-            
-            if (bombTransform && bombTransform.TryGetComponent<TriggerBomb>(out var bomb))
-            {
-                bomb.Activate();
-            }
-        }
-
-        private void OnDrawGizmos()
-        {
-            if (Application.isPlaying)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(Spaceship.position, bombRadiusActivation);
-            }
         }
     }
 }

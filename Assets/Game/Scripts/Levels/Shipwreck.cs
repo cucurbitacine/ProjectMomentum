@@ -6,9 +6,12 @@ namespace Game.Scripts.Levels
 {
     public class Shipwreck : MonoBehaviour
     {
-        [SerializeField] private CatsStorage storage;
+        [SerializeField] private StorageBase storage;
         [SerializeField] private Pointer pointer;
 
+        [Space]
+        [SerializeField] private GameObject silhouette;
+        
         public int Amount => storage?.Amount ?? 0;
         public bool IsCompleted => Amount == 0;
         
@@ -23,6 +26,8 @@ namespace Game.Scripts.Levels
         
         private void HandleStorage(int value)
         {
+            silhouette?.SetActive(value > 0);
+            
             if (value == 0)
             {
                 Sos(false);
@@ -39,6 +44,11 @@ namespace Game.Scripts.Levels
         private void OnDisable()
         {
             storage.OnAmountChanged -= HandleStorage;
+        }
+
+        private void Start()
+        {
+            HandleStorage(storage.Amount);
         }
     }
 }

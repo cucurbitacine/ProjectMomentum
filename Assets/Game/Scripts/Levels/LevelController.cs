@@ -9,7 +9,7 @@ namespace Game.Scripts.Levels
     {
         [field: SerializeField] public int TotalAmount { get; private set; }
 
-        [SerializeField] private CatsStorage evacuatedStorage;
+        [SerializeField] private StorageBase evacuatedStorage;
         
         [Header("Level Building")]
         [SerializeField] private bool buildOnStart = false;

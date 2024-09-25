@@ -5,9 +5,18 @@ namespace Game.Scripts.Interactions
 {
     public interface IStorage
     {
-        public event Action<int> OnAmountChanged;
-        
         public int Amount { get; set; }
-        public Vector3 Gateway { get; }
+        
+        public event Action<int> OnAmountChanged;
+    }
+
+    public interface IGateway
+    {
+        public Transform Gateway { get; }
+    }
+    
+    public interface IStorageWithGateway : IStorage, IGateway
+    {
+        
     }
 }

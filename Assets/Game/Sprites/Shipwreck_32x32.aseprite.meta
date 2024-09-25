@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e481cd05d16e6ac46b185cf77b8fa1f3
+guid: 51235e5fe2ba7044584e402d8b01ac1f
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -73,7 +73,7 @@ ScriptedImporter:
   previousAsepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 1
+    layerImportMode: 0
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
@@ -86,7 +86,7 @@ ScriptedImporter:
   asepriteImporterSettings:
     fileImportMode: 1
     importHiddenLayers: 0
-    layerImportMode: 1
+    layerImportMode: 0
     defaultPivotSpace: 0
     defaultPivotAlignment: 0
     customPivotPosition: {x: 0.5, y: 0.5}
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638625350636693323
+  platformSettingsDirtyTick: 638628835865054709
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,38 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Spaceship_16x32
+  - name: Box
     originalName: 
-    pivot: {x: 0.49999997, y: 0.5}
+    pivot: {x: 0.5, y: 0.64}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 39
+      width: 32
+      height: 25
+    spriteID: 7c7ff4566252b9040bdd4be825376749
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 39}
+  - name: Details
+    originalName: 
+    pivot: {x: 0.5, y: 0.51282054}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 10
-      height: 32
-    spriteID: 964967fd2d47c1e459aea8fb28fa0446
+      width: 40
+      height: 39
+    spriteID: 6f3abf2d93671d7469d5ce53ef8ccb25
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,24 +161,80 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
+  - name: Cat
+    originalName: 
+    pivot: {x: 2.5, y: -0.25}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 39
+      width: 4
+      height: 4
+    spriteID: e4234c14bf3341f4493721a5615ad719
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 32, y: 39}
   spriteSheetImportData: []
   asepriteLayers:
-  - layerIndex: 0
-    guid: 914458163
-    name: Spaceship_16x32
-    layerFlags: 0
+  - layerIndex: 1
+    guid: -468437956
+    name: Box
+    layerFlags: 3
     layerType: 0
     blendMode: 0
     cells:
-    - name: Spaceship_16x32
+    - name: Box
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 19
+        x: 16
         y: 16
-        width: 10
-        height: 32
-      spriteId: 964967fd2d47c1e459aea8fb28fa0446
+        width: 32
+        height: 25
+      spriteId: 7c7ff4566252b9040bdd4be825376749
+    linkedCells: []
+    parentIndex: -1
+  - layerIndex: 2
+    guid: -1524872558
+    name: Details
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Details
+      frameIndex: 0
+      additiveSortOrder: 0
+      cellRect:
+        x: 12
+        y: 12
+        width: 40
+        height: 39
+      spriteId: 6f3abf2d93671d7469d5ce53ef8ccb25
+    linkedCells: []
+    parentIndex: -1
+  - layerIndex: 3
+    guid: 1446202349
+    name: Cat
+    layerFlags: 3
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: Cat
+      frameIndex: 0
+      additiveSortOrder: 0
+      cellRect:
+        x: 22
+        y: 33
+        width: 4
+        height: 4
+      spriteId: e4234c14bf3341f4493721a5615ad719
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -201,4 +277,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 48, y: 64}
+  canvasSize: {x: 64, y: 64}

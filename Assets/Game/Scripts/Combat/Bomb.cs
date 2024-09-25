@@ -1,13 +1,11 @@
-using System;
 using System.Linq;
-using Game.Scripts.Combat;
 using Game.Scripts.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Game.Scripts.Player
+namespace Game.Scripts.Combat
 {
-    public class TriggerBomb : MonoBehaviour
+    public class Bomb : MonoBehaviour
     {
         [SerializeField] private bool activated = false;
         
@@ -49,6 +47,7 @@ namespace Game.Scripts.Player
                 var distance = Vector2.Distance(rigid.position, explosionCenter);
                 var direction = (rigid.position - explosionCenter).normalized;
                 var scale = (1f - Mathf.Clamp01(distance / explosionRadius));
+                
                 var power = explosionPower * scale;
                 rigid.AddForce(direction * power, ForceMode2D.Impulse);
 
@@ -56,6 +55,11 @@ namespace Game.Scripts.Player
                 {
                     var damageAmount = (int)(explosionDamage * scale);
                     health.Damage(damageAmount);
+                }
+
+                if (rigid.TryGetComponent<Bomb>(out var bomb) && bomb != this)
+                {
+                    bomb.Activate();
                 }
             }
             

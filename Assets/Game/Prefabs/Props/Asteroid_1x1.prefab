@@ -209,9 +209,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135a1d487e794bbb86f07572d496e27b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerMomentum: 10
-  hitEffectPrefab: {fileID: 0}
   health: {fileID: 3604003167543628249}
+  damagePerMomentum: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 9
+  hitEffectPrefab: {fileID: 0}
 --- !u!114 &7352715417673830006
 MonoBehaviour:
   m_ObjectHideFlags: 0

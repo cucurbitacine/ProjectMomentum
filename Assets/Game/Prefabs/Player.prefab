@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8222865002006185753}
   - component: {fileID: 5021882298218171156}
   - component: {fileID: 5826114955872263179}
+  - component: {fileID: 7892476213108621285}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -109,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerMomentum: 10
-  hitEffectPrefab: {fileID: 5654591273496390593, guid: 1806b739ce6190e428327e30002d37ca, type: 3}
+  hitEffectPrefab: {fileID: 3093170610347731322, guid: 1806b739ce6190e428327e30002d37ca, type: 3}
   health: {fileID: 7280306392836577407}
 --- !u!114 &8544873758124602441
 MonoBehaviour:
@@ -159,10 +160,6 @@ MonoBehaviour:
   massShip: 50
   massPerUnit: 5
   massPerFuelPercent: 0.5
-  bombRadiusActivation: 4
-  bombLayer:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!114 &5021882298218171156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +185,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59cf4af2e7424213b016e5ef6af1c761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7892476213108621285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337482985371444798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8cca97714a8461d91827daa28c28e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombRadiusActivation: 4
+  bombLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &6090830092856062917
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -34,5 +34,15 @@ namespace Game.Scripts.Core
                 audioSource.Play();
             }
         }
+
+        public static bool CompareLayer(this GameObject gameObject, LayerMask layerMask)
+        {
+            return (layerMask.value & (1 << gameObject.layer)) > 0;
+        }
+        
+        public static bool CompareLayer(this Transform transform, LayerMask layerMask)
+        {
+            return transform.gameObject.CompareLayer(layerMask);
+        }
     }
 }
