@@ -29,7 +29,6 @@ namespace Game.Scripts.Core
             {
                 if (value.IsFree)
                 {
-                    value.gameObject.SetActive(true);
                     value.Busy();
                     OnInstantiated?.Invoke(value);
                     return value.gameObject;
@@ -52,10 +51,9 @@ namespace Game.Scripts.Core
 
         public static void SmartDestroy(GameObject gameObject)
         {
-            if (gameObject.TryGetComponent<SmartPrefab>(out var smartObject))
+            if (gameObject.TryGetComponent<SmartPrefab>(out var smartObject) && smartObject.Prefab)
             {
                 smartObject.Release();
-                smartObject.gameObject.SetActive(false);
             }
             else
             {
@@ -76,18 +74,24 @@ namespace Game.Scripts.Core
         
         public event Action<bool> OnReleased; 
         
+        [ContextMenu(nameof(Busy))]
         public void Busy()
         {
             IsFree = false;
             
-            OnReleased?.Invoke(IsFree);
+            gameObject.SetActive(true);
+            
+            OnReleased?.Invoke(false);
         }
         
+        [ContextMenu(nameof(Release))]
         public void Release()
         {
             IsFree = true;
             
-            OnReleased?.Invoke(IsFree);
+            OnReleased?.Invoke(true);
+            
+            gameObject.SetActive(false);
         }
 
         private void OnDestroy()

@@ -59,7 +59,7 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  m_UseAutoMass: 1
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9633e9643d674264b452c4ee16bde495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmount: 100
+  usePercent: 1
+  healAmount: 10
 --- !u!1001 &4503112839491240916
 PrefabInstance:
   m_ObjectHideFlags: 0

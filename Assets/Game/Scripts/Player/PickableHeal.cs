@@ -6,7 +6,8 @@ namespace Game.Scripts.Player
 {
     public class PickableHeal : MonoBehaviour, IPickable
     {
-        [SerializeField] private int healAmount = 100;
+        [SerializeField] private bool usePercent = false;
+        [SerializeField] [Min(0)] private int healAmount = 100;
         
         public bool IsValid(GameObject actor)
         {
@@ -22,7 +23,15 @@ namespace Game.Scripts.Player
         {
             if (actor.TryGetComponent<PlayerController>(out var player))
             {
-                player.Health.Heal(healAmount);
+                if (usePercent)
+                {
+                    var amount = (int)(healAmount * 0.01f * player.Health.Max);
+                    player.Health.Heal(amount);
+                }
+                else
+                {
+                    player.Health.Heal(healAmount);
+                }
                 
                 SmartPrefab.SmartDestroy(gameObject);
             }

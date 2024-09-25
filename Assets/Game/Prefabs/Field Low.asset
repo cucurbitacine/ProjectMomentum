@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de41affdddf37b541a5f7911507bc0e0, type: 3}
+  m_Name: Field Low
+  m_EditorClassIdentifier: 
+  prefabData:
+  - displayName: 68.2% Asteroid_1x1
+    prefab: {fileID: 4796508243101903460, guid: 52740fbac91372e41b6e21464698358b, type: 3}
+    weight: 30
+  - displayName: 20.5% Asteroid_2x1
+    prefab: {fileID: 7034568362681548003, guid: c62a53f85f06f3e4fb2fa5f3975ab418, type: 3}
+    weight: 9
+  - displayName: 2.3% Asteroid_3x1
+    prefab: {fileID: 7034568362681548003, guid: 89ac9c67d23036342b99c0297c1ea918, type: 3}
+    weight: 1
+  - displayName: 4.5% Fuel
+    prefab: {fileID: 197792644461194920, guid: 3c6803e8620f31e47902c677c1a1f125, type: 3}
+    weight: 2
+  - displayName: 4.5% Heal
+    prefab: {fileID: 6942023093365437298, guid: e4e1b582657001049bb26ea68847bdd8, type: 3}
+    weight: 2

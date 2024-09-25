@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2253911629886400664, guid: 53e6791fef942dc4ba4e276cd32056bd, type: 3}
       propertyPath: m_Name
-      value: Asteroid
+      value: Asteroid_1x1
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 53e6791fef942dc4ba4e276cd32056bd, type: 3}
       propertyPath: m_Size.x
@@ -83,7 +83,13 @@ PrefabInstance:
       addedObject: {fileID: 180321274278065988}
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 53e6791fef942dc4ba4e276cd32056bd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 377131274275531598}
+      addedObject: {fileID: 3604003167543628249}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 53e6791fef942dc4ba4e276cd32056bd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7539175113494251170}
+    - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: 53e6791fef942dc4ba4e276cd32056bd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7352715417673830006}
   m_SourcePrefab: {fileID: -8435245712485981826, guid: 53e6791fef942dc4ba4e276cd32056bd, type: 3}
 --- !u!1 &4796508243101903460 stripped
 GameObject:
@@ -175,8 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <IsFree>k__BackingField: 0
-  <Prefab>k__BackingField: {fileID: 4796508243101903460}
---- !u!114 &377131274275531598
+--- !u!114 &3604003167543628249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,3 +196,32 @@ MonoBehaviour:
   <Value>k__BackingField: 100
   <Max>k__BackingField: 100
   <IsDead>k__BackingField: 0
+  <Immortal>k__BackingField: 0
+--- !u!114 &7539175113494251170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4796508243101903460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135a1d487e794bbb86f07572d496e27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerMomentum: 10
+  hitEffectPrefab: {fileID: 0}
+  health: {fileID: 3604003167543628249}
+--- !u!114 &7352715417673830006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4796508243101903460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85f43e2d2e82e7144947388b4d095684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyEffectPrefab: {fileID: 7691050554923611487, guid: 96ba71237188e9343bbc23ab79942acd, type: 3}

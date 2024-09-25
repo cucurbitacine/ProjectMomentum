@@ -6,6 +6,7 @@ namespace Game.Scripts.Player
 {
     public class PickableFuel : MonoBehaviour, IPickable
     {
+        [SerializeField] private bool usePercent = false;
         [SerializeField] private float fuelAmount = 100;
         
         public bool IsValid(GameObject actor)
@@ -22,7 +23,15 @@ namespace Game.Scripts.Player
         {
             if (actor.TryGetComponent<PlayerController>(out var player))
             {
-                player.Spaceship.AddFuel(fuelAmount);
+                if (usePercent)
+                {
+                    var amount = (int)(fuelAmount * 0.01f * player.Spaceship.FuelMax);
+                    player.Spaceship.AddFuel(amount);
+                }
+                else
+                {
+                    player.Spaceship.AddFuel(fuelAmount);
+                }
                 
                 SmartPrefab.SmartDestroy(gameObject);
             }

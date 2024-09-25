@@ -21,5 +21,18 @@ namespace Game.Scripts.Core
                 }
             }
         }
+
+        public static void PlayFX(this GameObject gameObject)
+        {
+            if (gameObject.TryGetComponent<ParticleSystem>(out var particleSystem))
+            {
+                particleSystem.Play();
+            }
+
+            if (gameObject.TryGetComponent<AudioSource>(out var audioSource))
+            {
+                audioSource.Play();
+            }
+        }
     }
 }
