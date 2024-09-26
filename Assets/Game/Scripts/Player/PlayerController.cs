@@ -40,9 +40,7 @@ namespace Game.Scripts.Player
         private LazyComponent<Health> _lazyHealth;
         private LazyComponent<Interactor> _lazyInteractor;
 
-        public SpaceshipController Spaceship =>
-            (_lazySpaceship ??= new LazyComponent<SpaceshipController>(gameObject)).Value;
-
+        public SpaceshipController Spaceship => (_lazySpaceship ??= new LazyComponent<SpaceshipController>(gameObject)).Value;
         public Health Health => (_lazyHealth ??= new LazyComponent<Health>(gameObject)).Value;
         public Interactor Interactor => (_lazyInteractor ??= new LazyComponent<Interactor>(gameObject)).Value;
 

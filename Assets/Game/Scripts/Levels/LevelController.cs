@@ -1,7 +1,6 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Game.Scripts.Core;
 using Game.Scripts.Interactions;
 using Game.Scripts.Player;
@@ -12,6 +11,9 @@ namespace Game.Scripts.Levels
 {
     public class LevelController : MonoBehaviour
     {
+        [field: SerializeField] public bool Busy { get; private set; }
+        
+        [Space]
         [SerializeField] private LazyComponent<PlayerController> lazyPlayer;
         [SerializeField] private StorageBase evacuatedStorage;
         
@@ -30,6 +32,22 @@ namespace Game.Scripts.Levels
         public int TotalAmount { get; private set; }
         
         public PlayerController Player => (lazyPlayer ??= new LazyComponent<PlayerController>(gameObject)).Value;
+        
+        public void RestartLevel()
+        {
+            if (Busy) return;
+            Busy = true;
+            
+            StartCoroutine(Restarting());
+        }
+
+        public void ExitLevel()
+        {
+            if (Busy) return;
+            Busy = true;
+            
+            StartCoroutine(Restarting());
+        }
         
         public void Build()
         {
@@ -110,7 +128,7 @@ namespace Game.Scripts.Levels
 
         private void HandleFuel(float fuel)
         {
-            if (Player.Health.IsDead) return;
+            if (Player.Health.IsDead || Busy) return;
 
             if (fuel <= 0f)
             {
@@ -123,15 +141,31 @@ namespace Game.Scripts.Levels
             }
         }
         
-        private async void HandlePlayerDeath()
+        private void HandlePlayerDeath()
         {
+            if (Busy) return;
+            
             textDisplay.SetText("> MISSION FAILED...");
             textDisplay.Display(true);
 
-            await Task.Delay(5000);
+            StartCoroutine(AfterPlayerDeath());
+        }
 
-            var scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.name);
+        private IEnumerator AfterPlayerDeath()
+        {
+            yield return new WaitForSeconds(3f);
+            
+            RestartLevel();
+        }
+        
+        private IEnumerator Restarting()
+        {
+            textDisplay.SetText("> Restart mission...");
+            textDisplay.Display(true);
+            
+            yield return new WaitForSeconds(2f);
+            
+            SceneManager.LoadScene(0);
         }
         
         private void OnEnable()
