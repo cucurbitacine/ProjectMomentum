@@ -9,9 +9,12 @@ namespace Game.Scripts.Player
         [SerializeField] private bool usePercent = false;
         [SerializeField] private float fuelAmount = 100;
         
+        [Space]
+        [SerializeField] private GameObject pickupEffectPrefab;
+        
         public bool IsValid(GameObject actor)
         {
-            if (actor.TryGetComponent<PlayerController>(out var player))
+            if (actor.TryGetComponent<PlayerController>(out var player) && !player.Health.IsDead)
             {
                 return player.Spaceship.Fuel < player.Spaceship.FuelMax;
             }
@@ -34,6 +37,13 @@ namespace Game.Scripts.Player
                 }
                 
                 SmartPrefab.SmartDestroy(gameObject);
+                
+                if (pickupEffectPrefab)
+                {
+                    var pickupEffect = SmartPrefab.SmartInstantiate(pickupEffectPrefab, actor.transform.position, actor.transform.rotation);
+                    
+                    pickupEffect.Play();
+                }
             }
         }
     }

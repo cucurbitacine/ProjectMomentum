@@ -64,7 +64,7 @@ namespace Game.Scripts.UI
             Show(IsPointing);
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             if (!IsPointing) return;
             

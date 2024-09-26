@@ -40,8 +40,7 @@ namespace Game.Scripts.Combat
 
                     if (hitEffectPrefab)
                     {
-                        var hitEffect = SmartPrefab.SmartInstantiate(hitEffectPrefab);
-                        hitEffect.transform.position = other.GetContact(0).point;
+                        var hitEffect = SmartPrefab.SmartInstantiate(hitEffectPrefab, other.GetContact(0).point, Quaternion.identity);
 
                         if (hitEffect.TryGetComponent<ParticleSystem>(out var particle))
                         {
@@ -51,7 +50,7 @@ namespace Game.Scripts.Combat
                             mainModule.startSpeed = startSpeedParam;
                         }
                         
-                        hitEffect.PlayFX();
+                        hitEffect.Play();
                     }
                 }
             }

@@ -4,24 +4,24 @@ using UnityEngine;
 
 namespace Game.Scripts.Control
 {
-    public class SpaceshipVFXController : MonoBehaviour
+    public class SpaceshipEffectController : MonoBehaviour
     {
         [SerializeField] private SpaceshipController spaceship;
         
         [Header("Effects")]
-        [SerializeField] private ParticleSystem mainEngineEffect;
+        [SerializeField] private GameObject mainEngineEffect;
         [Space]
-        [SerializeField] private ParticleSystem frontLeftEngineEffect;
-        [SerializeField] private ParticleSystem frontRightEngineEffect;
+        [SerializeField] private GameObject frontLeftEngineEffect;
+        [SerializeField] private GameObject frontRightEngineEffect;
         [Space]
-        [SerializeField] private ParticleSystem backLeftEngineEffect;
-        [SerializeField] private ParticleSystem backRightEngineEffect;
+        [SerializeField] private GameObject backLeftEngineEffect;
+        [SerializeField] private GameObject backRightEngineEffect;
         [Space]
-        [SerializeField] private ParticleSystem leftFrontEngineEffect;
-        [SerializeField] private ParticleSystem leftBackEngineEffect;
+        [SerializeField] private GameObject leftFrontEngineEffect;
+        [SerializeField] private GameObject leftBackEngineEffect;
         [Space]
-        [SerializeField] private ParticleSystem rightFrontEngineEffect;
-        [SerializeField] private ParticleSystem rightBackEngineEffect;
+        [SerializeField] private GameObject rightFrontEngineEffect;
+        [SerializeField] private GameObject rightBackEngineEffect;
         
         private float _rotation;
         private Vector2 _movement;

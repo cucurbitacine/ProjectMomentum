@@ -7,6 +7,9 @@ namespace Game.Scripts.Combat
     [RequireComponent(typeof(Health))]
     public class Destroyable : MonoBehaviour
     {
+        [SerializeField] private bool disableInstead = false;
+        
+        [Space]
         [SerializeField] private GameObject destroyEffectPrefab;
         
         private LazyComponent<Health> _lazyHealth;
@@ -16,14 +19,19 @@ namespace Game.Scripts.Combat
         [ContextMenu(nameof(HandleDeath))]
         private void HandleDeath()
         {
-            SmartPrefab.SmartDestroy(gameObject);
-
+            if (disableInstead)
+            {
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                SmartPrefab.SmartDestroy(gameObject);
+            }
+            
             if (destroyEffectPrefab)
             {
-                var destroyEffect = SmartPrefab.SmartInstantiate(destroyEffectPrefab);
-                destroyEffect.transform.position = transform.position;
-                destroyEffect.transform.rotation = transform.rotation;
-                destroyEffect.PlayFX();
+                var destroyEffect = SmartPrefab.SmartInstantiate(destroyEffectPrefab, transform.position, transform.rotation);
+                destroyEffect.Play();
             }
         }
         

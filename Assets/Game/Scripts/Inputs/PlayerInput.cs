@@ -12,6 +12,10 @@ namespace Game.Scripts.Inputs
         [Header("Settings")]
         [SerializeField] private float zoomRate = 1f;
 
+        [Header("SFX")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip clickSfx;
+        
         private Vector2 _inputMove = Vector2.zero;
         private float _inputRotate = 0f;
         private float _inputJet = 0f;
@@ -58,11 +62,15 @@ namespace Game.Scripts.Inputs
             if (_inputStabilizePosition)
             {
                 Player.Spaceship.StabilizationPosition = !Player.Spaceship.StabilizationPosition;
+                
+                audioSource?.PlayOneShot(clickSfx);
             }
             
             if (_inputStabilizeRotation)
             {
                 Player.Spaceship.StabilizationRotation = !Player.Spaceship.StabilizationRotation;
+                
+                audioSource?.PlayOneShot(clickSfx);
             }
             
             Player.Spaceship.Move(_inputMove);

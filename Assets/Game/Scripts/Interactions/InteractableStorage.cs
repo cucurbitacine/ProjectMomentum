@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Game.Scripts.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,6 +15,8 @@ namespace Game.Scripts.Interactions
         }
         
         [SerializeField] private bool interacting = false;
+        
+        [Header("Settings")]
         [SerializeField] private StorageMode mode = StorageMode.Receiver;
         [SerializeField] private GameObject storageObject;
         
@@ -22,8 +25,13 @@ namespace Game.Scripts.Interactions
         [SerializeField] private float followDuration = 1f;
         [SerializeField] private Transform gateway;
         
-        [Space]
+        [Header("Prefab")]
         [SerializeField] private GameObject itemPrefab;
+
+        [Header("SFX")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private List<AudioClip> pickSfx = new List<AudioClip>();
+        [SerializeField] private List<AudioClip> putSfx = new List<AudioClip>();
         
         private float _timerLoading;
         private Coroutine _loading = null;
@@ -33,7 +41,17 @@ namespace Game.Scripts.Interactions
         private float loadingPeriod => loadingRate > 0f ? 1f / loadingRate : 1f;
 
         public Transform Gateway => gateway ? gateway.transform : transform;
-        
+
+        public bool IsValid(GameObject actor)
+        {
+            if (actor.TryGetComponent<IStorage>(out var agent))
+            {
+                return mode == StorageMode.Source ? _mainStorage.Amount > 0 : agent.Amount > 0;
+            }
+
+            return false;
+        }
+
         public void BeginInteraction(GameObject actor)
         {
             if (interacting) return;
@@ -82,8 +100,7 @@ namespace Game.Scripts.Interactions
             {
                 if (_mainStorage.Amount > 0)
                 {
-                    var item = SmartPrefab.SmartInstantiate(itemPrefab);
-                    item.transform.rotation = Quaternion.Euler(0f, 0f, Random.value * 360f);
+                    var item = SmartPrefab.SmartInstantiate(itemPrefab, Gateway.position, Quaternion.Euler(0f, 0f, Random.value * 360f));
 
                     StartCoroutine(Throw(item, _mainStorage, agentStorage, Gateway, agentStorage.Gateway));
                 }
@@ -92,8 +109,7 @@ namespace Game.Scripts.Interactions
             {
                 if (agentStorage.Amount > 0)
                 {
-                    var item = SmartPrefab.SmartInstantiate(itemPrefab);
-                    item.transform.rotation = Quaternion.Euler(0f, 0f, Random.value * 360f);
+                    var item = SmartPrefab.SmartInstantiate(itemPrefab, agentStorage.Gateway.position, Quaternion.Euler(0f, 0f, Random.value * 360f));
                     
                     StartCoroutine(Throw(item, agentStorage, _mainStorage, agentStorage.Gateway, Gateway));
                 }
@@ -103,6 +119,8 @@ namespace Game.Scripts.Interactions
         private IEnumerator Throw(GameObject item, IStorage source, IStorage receiver, Transform origin, Transform destination)
         {
             source.Amount -= 1;
+            
+            audioSource?.PlayOneShot(pickSfx);
             
             var originPosition = origin.position;
             var originRotation = item.transform.rotation;
@@ -126,13 +144,17 @@ namespace Game.Scripts.Interactions
             item.transform.rotation = targetRotation;
 
             receiver.Amount += 1;
+            audioSource?.PlayOneShot(putSfx);
             
             SmartPrefab.SmartDestroy(item);
         }
-
+        
         private void Awake()
         {
-            storageObject.TryGetComponent<IStorage>(out _mainStorage);
+            storageObject.TryGetComponent(out _mainStorage);
+
+            pickSfx.RemoveAll(s => s == null);
+            putSfx.RemoveAll(s => s == null);
         }
     }
 }

@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usePercent: 1
   healAmount: 20
+  pickupEffectPrefab: {fileID: 3083049477367119429, guid: 9322a7360d27a7c4690a0117fb2f6b32, type: 3}
 --- !u!1001 &4503112839491240916
 PrefabInstance:
   m_ObjectHideFlags: 0

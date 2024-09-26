@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Levels
 {
-    public class AsteroidFieldGenerator : MonoBehaviour
+    public class SpaceFieldGenerator : MonoBehaviour
     {
         [SerializeField] private bool generateOnStart = true;
 
@@ -35,19 +35,18 @@ namespace Game.Scripts.Levels
                     for (var k = 0; k < amountPerCell; k++)
                     {
                         var point = GetRandomPointInCell(i, j);
-                        var rotation = Random.value * 360f;
+                        var angle = Random.value * 360f;
+                        var rotation = Quaternion.Euler(0, 0, angle);
 
                         var prefab = GetPrefab();
                         var prefabSize = GetSize(prefab);
                         
-                        if (Physics2D.OverlapBox(point, prefabSize, rotation, obstacleLayer))
+                        if (Physics2D.OverlapBox(point, prefabSize, angle, obstacleLayer))
                         {
                             continue;
                         }
 
-                        var asteroid = SmartPrefab.SmartInstantiate(prefab);
-                        asteroid.transform.SetPositionAndRotation(point, Quaternion.Euler(0, 0, rotation));
-                        asteroid.transform.SetParent(transform, true);
+                        var asteroid = SmartPrefab.SmartInstantiate(prefab, point, rotation, transform);
 
                         if (doPhysics && asteroid.TryGetComponent<Rigidbody2D>(out var rigid2d))
                         {

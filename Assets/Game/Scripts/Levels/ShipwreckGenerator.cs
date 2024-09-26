@@ -26,12 +26,10 @@ namespace Game.Scripts.Levels
             for (var i = 0; i < amountPerCircle; i++)
             {
                 var point = GetRandomPoint();
-                var rotation = Random.value * 180f;
+                var angle = Random.value * 180f;
+                var rotation = Quaternion.Euler(0f, 0f, angle);
                 
-                var ship = SmartPrefab.SmartInstantiate(GetPrefab());
-
-                ship.transform.SetPositionAndRotation(point, Quaternion.Euler(0f, 0f, rotation));
-                ship.transform.SetParent(transform, true);
+                var ship = SmartPrefab.SmartInstantiate(GetPrefab(), point, rotation, transform);
                 
                 ships.Add(ship);
             }

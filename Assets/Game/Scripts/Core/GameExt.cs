@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Scripts.Core
@@ -22,19 +23,52 @@ namespace Game.Scripts.Core
             }
         }
 
-        public static void PlayFX(this GameObject gameObject)
+        public static void PlaySafe(this AudioSource audioSource, bool play)
         {
-            if (gameObject.TryGetComponent<ParticleSystem>(out var particleSystem))
+            if (play)
             {
-                particleSystem.Play();
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
             }
-
-            if (gameObject.TryGetComponent<AudioSource>(out var audioSource))
+            else
             {
-                audioSource.Play();
+                if (audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                }
             }
         }
 
+        public static void PlaySafe(this GameObject gameObject, bool value)
+        {
+            if (gameObject.TryGetComponent<ParticleSystem>(out var particle))
+            {
+                particle.PlaySafe(value);
+            }
+
+            if (gameObject.TryGetComponent<AudioSource>(out var audio))
+            {
+                audio.PlaySafe(value);
+            }
+        }
+
+        public static void Play(this GameObject gameObject)
+        {
+            gameObject.PlaySafe(true);
+        }
+
+        public static void Stop(this GameObject gameObject)
+        {
+            gameObject.PlaySafe(false);
+        }
+
+        public static void PlayOneShot(this AudioSource audio, List<AudioClip> clips)
+        {
+            audio.PlayOneShot(clips != null && clips.Count > 0 ? clips[Random.Range(0, clips.Count)] : null);
+        }
+        
         public static bool CompareLayer(this GameObject gameObject, LayerMask layerMask)
         {
             return (layerMask.value & (1 << gameObject.layer)) > 0;

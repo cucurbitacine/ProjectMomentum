@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Game.Scripts.Core;
 using UnityEngine;
@@ -18,10 +19,17 @@ namespace Game.Scripts.Combat
         [Space]
         [SerializeField] private GameObject explosionArea;
         [SerializeField] private GameObject boomEffectPrefab;
+
+        [Space]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private List<AudioClip> activationSfx = new List<AudioClip>();
         
-        public void Activate()
+        public void Activate(GameObject actor)
         {
             if (activated) return;
+            
+            audioSource?.PlayOneShot(activationSfx);
+            
             activated = true;
             explosionArea?.SetActive(true);
             Invoke(nameof(Boom), boomDelay);
@@ -32,9 +40,8 @@ namespace Game.Scripts.Combat
         {
             if (boomEffectPrefab)
             {
-                var boomEffect = SmartPrefab.SmartInstantiate(boomEffectPrefab);
-                boomEffect.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0f, 0f, Random.value * 360f));
-                boomEffect.PlayFX();
+                var boomEffect = SmartPrefab.SmartInstantiate(boomEffectPrefab, transform.position, Quaternion.Euler(0f, 0f, Random.value * 360f));
+                boomEffect.Play();
             }
             
             SmartPrefab.SmartDestroy(gameObject);
@@ -59,7 +66,7 @@ namespace Game.Scripts.Combat
 
                 if (rigid.TryGetComponent<Bomb>(out var bomb) && bomb != this)
                 {
-                    bomb.Activate();
+                    bomb.Activate(gameObject);
                 }
             }
             

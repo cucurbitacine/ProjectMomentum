@@ -32,8 +32,8 @@ namespace Game.Scripts.UI
         {
             northImage.rectTransform.rotation = Quaternion.LookRotation(Vector3.forward, WorldToScreenVector(Vector2.up));
 
-            speedText.text = $"{Spaceship.velocity.magnitude:F1} unit/s{(Spaceship.StabilizationPosition ? " Auto" : "")}";
-            angularSpeedText.text = $"{Spaceship.angularVelocity:F1} deg/s{(Spaceship.StabilizationRotation ? " Auto" : "")}";
+            speedText.text = $"{Spaceship.velocity.magnitude:F1} unit/s{(Spaceship.StabilizationPosition ? " Keep" : "")}";
+            angularSpeedText.text = $"{Spaceship.angularVelocity:F1} deg/s{(Spaceship.StabilizationRotation ? " Keep" : "")}";
         }
     }
 }

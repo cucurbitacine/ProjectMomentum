@@ -1,25 +1,35 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Game.Scripts.Core;
 using Game.Scripts.Interactions;
+using Game.Scripts.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Scripts.Levels
 {
     public class LevelController : MonoBehaviour
     {
-        [field: SerializeField] public int TotalAmount { get; private set; }
-
+        [SerializeField] private LazyComponent<PlayerController> lazyPlayer;
         [SerializeField] private StorageBase evacuatedStorage;
         
         [Header("Level Building")]
         [SerializeField] private bool buildOnStart = false;
         [SerializeField] private List<ShipwreckGenerator> shipwreckGenerators = new List<ShipwreckGenerator>();
-        [SerializeField] private List<AsteroidFieldGenerator> asteroidGenerators = new List<AsteroidFieldGenerator>();
+        [SerializeField] private List<SpaceFieldGenerator> spaceGenerators = new List<SpaceFieldGenerator>();
 
+        [Header("UI")]
+        [SerializeField] private TextDisplayBase textDisplay;
+        
         private readonly List<List<Shipwreck>> _shipwreckQueue = new List<List<Shipwreck>>();
         private int _currentIndex = -1;
         
         public int SavedAmount => evacuatedStorage?.Amount ?? 0;
+        public int TotalAmount { get; private set; }
+        
+        public PlayerController Player => (lazyPlayer ??= new LazyComponent<PlayerController>(gameObject)).Value;
         
         public void Build()
         {
@@ -29,9 +39,9 @@ namespace Game.Scripts.Levels
             
             _shipwreckQueue.Clear();
             
-            foreach (var shipwreckGenerator in shipwreckGenerators)
+            foreach (var generator in shipwreckGenerators)
             {
-                var shipObjects = shipwreckGenerator.Generate();
+                var shipObjects = generator.Generate();
 
                 var shipwrecks = new List<Shipwreck>();
                 
@@ -50,9 +60,9 @@ namespace Game.Scripts.Levels
 
             SosShipwrecks(0);
             
-            foreach (var asteroidFieldGenerator in asteroidGenerators)
+            foreach (var generator in spaceGenerators)
             {
-                asteroidFieldGenerator.Generate();
+                generator.Generate();
             }
         }
         
@@ -96,6 +106,44 @@ namespace Game.Scripts.Levels
             {
                 SosShipwrecks(_currentIndex + 1);
             }
+        }
+
+        private void HandleFuel(float fuel)
+        {
+            if (Player.Health.IsDead) return;
+
+            if (fuel <= 0f)
+            {
+                textDisplay.SetText("> NO FUEL...");
+                textDisplay.Display(true);
+            }
+            else
+            {
+                textDisplay.Display(false);
+            }
+        }
+        
+        private async void HandlePlayerDeath()
+        {
+            textDisplay.SetText("> MISSION FAILED...");
+            textDisplay.Display(true);
+
+            await Task.Delay(5000);
+
+            var scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.name);
+        }
+        
+        private void OnEnable()
+        {
+            Player.Health.OnDied += HandlePlayerDeath;
+            Player.Spaceship.OnFuelChanged += HandleFuel;
+        }
+        
+        private void OnDisable()
+        {
+            Player.Health.OnDied -= HandlePlayerDeath;
+            Player.Spaceship.OnFuelChanged -= HandleFuel;
         }
 
         private void Start()

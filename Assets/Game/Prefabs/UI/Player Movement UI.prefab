@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6616097690697887330}
+  - component: {fileID: 5598888999081497415}
   m_Layer: 5
   m_Name: Player Movement UI
   m_TagString: Untagged
@@ -38,6 +39,23 @@ RectTransform:
   m_AnchoredPosition: {x: 50, y: -50}
   m_SizeDelta: {x: 350, y: 100}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &5598888999081497415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270373519924241006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c003336af19fdac47b6d4d70ee48ff8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  root: {fileID: 6616097690697887330}
+  northImage: {fileID: 6740376852124913520}
+  speedText: {fileID: 6950094806376146085}
+  angularSpeedText: {fileID: 6979854395154708320}
 --- !u!1 &4236181816335855516
 GameObject:
   m_ObjectHideFlags: 0

@@ -405,6 +405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1622125647606184754}
+  - component: {fileID: 4231744589335171039}
   m_Layer: 5
   m_Name: Player Status UI
   m_TagString: Untagged
@@ -435,6 +436,25 @@ RectTransform:
   m_AnchoredPosition: {x: -50, y: -50}
   m_SizeDelta: {x: 550, y: 200}
   m_Pivot: {x: 1, y: 1}
+--- !u!114 &4231744589335171039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608057081992200149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a02249401aa4604812234994e6f14ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  storageText: {fileID: 7012220222083151738}
+  massText: {fileID: 8619816467924070267}
+  healthText: {fileID: 1245414597207647788}
+  healthSlider: {fileID: 6420009317828674229}
+  fuelText: {fileID: 1341604759099334430}
+  fuelSlider: {fileID: 1236738492779726317}
 --- !u!1 &717015839089026102
 GameObject:
   m_ObjectHideFlags: 0

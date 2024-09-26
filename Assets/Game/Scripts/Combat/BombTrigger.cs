@@ -23,7 +23,7 @@ namespace Game.Scripts.Combat
                 
                 if (bombTransform && bombTransform.TryGetComponent<Bomb>(out var bomb))
                 {
-                    bomb.Activate();
+                    bomb.Activate(gameObject);
                 }
             }
         }

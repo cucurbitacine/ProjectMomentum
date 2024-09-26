@@ -6,7 +6,6 @@ namespace Game.Scripts.Interactions
     public class StorageBase : MonoBehaviour, IStorage
     {
         [SerializeField] private int amount = 0;
-
         
         public int Amount
         {
@@ -22,7 +21,5 @@ namespace Game.Scripts.Interactions
         }
 
         public event Action<int> OnAmountChanged;
-        
-        //public Vector3 Gateway { get; }
     }
 }
