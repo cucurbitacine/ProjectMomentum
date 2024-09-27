@@ -16,6 +16,11 @@ namespace Game.Scripts.Levels
 
         public CinemachineVirtualCamera virtualCamera => (_lazyCamera ??= new LazyComponent<CinemachineVirtualCamera>(gameObject)).Value;
 
+        public void SetActive()
+        {
+            VCam.ActiveCamera = this;
+        }
+        
         private void OnEnable()
         {
             VCam.Register(this);
@@ -30,7 +35,7 @@ namespace Game.Scripts.Levels
         {
             if (activeOnStart)
             {
-                VCam.ActiveCamera = this;
+                SetActive();
             }
         }
 

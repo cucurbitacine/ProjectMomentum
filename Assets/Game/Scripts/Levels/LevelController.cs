@@ -46,7 +46,7 @@ namespace Game.Scripts.Levels
             if (Busy) return;
             Busy = true;
             
-            StartCoroutine(Restarting());
+            StartCoroutine(Quiting());
         }
         
         public void Build()
@@ -161,6 +161,16 @@ namespace Game.Scripts.Levels
         private IEnumerator Restarting()
         {
             textDisplay.SetText("> Restart mission...");
+            textDisplay.Display(true);
+            
+            yield return new WaitForSeconds(2f);
+            
+            SceneManager.LoadScene(1);
+        }
+        
+        private IEnumerator Quiting()
+        {
+            textDisplay.SetText("> Interrupt mission...");
             textDisplay.Display(true);
             
             yield return new WaitForSeconds(2f);
