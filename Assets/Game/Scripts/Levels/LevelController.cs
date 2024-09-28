@@ -46,8 +46,6 @@ namespace Game.Scripts.Levels
         
         public PlayerController Player => (lazyPlayer ??= new LazyComponent<PlayerController>(gameObject)).Value;
 
-        [SerializeField] private float delayDefault = 2f;
-        
         public void RestartLevel()
         {
             if (State == LevelState.Loading) return;

@@ -30,7 +30,7 @@ namespace Game.Scripts.Levels
             }
             catch (Exception e)
             {
-                Debug.LogError(e.Message);
+                //Debug.LogError(e.Message);
             }
             
             return null;

@@ -2189,6 +2189,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <State>k__BackingField: 0
+  dieDuration: 2
+  saveDuration: 2
+  failDuration: 2
+  completeDuration: 2
+  restartDuration: 2
+  quitDuration: 2
   lazyPlayer:
     value: {fileID: 1605711405}
   evacuatedStorage: {fileID: 1526600479}

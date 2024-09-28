@@ -48,7 +48,7 @@ MonoBehaviour:
   <IsPointing>k__BackingField: 0
   displayName: Target
   target: {fileID: 0}
-  radiusScale: 0.8
+  radiusScale: 0.75
   minDistance: 5
   canvas: {fileID: 5322060596813069326}
   arrowImage: {fileID: 6085023651091769038}

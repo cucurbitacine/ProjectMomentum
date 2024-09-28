@@ -38,6 +38,11 @@ namespace Game.Scripts.Levels
                 {
                     level.FailLevel();
                 }
+
+                if (Input.GetKey(KeyCode.C) && Input.GetKeyDown(KeyCode.L))
+                {
+                    GameSessionTable.Clear();
+                }
             }
         }
 
