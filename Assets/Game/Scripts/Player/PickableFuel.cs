@@ -16,7 +16,7 @@ namespace Game.Scripts.Player
         {
             if (actor.TryGetComponent<PlayerController>(out var player) && !player.Health.IsDead)
             {
-                return player.Spaceship.Fuel < player.Spaceship.FuelMax;
+                return player.Spaceship.Fuel.Value < player.Spaceship.Fuel.Max;
             }
 
             return false;
@@ -26,14 +26,17 @@ namespace Game.Scripts.Player
         {
             if (actor.TryGetComponent<PlayerController>(out var player))
             {
+                if(player.Spaceship.Fuel.IsEmpty) player.Spaceship.Fuel.Fill();
+                
                 if (usePercent)
                 {
-                    var amount = (int)(fuelAmount * 0.01f * player.Spaceship.FuelMax);
-                    player.Spaceship.AddFuel(amount);
+                    var amount = (int)(fuelAmount * 0.01f * player.Spaceship.Fuel.Max);
+                    
+                    player.Spaceship.Fuel.Increase(amount);
                 }
                 else
                 {
-                    player.Spaceship.AddFuel(fuelAmount);
+                    player.Spaceship.Fuel.Increase(fuelAmount);
                 }
                 
                 SmartPrefab.SmartDestroy(gameObject);

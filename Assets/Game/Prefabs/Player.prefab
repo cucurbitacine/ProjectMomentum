@@ -13,11 +13,12 @@ GameObject:
   - component: {fileID: 1354852739907254509}
   - component: {fileID: 4298088320079837538}
   - component: {fileID: 7280306392836577407}
-  - component: {fileID: 8988216336487497984}
+  - component: {fileID: 3729598593923265389}
   - component: {fileID: 8544873758124602441}
   - component: {fileID: 3491123879010883996}
   - component: {fileID: 8222865002006185753}
   - component: {fileID: 5021882298218171156}
+  - component: {fileID: 8988216336487497984}
   - component: {fileID: 5826114955872263179}
   - component: {fileID: 7892476213108621285}
   - component: {fileID: 3949951244160346607}
@@ -195,7 +196,7 @@ MonoBehaviour:
   <Max>k__BackingField: 100
   <IsDead>k__BackingField: 0
   <Immortal>k__BackingField: 0
---- !u!114 &8988216336487497984
+--- !u!114 &3729598593923265389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,16 +205,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8337482985371444798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135a1d487e794bbb86f07572d496e27b, type: 3}
+  m_Script: {fileID: 11500000, guid: c2bc83b234ea4cc4b308d2fae0f3186e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 7280306392836577407}
-  damageTimeout: 0.1
-  damagePerMomentum: 10
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  hitEffectPrefab: {fileID: 3093170610347731322, guid: 1806b739ce6190e428327e30002d37ca, type: 3}
+  <Value>k__BackingField: 100
+  <Max>k__BackingField: 100
+  <IsEmpty>k__BackingField: 0
+  <Infinity>k__BackingField: 0
 --- !u!114 &8544873758124602441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,8 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5019dec3796e43d45bfe390635f8446d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuel: 100
-  <FuelMax>k__BackingField: 100
   powerJetEngine: 4
   powerMovement: 1
   powerRotation: 0.5
@@ -277,6 +273,25 @@ MonoBehaviour:
   zoomRate: 0.2
   audioSource: {fileID: 4298088320079837538}
   clickSfx: {fileID: 8300000, guid: 3c9ff29904d30bf498e9596760139c10, type: 3}
+--- !u!114 &8988216336487497984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337482985371444798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 135a1d487e794bbb86f07572d496e27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 7280306392836577407}
+  damageTimeout: 0.1
+  damagePerMomentum: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  hitEffectPrefab: {fileID: 3093170610347731322, guid: 1806b739ce6190e428327e30002d37ca, type: 3}
 --- !u!114 &5826114955872263179
 MonoBehaviour:
   m_ObjectHideFlags: 0

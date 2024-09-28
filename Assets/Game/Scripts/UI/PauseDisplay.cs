@@ -31,7 +31,7 @@ namespace Game.Scripts.UI
         
         private void HandleRestartButton()
         {
-            if (level.Busy) return;
+            if (level.State != LevelController.LevelState.Playing) return;
             
             gameObject.SetActive(false);
             
@@ -40,7 +40,7 @@ namespace Game.Scripts.UI
         
         private void HandleExitButton()
         {
-            if (level.Busy) return;
+            if (level.State != LevelController.LevelState.Playing) return;
             
             gameObject.SetActive(false);
             

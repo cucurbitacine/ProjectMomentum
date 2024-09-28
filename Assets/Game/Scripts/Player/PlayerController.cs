@@ -68,7 +68,7 @@ namespace Game.Scripts.Player
 
         private float GetFuelMass()
         {
-            return 100f * massPerFuelPercent * Spaceship.Fuel / Spaceship.FuelMax;
+            return 100f * massPerFuelPercent * Spaceship.Fuel.Value / Spaceship.Fuel.Max;
         }
 
         private void Awake()
@@ -79,13 +79,13 @@ namespace Game.Scripts.Player
         private void OnEnable()
         {
             OnAmountChanged += HandleStorage;
-            Spaceship.OnFuelChanged += HandleFuel;
+            Spaceship.Fuel.OnValueChanged += HandleFuel;
         }
 
         private void OnDisable()
         {
             OnAmountChanged -= HandleStorage;
-            Spaceship.OnFuelChanged -= HandleFuel;
+            Spaceship.Fuel.OnValueChanged -= HandleFuel;
         }
 
         private void Start()

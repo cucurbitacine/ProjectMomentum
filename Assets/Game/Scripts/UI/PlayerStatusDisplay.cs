@@ -34,7 +34,7 @@ namespace Game.Scripts.UI
         
         private void HandleFuel(float value)
         {
-            fuelSlider.value = Spaceship.Fuel / Spaceship.FuelMax;
+            fuelSlider.value = Spaceship.Fuel.Value / Spaceship.Fuel.Max;
             fuelText.text = $"{(fuelSlider.value * 100):F1}%";
         }
         
@@ -47,21 +47,21 @@ namespace Game.Scripts.UI
         {
             Health.OnValueChanged += HandleHealth;
             player.OnAmountChanged += HandleStorage;
-            Spaceship.OnFuelChanged += HandleFuel;
+            Spaceship.Fuel.OnValueChanged += HandleFuel;
         }
         
         private void OnDisable()
         {
             Health.OnValueChanged -= HandleHealth;
             player.OnAmountChanged -= HandleStorage;
-            Spaceship.OnFuelChanged -= HandleFuel;
+            Spaceship.Fuel.OnValueChanged -= HandleFuel;
         }
 
         private void Start()
         {
             HandleHealth(Health.Value);
             HandleStorage(player.Amount);
-            HandleFuel(Spaceship.Fuel);
+            HandleFuel(Spaceship.Fuel.Value);
         }
         
         private void Update()
