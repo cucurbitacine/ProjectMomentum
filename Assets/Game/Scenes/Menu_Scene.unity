@@ -1230,7 +1230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625848855158761399, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: m_text
-      value: Return
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 2962598482518098136, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size
@@ -1321,7 +1321,7 @@ GameObject:
   - component: {fileID: 251031426}
   - component: {fileID: 251031427}
   m_Layer: 0
-  m_Name: V
+  m_Name: V, ZX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3660,7 +3660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625848855158761399, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: m_text
-      value: Return
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 2962598482518098136, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size
@@ -7846,7 +7846,7 @@ MonoBehaviour:
     the fuel and astronauts
     on your ship
 
-    affect the total mass?'
+    affect the total mass'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -8075,7 +8075,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2, y: 1.75}
-  m_SizeDelta: {x: 4, y: 1.5}
+  m_SizeDelta: {x: 8, y: 1.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1657351175
 MonoBehaviour:
@@ -8097,9 +8097,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Change View
+  m_text: 'View, Zoom
 
-    [V]'
+    [V], [Z x]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -8252,7 +8252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625848855158761399, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: m_text
-      value: Return
+      value: Menu
       objectReference: {fileID: 0}
     - target: {fileID: 2962598482518098136, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size
@@ -9172,7 +9172,7 @@ MonoBehaviour:
     Be careful not to crash too hard.
 
     Although some debris can
-    be useful.'
+    be useful'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -9953,7 +9953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625848855158761399, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: m_text
-      value: Return
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 2962598482518098136, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size
@@ -10133,7 +10133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625848855158761399, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: m_text
-      value: Return
+      value: Back
       objectReference: {fileID: 0}
     - target: {fileID: 2962598482518098136, guid: b23763cb91987a7448b53d258a8fd690, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size
