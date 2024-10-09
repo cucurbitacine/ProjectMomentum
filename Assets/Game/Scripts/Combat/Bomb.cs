@@ -41,7 +41,7 @@ namespace Game.Scripts.Combat
             if (boomEffectPrefab)
             {
                 var boomEffect = SmartPrefab.SmartInstantiate(boomEffectPrefab, transform.position, Quaternion.Euler(0f, 0f, Random.value * 360f));
-                boomEffect.Play();
+                boomEffect.PlaySafe();
             }
             
             SmartPrefab.SmartDestroy(gameObject);

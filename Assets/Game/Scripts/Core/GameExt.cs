@@ -5,6 +5,8 @@ namespace Game.Scripts.Core
 {
     public static class GameExt
     {
+        #region ParticleSystem
+
         public static void PlaySafe(this ParticleSystem particleSystem, bool play)
         {
             if (play)
@@ -23,6 +25,10 @@ namespace Game.Scripts.Core
             }
         }
 
+        #endregion
+        
+        #region AudioSource
+
         public static void PlaySafe(this AudioSource audioSource, bool play)
         {
             if (play)
@@ -40,33 +46,13 @@ namespace Game.Scripts.Core
                 }
             }
         }
-
-        public static void PlaySafe(this GameObject gameObject, bool value)
-        {
-            if (gameObject.TryGetComponent<ParticleSystem>(out var particle))
-            {
-                particle.PlaySafe(value);
-            }
-
-            if (gameObject.TryGetComponent<AudioSource>(out var audio))
-            {
-                audio.PlaySafe(value);
-            }
-        }
-
-        public static void Play(this GameObject gameObject)
-        {
-            gameObject.PlaySafe(true);
-        }
-
-        public static void Stop(this GameObject gameObject)
-        {
-            gameObject.PlaySafe(false);
-        }
         
         public static void PlayOneShot(this AudioSource audio, List<AudioClip> clips)
         {
-            audio.PlayOneShot(clips != null && clips.Count > 0 ? clips[Random.Range(0, clips.Count)] : null);
+            if (clips != null && clips.Count > 0)
+            {
+                audio.PlayOneShot(clips[Random.Range(0, clips.Count)]);
+            }
         }
 
         public static void PlayOneShot(this GameObject gameObject, List<AudioClip> clips)
@@ -84,15 +70,49 @@ namespace Game.Scripts.Core
                 audio.PlayOneShot(clip);
             }
         }
+
+        #endregion
+
+        #region LayerMask
+
+        public static bool CompareLayer(this LayerMask layerMask, int layer)
+        {
+            return (layerMask.value & (1 << layer)) > 0;
+        }
         
         public static bool CompareLayer(this GameObject gameObject, LayerMask layerMask)
         {
-            return (layerMask.value & (1 << gameObject.layer)) > 0;
+            return layerMask.CompareLayer(gameObject.layer);
         }
-        
-        public static bool CompareLayer(this Transform transform, LayerMask layerMask)
+
+        public static bool CompareLayer(this Component component, LayerMask layerMask)
         {
-            return transform.gameObject.CompareLayer(layerMask);
+            return component.gameObject.CompareLayer(layerMask);
+        }
+
+        #endregion
+        
+        public static void PlaySafe(this GameObject gameObject, bool value)
+        {
+            if (gameObject.TryGetComponent<ParticleSystem>(out var particle))
+            {
+                particle.PlaySafe(value);
+            }
+
+            if (gameObject.TryGetComponent<AudioSource>(out var audio))
+            {
+                audio.PlaySafe(value);
+            }
+        }
+
+        public static void PlaySafe(this GameObject gameObject)
+        {
+            gameObject.PlaySafe(true);
+        }
+
+        public static void StopSafe(this GameObject gameObject)
+        {
+            gameObject.PlaySafe(false);
         }
     }
 }

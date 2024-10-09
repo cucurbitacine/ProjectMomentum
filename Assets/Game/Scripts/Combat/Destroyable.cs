@@ -31,7 +31,7 @@ namespace Game.Scripts.Combat
             if (destroyEffectPrefab)
             {
                 var destroyEffect = SmartPrefab.SmartInstantiate(destroyEffectPrefab, transform.position, transform.rotation);
-                destroyEffect.Play();
+                destroyEffect.PlaySafe();
             }
         }
         

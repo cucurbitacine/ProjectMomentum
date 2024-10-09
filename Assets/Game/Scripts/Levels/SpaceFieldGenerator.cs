@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Game.Scripts.Core;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -24,6 +25,8 @@ namespace Game.Scripts.Levels
         [SerializeField] private PrefabList prefabList;
         [SerializeField] private Color gridColor = Color.white;
         
+        private readonly List<Collider2D> overlap = new List<Collider2D>();
+        
         private Vector2 fieldCenter => transform.position;
         
         public void Generate()
@@ -40,18 +43,32 @@ namespace Game.Scripts.Levels
 
                         var prefab = GetPrefab();
                         var prefabSize = GetSize(prefab);
+
+                        var filter = new ContactFilter2D()
+                        {
+                            useLayerMask = true,
+                            layerMask = obstacleLayer,
+                            useTriggers = false,
+                        };
                         
-                        if (Physics2D.OverlapBox(point, prefabSize, angle, obstacleLayer))
+                        var count = Physics2D.OverlapBox(point, prefabSize, angle, filter, overlap);
+                        
+                        if (count > 0)
                         {
                             continue;
                         }
 
                         var asteroid = SmartPrefab.SmartInstantiate(prefab, point, rotation, transform);
 
-                        if (doPhysics && asteroid.TryGetComponent<Rigidbody2D>(out var rigid2d))
+                        if (asteroid.TryGetComponent<IRigidbody2D>(out var rigid2d))
                         {
-                            rigid2d.AddTorque((Random.value * 2f - 1f) * torqueMax, ForceMode2D.Impulse);
-                            rigid2d.AddForce(Random.insideUnitCircle * forceMax, ForceMode2D.Impulse);
+                            rigid2d.Simulate(false);
+                            
+                            if (doPhysics)
+                            {
+                                rigid2d.AddTorque((Random.value * 2f - 1f) * torqueMax, ForceMode2D.Impulse);
+                                rigid2d.AddForce(Random.insideUnitCircle * forceMax, ForceMode2D.Impulse);
+                            }
                         }
                     }
                 }

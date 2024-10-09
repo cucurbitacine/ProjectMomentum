@@ -45,7 +45,7 @@ namespace Game.Scripts.Player
                 {
                     var pickupEffect = SmartPrefab.SmartInstantiate(pickupEffectPrefab, actor.transform.position, actor.transform.rotation);
                     
-                    pickupEffect.Play();
+                    pickupEffect.PlaySafe();
                 }
             }
         }

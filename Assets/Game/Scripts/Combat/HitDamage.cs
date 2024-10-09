@@ -50,7 +50,7 @@ namespace Game.Scripts.Combat
                             mainModule.startSpeed = startSpeedParam;
                         }
                         
-                        hitEffect.Play();
+                        hitEffect.PlaySafe();
                     }
                 }
             }

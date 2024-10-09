@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6353129252094788918}
   - component: {fileID: 3823975428027387682}
   - component: {fileID: 3966000646651255345}
+  - component: {fileID: 8613819905487617886}
   m_Layer: 6
   m_Name: Heal
   m_TagString: Untagged
@@ -103,6 +104,18 @@ MonoBehaviour:
   usePercent: 1
   healAmount: 20
   pickupEffectPrefab: {fileID: 3083049477367119429, guid: 9322a7360d27a7c4690a0117fb2f6b32, type: 3}
+--- !u!114 &8613819905487617886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6942023093365437298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8683f80ac548ce9d7f9afb620f3761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4503112839491240916
 PrefabInstance:
   m_ObjectHideFlags: 0
