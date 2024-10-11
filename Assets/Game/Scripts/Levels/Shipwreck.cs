@@ -15,9 +15,9 @@ namespace Game.Scripts.Levels
         public int Amount => storage?.Amount ?? 0;
         public bool IsCompleted => Amount == 0;
         
-        public event Action OnCompleted;
+        public event Action Rescued;
         
-        public void Sos(bool value)
+        public void StartRescue(bool value)
         {
             if (value && Amount == 0) return;
             
@@ -30,20 +30,20 @@ namespace Game.Scripts.Levels
             
             if (value == 0)
             {
-                Sos(false);
+                StartRescue(false);
                 
-                OnCompleted?.Invoke();
+                Rescued?.Invoke();
             }
         }
         
         private void OnEnable()
         {
-            storage.OnAmountChanged += HandleStorage;
+            storage.AmountChanged += HandleStorage;
         }
 
         private void OnDisable()
         {
-            storage.OnAmountChanged -= HandleStorage;
+            storage.AmountChanged -= HandleStorage;
         }
 
         private void Start()

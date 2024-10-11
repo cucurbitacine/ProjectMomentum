@@ -12,14 +12,14 @@ namespace Game.Scripts.Control
         [field: SerializeField] public bool IsEmpty { get; private set; } = false;
         [field: SerializeField] public bool Infinity { get; set; } = false;
         
-        public event Action<float> OnMaxChanged;
-        public event Action<float> OnValueChanged; 
+        public event Action<float> MaxValueChanged;
+        public event Action<float> ValueChanged; 
 
-        public event Action<float> OnDecreased; 
-        public event Action<float> OnIncreased; 
+        public event Action<float> Decreased; 
+        public event Action<float> Increased; 
         
-        public event Action OnEmptied; 
-        public event Action OnFilled; 
+        public event Action Emptied; 
+        public event Action Filled; 
         
         public void SetValue(float newValue)
         {
@@ -31,7 +31,7 @@ namespace Game.Scripts.Control
 
             Value = newValue;
                 
-            OnValueChanged?.Invoke(Value);
+            ValueChanged?.Invoke(Value);
 
             if (Value <= 0f)
             {
@@ -49,7 +49,7 @@ namespace Game.Scripts.Control
 
             SetValue(Value);
             
-            OnMaxChanged?.Invoke(Value);
+            MaxValueChanged?.Invoke(Value);
         }
         
         public void Decrease(float amount)
@@ -64,7 +64,7 @@ namespace Game.Scripts.Control
             
             SetValue(Value - amount);
             
-            OnDecreased?.Invoke(amount);
+            Decreased?.Invoke(amount);
         }
         
         public void Increase(float amount)
@@ -77,7 +77,7 @@ namespace Game.Scripts.Control
 
             SetValue(Value + amount);
             
-            OnIncreased?.Invoke(amount);
+            Increased?.Invoke(amount);
         }
 
         public void Empty()
@@ -89,7 +89,7 @@ namespace Game.Scripts.Control
             Value = 0f;
             IsEmpty = true;
 
-            OnEmptied?.Invoke();
+            Emptied?.Invoke();
         }
 
         public void Fill()
@@ -98,7 +98,7 @@ namespace Game.Scripts.Control
             
             IsEmpty = false;
             
-            OnFilled?.Invoke();
+            Filled?.Invoke();
         }
 
         private void OnValidate()

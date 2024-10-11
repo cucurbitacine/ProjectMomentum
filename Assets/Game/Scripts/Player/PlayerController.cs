@@ -21,7 +21,7 @@ namespace Game.Scripts.Player
         [SerializeField] [Min(0f)] private float massPerUnit = 5f;
         [SerializeField] [Min(0f)] private float massPerFuelPercent = 0.5f;
 
-        public event Action<int> OnAmountChanged;
+        public event Action<int> AmountChanged;
 
         public int Amount
         {
@@ -32,7 +32,7 @@ namespace Game.Scripts.Player
 
                 amount = value;
 
-                OnAmountChanged?.Invoke(amount);
+                AmountChanged?.Invoke(amount);
             }
         }
 
@@ -78,14 +78,14 @@ namespace Game.Scripts.Player
 
         private void OnEnable()
         {
-            OnAmountChanged += HandleStorage;
-            Spaceship.Fuel.OnValueChanged += HandleFuel;
+            AmountChanged += HandleStorage;
+            Spaceship.Fuel.ValueChanged += HandleFuel;
         }
 
         private void OnDisable()
         {
-            OnAmountChanged -= HandleStorage;
-            Spaceship.Fuel.OnValueChanged -= HandleFuel;
+            AmountChanged -= HandleStorage;
+            Spaceship.Fuel.ValueChanged -= HandleFuel;
         }
 
         private void Start()

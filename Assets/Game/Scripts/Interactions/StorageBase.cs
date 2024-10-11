@@ -16,10 +16,10 @@ namespace Game.Scripts.Interactions
 
                 amount = value;
                 
-                OnAmountChanged?.Invoke(amount);
+                AmountChanged?.Invoke(amount);
             }
         }
 
-        public event Action<int> OnAmountChanged;
+        public event Action<int> AmountChanged;
     }
 }

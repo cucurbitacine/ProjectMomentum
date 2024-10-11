@@ -7,7 +7,7 @@ namespace Game.Scripts.Interactions
     {
         public int Amount { get; set; }
         
-        public event Action<int> OnAmountChanged;
+        public event Action<int> AmountChanged;
     }
 
     public interface IGateway
@@ -17,6 +17,5 @@ namespace Game.Scripts.Interactions
     
     public interface IStorageWithGateway : IStorage, IGateway
     {
-        
     }
 }

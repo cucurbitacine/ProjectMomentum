@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,20 @@ namespace Game.Scripts.Levels
     {
         [field: SerializeField] public LevelState State { get; private set; } = LevelState.Starting;
         
+        [Header("Level Settings")]
+        [SerializeField] [Min(0f)] private float maxPlayerDistance = 500f;
+        
+        [Header("Game Entities")]
+        [SerializeField] private LazyComponent<PlayerController> lazyPlayer;
+        [SerializeField] private StorageBase evacuatedStorage;
+
+        [Header("Level Building")]
+        [SerializeField] private ChunkGenerationSystem generatorSystem;
+        [SerializeField] private List<RingSpawnerSystem> shipwrecksSpawners = new List<RingSpawnerSystem>();
+
+        [Header("UI")]
+        [SerializeField] private TextDisplayBase textDisplay;
+        
         [Space]
         [SerializeField] [Min(0f)] private float dieDuration = 2f;
         [SerializeField] [Min(0f)] private float saveDuration = 2f;
@@ -21,25 +36,14 @@ namespace Game.Scripts.Levels
         [SerializeField] [Min(0f)] private float restartDuration = 2f;
         [SerializeField] [Min(0f)] private float quitDuration = 2f;
         
-        [Space]
-        [SerializeField] private LazyComponent<PlayerController> lazyPlayer;
-        [SerializeField] private StorageBase evacuatedStorage;
+        private readonly List<List<Shipwreck>> _shipwreckStack = new List<List<Shipwreck>>();
+        private int _selectedStackShipwrecks = -1;
+        private float _playerFuel; 
+        private int _playerHealth; 
         
-        [Header("Level Building")]
-        [SerializeField] private List<ShipwreckGenerator> shipwreckGenerators = new List<ShipwreckGenerator>();
-        [SerializeField] private List<SpaceFieldGenerator> spaceGenerators = new List<SpaceFieldGenerator>();
-
-        [Header("UI")]
-        [SerializeField] private TextDisplayBase textDisplay;
+        public int MaxScore { get; private set; }
         
-        private readonly List<List<Shipwreck>> _shipwreckQueue = new List<List<Shipwreck>>();
-        private int _currentIndex = -1;
-        private float _fuelAmount; 
-        private int _healthAmount; 
-        
-        public int TotalAmount { get; private set; }
-        
-        public int SavedAmount => evacuatedStorage?.Amount ?? 0;
+        public int Score => evacuatedStorage?.Amount ?? 0;
         public float TimeSpent { get; private set; }
         public int HealthSpent { get; private set; }
         public float FuelSpent { get; private set; }
@@ -62,82 +66,107 @@ namespace Game.Scripts.Levels
             StartCoroutine(Quiting());
         }
         
-        public void Build()
+        public void BuildLevel()
         {
             if (State != LevelState.Starting) return;
-            
-            TotalAmount = 0;
-            
-            SosShipwrecks(-1);
-            
-            _shipwreckQueue.Clear();
-            
-            foreach (var generator in shipwreckGenerators)
+
+            SpawnShipwrecks();
+
+            GenerateLevel();
+        }
+
+        private void SpawnShipwrecks()
+        {
+            ResetShipwrecks();
+
+            SetupShipwrecks();
+
+            StartRescueShipwrecks(0);
+        }
+
+        private void GenerateLevel()
+        {
+            if (generatorSystem)
             {
-                var shipObjects = generator.Generate();
+                generatorSystem.StartGeneration();
+            }
+            else
+            {
+                Debug.LogWarning($"There are no Generation System");
+            }
+        }
+
+        private void ResetShipwrecks()
+        {
+            StartRescueShipwrecks(-1);
+            
+            _shipwreckStack.Clear();
+        }
+
+        private void SetupShipwrecks()
+        {
+            MaxScore = 0;
+            
+            foreach (var spawner in shipwrecksSpawners)
+            {
+                var spawnedObjects = spawner.Spawn();
 
                 var shipwrecks = new List<Shipwreck>();
                 
-                foreach (var shipObject in shipObjects)
+                foreach (var spawnedObject in spawnedObjects)
                 {
-                    if (shipObject.TryGetComponent<Shipwreck>(out var shipwreck))
+                    if (spawnedObject.TryGetComponent<Shipwreck>(out var shipwreck))
                     {
                         shipwrecks.Add(shipwreck);
 
-                        TotalAmount += shipwreck.Amount;
+                        MaxScore += shipwreck.Amount;
                     }
                 }
                 
-                _shipwreckQueue.Add(shipwrecks);
-            }
-
-            SosShipwrecks(0);
-            
-            foreach (var generator in spaceGenerators)
-            {
-                generator.Generate();
+                _shipwreckStack.Add(shipwrecks);
             }
         }
         
-        private void SosShipwrecks(int index)
+        private void StartRescueShipwrecks(int index)
         {
-            if (_currentIndex >= 0)
+            if (_selectedStackShipwrecks >= 0)
             {
-                var previousShips = _shipwreckQueue[_currentIndex];
+                var previousShipwrecks = _shipwreckStack[_selectedStackShipwrecks];
 
-                foreach (var ship in previousShips)
+                foreach (var shipwreck in previousShipwrecks)
                 {
-                    ship.OnCompleted -= HandleShipwreck;
+                    shipwreck.Rescued -= OnShipwreckRescued;
                     
                     if (gameObject.scene.isLoaded)
                     {
-                        ship.Sos(false);
+                        shipwreck.StartRescue(false);
                     }
                 }
             }
 
-            _currentIndex = index;
+            _selectedStackShipwrecks = index;
             
-            if (_currentIndex < 0) return;
-            if (_shipwreckQueue.Count <= _currentIndex) return;
+            if (_selectedStackShipwrecks < 0) return;
+            if (_shipwreckStack.Count <= _selectedStackShipwrecks) return;
             
-            var ships = _shipwreckQueue[_currentIndex];
+            var selectedShipwrecks = _shipwreckStack[_selectedStackShipwrecks];
 
-            foreach (var ship in ships)
+            foreach (var shipwreck in selectedShipwrecks)
             {
-                ship.OnCompleted += HandleShipwreck;
-                ship.Sos(true);
+                shipwreck.Rescued += OnShipwreckRescued;
+                
+                shipwreck.StartRescue(true);
             }
         }
         
-        private void HandleShipwreck()
+        private void OnShipwreckRescued()
         {
-            if (_currentIndex < 0) return;
-            if (_shipwreckQueue.Count <= _currentIndex) return;
+            if (_selectedStackShipwrecks < 0) return;
+            if (_shipwreckStack.Count <= _selectedStackShipwrecks) return;
             
-            if (_shipwreckQueue[_currentIndex].All(s => s.IsCompleted))
+            if (_shipwreckStack[_selectedStackShipwrecks].All(s => s.IsCompleted))
             {
-                SosShipwrecks(_currentIndex + 1);
+                StartRescueShipwrecks(_selectedStackShipwrecks + 1);
             }
         }
         
@@ -145,7 +174,7 @@ namespace Game.Scripts.Levels
         {
             return new GameSessionData()
             {
-                savedAmount = SavedAmount,
+                savedAmount = Score,
                 timeSpent = TimeSpent,
                 healthSpent = HealthSpent,
                 fuelSpent = FuelSpent,
@@ -159,16 +188,16 @@ namespace Game.Scripts.Levels
             GameSessionTable.Save(session);
         }
         
-        private void HandleFuel(float fuel)
+        private void OnPlayerFueldChanged(float fuel)
         {
             if (State != LevelState.Playing) return;
 
-            var delta = fuel - _fuelAmount;
+            var delta = fuel - _playerFuel;
             if (delta < 0)
             {
                 FuelSpent -= delta;
             }
-            _fuelAmount = fuel;
+            _playerFuel = fuel;
             
             if (fuel <= 0f)
             {
@@ -181,19 +210,19 @@ namespace Game.Scripts.Levels
             }
         }
         
-        private void HandleHealth(int health)
+        private void OnPlayerHealthChanged(int health)
         {
             if (State != LevelState.Playing) return;
             
-            var delta = health - _healthAmount;
+            var delta = health - _playerHealth;
             if (delta < 0)
             {
                 HealthSpent -= delta;
             }
-            _healthAmount = health;
+            _playerHealth = health;
         }
         
-        private void HandlePlayerDeath()
+        private void OnPlayerDied()
         {
             if (State != LevelState.Playing) return;
             State = LevelState.Failed;
@@ -201,10 +230,10 @@ namespace Game.Scripts.Levels
             StartCoroutine(Dying());
         }
         
-        private void HandleMissionComplete(int value)
+        private void OnEvacuatedStorageAmountChanged(int value)
         {
             if (State != LevelState.Playing) return;
-            if (SavedAmount < TotalAmount) return;
+            if (Score < MaxScore) return;
             State = LevelState.Completed;
             
             StartCoroutine(Saving());
@@ -282,45 +311,55 @@ namespace Game.Scripts.Levels
         
         private void OnEnable()
         {
-            Player.Health.OnValueChanged += HandleHealth;
-            Player.Health.OnDied += HandlePlayerDeath;
-            Player.Spaceship.Fuel.OnValueChanged += HandleFuel;
+            Player.Health.ValueChanged += OnPlayerHealthChanged;
+            Player.Health.Died += OnPlayerDied;
+            Player.Spaceship.Fuel.ValueChanged += OnPlayerFueldChanged;
 
-            evacuatedStorage.OnAmountChanged += HandleMissionComplete;
+            evacuatedStorage.AmountChanged += OnEvacuatedStorageAmountChanged;
         }
 
         private void OnDisable()
         {
-            Player.Health.OnValueChanged -= HandleHealth;
-            Player.Health.OnDied -= HandlePlayerDeath;
-            Player.Spaceship.Fuel.OnValueChanged -= HandleFuel;
+            Player.Health.ValueChanged -= OnPlayerHealthChanged;
+            Player.Health.Died -= OnPlayerDied;
+            Player.Spaceship.Fuel.ValueChanged -= OnPlayerFueldChanged;
             
-            evacuatedStorage.OnAmountChanged -= HandleMissionComplete;
+            evacuatedStorage.AmountChanged -= OnEvacuatedStorageAmountChanged;
         }
 
         private void Start()
         {
-            Build();
+            BuildLevel();
 
-            _healthAmount = Player.Health.Value;
-            _fuelAmount = Player.Spaceship.Fuel.Value;
+            _playerHealth = Player.Health.Value;
+            _playerFuel = Player.Spaceship.Fuel.Value;
 
             State = LevelState.Playing;
         }
 
         private void Update()
         {
-            if (State == LevelState.Playing && SavedAmount < TotalAmount)
+            if (State == LevelState.Playing && Score < MaxScore)
             {
                 TimeSpent += Time.deltaTime;
+
+                if (Vector2.Distance(Player.Spaceship.position, evacuatedStorage.transform.position) > maxPlayerDistance)
+                {
+                    RestartLevel();
+                }
             }
         }
 
         private void OnDestroy()
         {
-            SosShipwrecks(-1);
+            ResetShipwrecks();
         }
-        
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawWireSphere(evacuatedStorage.transform.position, maxPlayerDistance);
+        }
+
         public enum LevelState
         {
             Starting,

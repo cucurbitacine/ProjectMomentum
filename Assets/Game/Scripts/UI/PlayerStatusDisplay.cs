@@ -45,16 +45,16 @@ namespace Game.Scripts.UI
         
         private void OnEnable()
         {
-            Health.OnValueChanged += HandleHealth;
-            player.OnAmountChanged += HandleStorage;
-            Spaceship.Fuel.OnValueChanged += HandleFuel;
+            Health.ValueChanged += HandleHealth;
+            player.AmountChanged += HandleStorage;
+            Spaceship.Fuel.ValueChanged += HandleFuel;
         }
         
         private void OnDisable()
         {
-            Health.OnValueChanged -= HandleHealth;
-            player.OnAmountChanged -= HandleStorage;
-            Spaceship.Fuel.OnValueChanged -= HandleFuel;
+            Health.ValueChanged -= HandleHealth;
+            player.AmountChanged -= HandleStorage;
+            Spaceship.Fuel.ValueChanged -= HandleFuel;
         }
 
         private void Start()

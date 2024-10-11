@@ -118,12 +118,12 @@ namespace Game.Scripts.Inputs
         
         private void OnEnable()
         {
-            Player.Health.OnDied += HandlePlayerDeath;
+            Player.Health.Died += HandlePlayerDeath;
         }
 
         private void OnDisable()
         {
-            Player.Health.OnDied -= HandlePlayerDeath;
+            Player.Health.Died -= HandlePlayerDeath;
         }
 
         private void Update()

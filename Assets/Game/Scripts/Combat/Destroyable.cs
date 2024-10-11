@@ -37,12 +37,12 @@ namespace Game.Scripts.Combat
         
         private void OnEnable()
         {
-            Health.OnDied += HandleDeath;
+            Health.Died += HandleDeath;
         }
         
         private void OnDisable()
         {
-            Health.OnDied -= HandleDeath;
+            Health.Died -= HandleDeath;
         }
     }
 }

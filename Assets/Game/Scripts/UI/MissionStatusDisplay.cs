@@ -15,7 +15,7 @@ namespace Game.Scripts.UI
         
         private void Update()
         {
-            savedText.text = $"{level.SavedAmount:00}/{level.TotalAmount:00} saved";
+            savedText.text = $"{level.Score:00}/{level.MaxScore:00} saved";
             
             var time = TimeSpan.FromSeconds(level.TimeSpent);
                 

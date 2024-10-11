@@ -43,13 +43,13 @@ namespace Game.Scripts.UI
         private void OnEnable()
         {
             player.Interactor.OnSetChanged += HandleInteractor;
-            player.OnAmountChanged += HandleStorage;
+            player.AmountChanged += HandleStorage;
         }
         
         private void OnDisable()
         {
             player.Interactor.OnSetChanged -= HandleInteractor;
-            player.OnAmountChanged -= HandleStorage;
+            player.AmountChanged -= HandleStorage;
         }
 
         private void Start()

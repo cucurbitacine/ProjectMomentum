@@ -13,14 +13,14 @@ namespace Game.Scripts.Combat
         [field: SerializeField] public bool IsDead { get; private set; } = false;
         [field: SerializeField] public bool Immortal { get; set; } = false;
         
-        public event Action<int> OnMaxChanged;
-        public event Action<int> OnValueChanged; 
+        public event Action<int> MaxValueChanged;
+        public event Action<int> ValueChanged; 
 
-        public event Action<int> OnDamaged; 
-        public event Action<int> OnHealed; 
+        public event Action<int> Damaged; 
+        public event Action<int> Healed; 
         
-        public event Action OnDied; 
-        public event Action OnRevived; 
+        public event Action Died; 
+        public event Action Revived; 
         
         public void SetValue(int newValue)
         {
@@ -32,7 +32,7 @@ namespace Game.Scripts.Combat
 
             Value = newValue;
                 
-            OnValueChanged?.Invoke(Value);
+            ValueChanged?.Invoke(Value);
 
             if (Value == 0)
             {
@@ -50,7 +50,7 @@ namespace Game.Scripts.Combat
 
             SetValue(Value);
             
-            OnMaxChanged?.Invoke(Value);
+            MaxValueChanged?.Invoke(Value);
         }
         
         public void Damage(int amount)
@@ -65,7 +65,7 @@ namespace Game.Scripts.Combat
             
             SetValue(Value - amount);
             
-            OnDamaged?.Invoke(amount);
+            Damaged?.Invoke(amount);
         }
         
         public void Heal(int amount)
@@ -78,7 +78,7 @@ namespace Game.Scripts.Combat
 
             SetValue(Value + amount);
             
-            OnHealed?.Invoke(amount);
+            Healed?.Invoke(amount);
         }
 
         public void Die()
@@ -89,7 +89,7 @@ namespace Game.Scripts.Combat
             
             IsDead = true;
 
-            OnDied?.Invoke();
+            Died?.Invoke();
         }
 
         public void Revive()
@@ -103,7 +103,7 @@ namespace Game.Scripts.Combat
                 Heal(1);
             }
             
-            OnRevived?.Invoke();
+            Revived?.Invoke();
         }
         
         private void OnValidate()

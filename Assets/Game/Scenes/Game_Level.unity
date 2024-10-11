@@ -170,62 +170,6 @@ MonoBehaviour:
   level: {fileID: 1969419827}
   table:
     sessions: []
---- !u!1 &44566737
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 44566739}
-  - component: {fileID: 44566738}
-  m_Layer: 0
-  m_Name: SpaceFieldGenerator Medium (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &44566738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44566737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ad14de6dc97418a4604e74260f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateOnStart: 0
-  fieldSize: {x: 200, y: 100}
-  fieldGrid: {x: 16, y: 8}
-  amountPerCell: 6
-  doPhysics: 1
-  torqueMax: 0.1
-  forceMax: 0.2
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 9
-  prefabList: {fileID: 11400000, guid: 342d987bc855f954aaa6a0a8a8a7b69c, type: 2}
-  gridColor: {r: 1, g: 1, b: 0, a: 0.5019608}
---- !u!4 &44566739
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44566737}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: -100, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &138025253
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +371,7 @@ GameObject:
   - component: {fileID: 275967836}
   - component: {fileID: 275967835}
   m_Layer: 0
-  m_Name: HelpPointGenerator Hard
+  m_Name: Shipwreck Spawner Hard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -445,13 +389,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269cfb21e7a54de7ac9351b2c0d6564c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outerRadius: 250
-  innerRadius: 212.132
+  outerRadius: 475
+  innerRadius: 325
   amountPerCircle: 3
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 9
-  shipwreckPrefab: {fileID: 3376240579646927624, guid: 2c2e19cfaa15337409f3a2d10a36d255, type: 3}
+    m_Bits: 73
+  prefab: {fileID: 3376240579646927624, guid: 2c2e19cfaa15337409f3a2d10a36d255, type: 3}
 --- !u!4 &275967836
 Transform:
   m_ObjectHideFlags: 0
@@ -508,118 +452,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2404733003913645514, guid: bb5fc9007e7badc499733ba9b53019ff, type: 3}
   m_PrefabInstance: {fileID: 2368264732839075595}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &409214704
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 409214706}
-  - component: {fileID: 409214705}
-  m_Layer: 0
-  m_Name: SpaceFieldGenerator Medium (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &409214705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409214704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ad14de6dc97418a4604e74260f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateOnStart: 0
-  fieldSize: {x: 200, y: 100}
-  fieldGrid: {x: 16, y: 8}
-  amountPerCell: 6
-  doPhysics: 1
-  torqueMax: 0.1
-  forceMax: 0.2
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 9
-  prefabList: {fileID: 11400000, guid: 342d987bc855f954aaa6a0a8a8a7b69c, type: 2}
-  gridColor: {r: 1, g: 1, b: 0, a: 0.5019608}
---- !u!4 &409214706
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409214704}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 100, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &433361198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 433361200}
-  - component: {fileID: 433361199}
-  m_Layer: 0
-  m_Name: SpaceFieldGenerator Low
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &433361199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433361198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ad14de6dc97418a4604e74260f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateOnStart: 0
-  fieldSize: {x: 100, y: 100}
-  fieldGrid: {x: 8, y: 8}
-  amountPerCell: 2
-  doPhysics: 1
-  torqueMax: 0.1
-  forceMax: 0.5
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 9
-  prefabList: {fileID: 11400000, guid: 76950eaa8d379e24c81fb9610792452e, type: 2}
-  gridColor: {r: 0.33333325, g: 1, b: 0, a: 0.5019608}
---- !u!4 &433361200
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433361198}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &478931315
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,118 +688,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damping: 0.1
---- !u!1 &594376537
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 594376539}
-  - component: {fileID: 594376538}
-  m_Layer: 0
-  m_Name: SpaceFieldGenerator Hard (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &594376538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 594376537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ad14de6dc97418a4604e74260f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateOnStart: 0
-  fieldSize: {x: 400, y: 100}
-  fieldGrid: {x: 32, y: 8}
-  amountPerCell: 12
-  doPhysics: 1
-  torqueMax: 0.1
-  forceMax: 0.1
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 9
-  prefabList: {fileID: 11400000, guid: 3fc92b36d89ae674aad1dbfd5c26f88b, type: 2}
-  gridColor: {r: 1, g: 0.5, b: 0, a: 0.5019608}
---- !u!4 &594376539
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 594376537}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 200, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &689844897
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 689844899}
-  - component: {fileID: 689844898}
-  m_Layer: 0
-  m_Name: SpaceFieldGenerator Hard (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &689844898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689844897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ad14de6dc97418a4604e74260f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateOnStart: 0
-  fieldSize: {x: 100, y: 400}
-  fieldGrid: {x: 8, y: 32}
-  amountPerCell: 12
-  doPhysics: 1
-  torqueMax: 0.1
-  forceMax: 0.1
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 9
-  prefabList: {fileID: 11400000, guid: 3fc92b36d89ae674aad1dbfd5c26f88b, type: 2}
-  gridColor: {r: 1, g: 0.5, b: 0, a: 0.5019608}
---- !u!4 &689844899
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689844897}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -200, y: -50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &720677707
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,6 +1049,97 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &987781582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 987781583}
+  - component: {fileID: 987781586}
+  - component: {fileID: 987781584}
+  - component: {fileID: 987781585}
+  m_Layer: 0
+  m_Name: Chunk Generation System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &987781583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987781582}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &987781584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987781582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4d4566a14643fe85d84dd75b48e5bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generating: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 73
+  doPhysics: 1
+  torqueMax: 0.1
+  forceMax: 0.2
+  agentObject: {fileID: 987781582}
+  configSourceObject: {fileID: 987781582}
+--- !u!114 &987781585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987781582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85f17f85b8a42d386bc4df3d34c84eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spreadConfig: {fileID: 11400000, guid: db6f313e66cc7954cb5312a2f092c728, type: 2}
+  gizmosEnabled: 1
+--- !u!114 &987781586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987781582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac4af15e67164c8ebb78de507068eaec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 402846571}
+  chunkWidth: 50
+  chunkWorldCenter: {x: 0, y: 0}
+  editorChunk:
+    index: {x: 0, y: 0}
+    size: {x: 50, y: 50}
+    worldCenter: {x: 0, y: 0}
+  gizmosGridEnabled: 1
+  gizmosGridColor: {r: 1, g: 1, b: 1, a: 0.1}
+  gizmosGridScaleDisplay: 5
 --- !u!1 &1044941015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,7 +1151,7 @@ GameObject:
   - component: {fileID: 1044941017}
   - component: {fileID: 1044941016}
   m_Layer: 0
-  m_Name: HelpPointGenerator Medium
+  m_Name: Shipwreck Spawner Medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1358,13 +1169,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269cfb21e7a54de7ac9351b2c0d6564c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outerRadius: 150
-  innerRadius: 70.7107
+  outerRadius: 275
+  innerRadius: 150
   amountPerCircle: 2
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 9
-  shipwreckPrefab: {fileID: 3376240579646927624, guid: 2c2e19cfaa15337409f3a2d10a36d255, type: 3}
+    m_Bits: 73
+  prefab: {fileID: 3376240579646927624, guid: 2c2e19cfaa15337409f3a2d10a36d255, type: 3}
 --- !u!4 &1044941017
 Transform:
   m_ObjectHideFlags: 0
@@ -1375,62 +1186,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1124900285
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1124900287}
-  - component: {fileID: 1124900286}
-  m_Layer: 0
-  m_Name: SpaceFieldGenerator Hard
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1124900286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124900285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ad14de6dc97418a4604e74260f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateOnStart: 0
-  fieldSize: {x: 100, y: 400}
-  fieldGrid: {x: 8, y: 32}
-  amountPerCell: 12
-  doPhysics: 1
-  torqueMax: 0.1
-  forceMax: 0.1
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 9
-  prefabList: {fileID: 11400000, guid: 3fc92b36d89ae674aad1dbfd5c26f88b, type: 2}
-  gridColor: {r: 1, g: 0.5, b: 0, a: 0.5019608}
---- !u!4 &1124900287
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1124900285}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1862,6 +1617,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 419624522a1d483bb6909382fdcbdb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1594087378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1594087379}
+  m_Layer: 0
+  m_Name: ==== AUDIO ====
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1594087379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594087378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1605711405 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8222865002006185753, guid: bb5fc9007e7badc499733ba9b53019ff, type: 3}
@@ -1873,62 +1659,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9df8228a634a24b8d81439b4a88510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1688812008
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1688812010}
-  - component: {fileID: 1688812009}
-  m_Layer: 0
-  m_Name: SpaceFieldGenerator Medium (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1688812009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688812008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ad14de6dc97418a4604e74260f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateOnStart: 0
-  fieldSize: {x: 100, y: 200}
-  fieldGrid: {x: 8, y: 16}
-  amountPerCell: 6
-  doPhysics: 1
-  torqueMax: 0.1
-  forceMax: 0.2
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 9
-  prefabList: {fileID: 11400000, guid: 342d987bc855f954aaa6a0a8a8a7b69c, type: 2}
-  gridColor: {r: 1, g: 1, b: 0, a: 0.5019608}
---- !u!4 &1688812010
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1688812008}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: -50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1723022758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1940,7 +1670,7 @@ GameObject:
   - component: {fileID: 1723022760}
   - component: {fileID: 1723022759}
   m_Layer: 0
-  m_Name: HelpPointGenerator Low
+  m_Name: Shipwreck Spawner Easy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1958,13 +1688,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269cfb21e7a54de7ac9351b2c0d6564c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outerRadius: 50
+  outerRadius: 100
   innerRadius: 25
   amountPerCircle: 1
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 9
-  shipwreckPrefab: {fileID: 3376240579646927624, guid: 2c2e19cfaa15337409f3a2d10a36d255, type: 3}
+    m_Bits: 73
+  prefab: {fileID: 3376240579646927624, guid: 2c2e19cfaa15337409f3a2d10a36d255, type: 3}
 --- !u!4 &1723022760
 Transform:
   m_ObjectHideFlags: 0
@@ -2233,62 +1963,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1875660541
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1875660543}
-  - component: {fileID: 1875660542}
-  m_Layer: 0
-  m_Name: SpaceFieldGenerator Hard (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1875660542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875660541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ad14de6dc97418a4604e74260f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateOnStart: 0
-  fieldSize: {x: 400, y: 100}
-  fieldGrid: {x: 32, y: 8}
-  amountPerCell: 12
-  doPhysics: 1
-  torqueMax: 0.1
-  forceMax: 0.1
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 9
-  prefabList: {fileID: 11400000, guid: 3fc92b36d89ae674aad1dbfd5c26f88b, type: 2}
-  gridColor: {r: 1, g: 0.5, b: 0, a: 0.5019608}
---- !u!4 &1875660543
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875660541}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50, y: -200, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1969419826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,30 +1993,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <State>k__BackingField: 0
+  maxPlayerDistance: 525
+  lazyPlayer:
+    value: {fileID: 1605711405}
+  evacuatedStorage: {fileID: 1526600479}
+  generatorSystem: {fileID: 987781584}
+  shipwrecksSpawners:
+  - {fileID: 1723022759}
+  - {fileID: 1044941016}
+  - {fileID: 275967835}
+  textDisplay: {fileID: 1745324276}
   dieDuration: 2
   saveDuration: 2
   failDuration: 2
   completeDuration: 2
   restartDuration: 2
   quitDuration: 2
-  lazyPlayer:
-    value: {fileID: 1605711405}
-  evacuatedStorage: {fileID: 1526600479}
-  shipwreckGenerators:
-  - {fileID: 1723022759}
-  - {fileID: 1044941016}
-  - {fileID: 275967835}
-  spaceGenerators:
-  - {fileID: 433361199}
-  - {fileID: 2103910436}
-  - {fileID: 44566738}
-  - {fileID: 1688812009}
-  - {fileID: 409214705}
-  - {fileID: 1124900286}
-  - {fileID: 1875660542}
-  - {fileID: 689844898}
-  - {fileID: 594376538}
-  textDisplay: {fileID: 1745324276}
 --- !u!4 &1969419828
 Transform:
   m_ObjectHideFlags: 0
@@ -2496,62 +2162,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0, y: 0.5}
---- !u!1 &2103910435
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2103910437}
-  - component: {fileID: 2103910436}
-  m_Layer: 0
-  m_Name: SpaceFieldGenerator Medium
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2103910436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103910435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bf6ad14de6dc97418a4604e74260f18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generateOnStart: 0
-  fieldSize: {x: 100, y: 200}
-  fieldGrid: {x: 8, y: 16}
-  amountPerCell: 6
-  doPhysics: 1
-  torqueMax: 0.1
-  forceMax: 0.2
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 9
-  prefabList: {fileID: 11400000, guid: 342d987bc855f954aaa6a0a8a8a7b69c, type: 2}
-  gridColor: {r: 1, g: 1, b: 0, a: 0.5019608}
---- !u!4 &2103910437
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103910435}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 50, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1802887721240309724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2824,6 +2434,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5953815226177977382, guid: f8020b8c28f91ad44923d33f36d62808, type: 3}
+      propertyPath: m_TranslationOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5953815226177977382, guid: f8020b8c28f91ad44923d33f36d62808, type: 3}
       propertyPath: m_TranslationOffset.y
       value: 0
       objectReference: {fileID: 0}
@@ -2967,13 +2581,17 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 386673584}
-  - {fileID: 33395906}
   - {fileID: 1199529679}
-  - {fileID: 1743377062}
-  - {fileID: 775380343}
   - {fileID: 1969419828}
-  - {fileID: 179649193}
+  - {fileID: 987781583}
+  - {fileID: 1723022760}
+  - {fileID: 1044941017}
+  - {fileID: 275967836}
+  - {fileID: 852190391}
+  - {fileID: 33395906}
   - {fileID: 1189119297}
+  - {fileID: 1594087379}
+  - {fileID: 179649193}
   - {fileID: 138025254}
   - {fileID: 1745324275}
   - {fileID: 3436876683391927841}
@@ -2982,19 +2600,8 @@ SceneRoots:
   - {fileID: 1732456706}
   - {fileID: 2031059846}
   - {fileID: 4228454404340696024}
-  - {fileID: 1723022760}
-  - {fileID: 1044941017}
-  - {fileID: 275967836}
-  - {fileID: 433361200}
-  - {fileID: 2103910437}
-  - {fileID: 44566739}
-  - {fileID: 1688812010}
-  - {fileID: 409214706}
-  - {fileID: 1124900287}
-  - {fileID: 1875660543}
-  - {fileID: 689844899}
-  - {fileID: 594376539}
   - {fileID: 192192118}
-  - {fileID: 852190391}
+  - {fileID: 1743377062}
+  - {fileID: 775380343}
   - {fileID: 7505830200368574051}
   - {fileID: 2368264732839075595}

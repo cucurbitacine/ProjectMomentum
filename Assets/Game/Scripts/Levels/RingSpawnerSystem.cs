@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Levels
 {
-    public class ShipwreckGenerator : MonoBehaviour
+    public class RingSpawnerSystem : MonoBehaviour
     {
         [SerializeField] [Min(0f)] private float outerRadius = 30f;
         [SerializeField] [Min(0f)] private float innerRadius = 10f;
@@ -15,11 +15,11 @@ namespace Game.Scripts.Levels
         [SerializeField] private LayerMask obstacleLayer = 1; 
         
         [Space]
-        [SerializeField] private GameObject shipwreckPrefab;
+        [SerializeField] private GameObject prefab;
 
         private Vector2 center => transform.position;
         
-        public List<GameObject> Generate()
+        public List<GameObject> Spawn()
         {
             var ships = new List<GameObject>();
             
@@ -46,10 +46,19 @@ namespace Game.Scripts.Levels
 
         private GameObject GetPrefab()
         {
-            return shipwreckPrefab;
+            return prefab;
         }
 
         private void OnDrawGizmos()
+        {
+            Gizmos.color = new Color(1f, 0f, 0f, 0.1f);
+            Gizmos.DrawWireSphere(center, innerRadius);
+            
+            Gizmos.color = new Color(0f, 0f, 1f, 0.1f);
+            Gizmos.DrawWireSphere(center, outerRadius);
+        }
+        
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(center, innerRadius);

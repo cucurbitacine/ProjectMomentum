@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289237d33f1240cf8caeee94f69d0923, type: 3}
+  m_Name: GameLevel_PrefabSpreadConfig
+  m_EditorClassIdentifier: 
+  testWidth: 100
+  totalAmount: 1250
+  spreading:
+  - displayName: '[125] 125.0 m'
+    radius: 125
+    density: 0.0125
+    prefabList: {fileID: 11400000, guid: 76950eaa8d379e24c81fb9610792452e, type: 2}
+  - displayName: '[375] 300.0 m'
+    radius: 300
+    density: 0.0375
+    prefabList: {fileID: 11400000, guid: 342d987bc855f954aaa6a0a8a8a7b69c, type: 2}
+  - displayName: '[750] 500.0 m'
+    radius: 500
+    density: 0.075
+    prefabList: {fileID: 11400000, guid: 3fc92b36d89ae674aad1dbfd5c26f88b, type: 2}

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289237d33f1240cf8caeee94f69d0923, type: 3}
+  m_Name: DifficultyZoneList
+  m_EditorClassIdentifier: 
+  testWidth: 100
+  totalAmount: 70
+  zones:
+  - displayName: '[10] 100.0 m'
+    radius: 100
+    density: 0.001
+    prefabList: {fileID: 11400000, guid: bf2f945d68708c24a93b04c39924d5c7, type: 2}
+  - displayName: '[20] 250.0 m'
+    radius: 300
+    density: 0.002
+    prefabList: {fileID: 11400000, guid: a91f4fe10ff7158499955b4f0bea93ed, type: 2}
+  - displayName: '[40] 450.0 m'
+    radius: 500
+    density: 0.004
+    prefabList: {fileID: 11400000, guid: 126bf8064b5a3864eb7078ee9fc24b52, type: 2}

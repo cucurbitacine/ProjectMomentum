@@ -7,11 +7,11 @@ using Random = UnityEngine.Random;
 namespace Game.Scripts.Core
 {
     [CreateAssetMenu(menuName = "Game/Create PrefabList", fileName = "PrefabList", order = 0)]
-    public class PrefabList : ScriptableObject
+    public class PrefabList : ScriptableObject, IPrefabSource
     {
         [SerializeField] private List<PrefabData> prefabData = new List<PrefabData>();
 
-        public GameObject GetRandomPrefab()
+        public GameObject GetPrefab()
         {
             if (prefabData.Count == 0) return null;
             
@@ -66,5 +66,10 @@ namespace Game.Scripts.Core
             public GameObject prefab;
             public int weight;
         }
+    }
+
+    public interface IPrefabSource
+    {
+        public GameObject GetPrefab();
     }
 }
