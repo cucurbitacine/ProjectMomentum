@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Game.Scripts.Player
 {
     [RequireComponent(typeof(Health))]
-    [RequireComponent(typeof(SpaceshipController))]
+    [RequireComponent(typeof(Spaceship))]
     [RequireComponent(typeof(Interactor))]
     public class PlayerController : MonoBehaviour, IStorageWithGateway
     {
@@ -36,16 +36,23 @@ namespace Game.Scripts.Player
             }
         }
 
-        private LazyComponent<SpaceshipController> _lazySpaceship;
+        private LazyComponent<Spaceship> _lazySpaceship;
         private LazyComponent<Health> _lazyHealth;
         private LazyComponent<Interactor> _lazyInteractor;
 
-        public SpaceshipController Spaceship => (_lazySpaceship ??= new LazyComponent<SpaceshipController>(gameObject)).Value;
+        public Spaceship Spaceship => (_lazySpaceship ??= new LazyComponent<Spaceship>(gameObject)).Value;
         public Health Health => (_lazyHealth ??= new LazyComponent<Health>(gameObject)).Value;
         public Interactor Interactor => (_lazyInteractor ??= new LazyComponent<Interactor>(gameObject)).Value;
 
         public Transform Gateway => Spaceship.transform;
 
+        public void Pause(bool paused)
+        {
+            Spaceship.Pause(paused);
+            
+            Interactor.Pause(paused);
+        }
+        
         private void UpdateMass()
         {
             Spaceship.mass = (massShip + GetStorageMass() + GetFuelMass()) * 0.01f;
@@ -70,7 +77,7 @@ namespace Game.Scripts.Player
         {
             return 100f * massPerFuelPercent * Spaceship.Fuel.Value / Spaceship.Fuel.Max;
         }
-
+        
         private void Awake()
         {
             Player = this;
@@ -87,7 +94,7 @@ namespace Game.Scripts.Player
             AmountChanged -= HandleStorage;
             Spaceship.Fuel.ValueChanged -= HandleFuel;
         }
-
+        
         private void Start()
         {
             UpdateMass();

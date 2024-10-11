@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8544873758124602441}
   - component: {fileID: 3491123879010883996}
   - component: {fileID: 8222865002006185753}
-  - component: {fileID: 5021882298218171156}
+  - component: {fileID: 848884882052311599}
   - component: {fileID: 8988216336487497984}
   - component: {fileID: 5826114955872263179}
   - component: {fileID: 7892476213108621285}
@@ -227,8 +227,8 @@ MonoBehaviour:
   powerJetEngine: 4
   powerMovement: 1
   powerRotation: 0.5
-  <StabilizationPosition>k__BackingField: 0
-  <StabilizationRotation>k__BackingField: 0
+  <KeepPosition>k__BackingField: 0
+  <KeepRotation>k__BackingField: 0
 --- !u!114 &3491123879010883996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   massShip: 50
   massPerUnit: 5
   massPerFuelPercent: 0.5
---- !u!114 &5021882298218171156
+--- !u!114 &848884882052311599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,12 +267,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8337482985371444798}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d1337eb3bbe5c14ba0985e6e8149ccb, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e4eb1fe5c7678340840b3b24069b08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomRate: 0.2
-  audioSource: {fileID: 4298088320079837538}
-  clickSfx: {fileID: 8300000, guid: 3c9ff29904d30bf498e9596760139c10, type: 3}
+  zoomRate: 1
+  playerInput: {fileID: 11400000, guid: 66f622a046b69af41a4601ff1c3008d4, type: 2}
 --- !u!114 &8988216336487497984
 MonoBehaviour:
   m_ObjectHideFlags: 0

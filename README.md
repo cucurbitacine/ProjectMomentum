@@ -5,7 +5,7 @@
 ### 1. VERSION 2.0
 
 -[x] Smart Generating World + World with bounds
--[ ] New Input System (+Gamepad)
+-[x] New Input System (+Gamepad)
 -[ ] Inventory (minimum: show how many cats on the board, and max capacity)
 -[ ] Rethink over the weight system (just refactor)
 -[ ] UI (more hints/instructions/information)
@@ -17,8 +17,9 @@
 
 ### 3. VERSION 3.0+
 
-- Ship Level Up ? (level up for money, money from selling stuff, stuff is picked in space)
+- Ship level up system
 - Various Cats and cargo types
+- New tasks
 - Different ships
 - Ships customization
 - Multiplayer

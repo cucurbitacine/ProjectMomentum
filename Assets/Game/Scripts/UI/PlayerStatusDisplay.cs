@@ -1,4 +1,3 @@
-using System;
 using Game.Scripts.Combat;
 using Game.Scripts.Control;
 using Game.Scripts.Player;
@@ -23,7 +22,7 @@ namespace Game.Scripts.UI
         [SerializeField] private TMP_Text fuelText;
         [SerializeField] private Slider fuelSlider;
         
-        private SpaceshipController Spaceship => player.Spaceship;
+        private Spaceship Spaceship => player.Spaceship;
         private Health Health => player.Health;
             
         private void HandleHealth(int value)

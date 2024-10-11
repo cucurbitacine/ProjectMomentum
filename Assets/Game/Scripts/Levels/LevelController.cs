@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +53,8 @@ namespace Game.Scripts.Levels
         {
             if (State == LevelState.Loading) return;
             State = LevelState.Loading;
+
+            Time.timeScale = 1f;
             
             StartCoroutine(Restarting());
         }
@@ -62,6 +63,8 @@ namespace Game.Scripts.Levels
         {
             if (State == LevelState.Loading) return;
             State = LevelState.Loading;
+            
+            Time.timeScale = 1f;
             
             StartCoroutine(Quiting());
         }
@@ -259,6 +262,8 @@ namespace Game.Scripts.Levels
         
         public void FailLevel()
         {
+            Time.timeScale = 1f;
+            
             State = LevelState.Failed;
 
             StartCoroutine(Failing());
@@ -266,6 +271,8 @@ namespace Game.Scripts.Levels
         
         public void CompleteLevel()
         {
+            Time.timeScale = 1f;
+            
             State = LevelState.Completed;
 
             SaveSession();
@@ -309,8 +316,15 @@ namespace Game.Scripts.Levels
             SceneManager.LoadScene(0);
         }
         
+        private void OnLevelPaused(bool paused)
+        {
+            Time.timeScale = paused ? 0.001f : 1f;
+        }
+        
         private void OnEnable()
         {
+            LevelPause.LevelPaused += OnLevelPaused;
+            
             Player.Health.ValueChanged += OnPlayerHealthChanged;
             Player.Health.Died += OnPlayerDied;
             Player.Spaceship.Fuel.ValueChanged += OnPlayerFueldChanged;
@@ -320,6 +334,10 @@ namespace Game.Scripts.Levels
 
         private void OnDisable()
         {
+            Time.timeScale = 1f;
+            
+            LevelPause.LevelPaused -= OnLevelPaused;
+            
             Player.Health.ValueChanged -= OnPlayerHealthChanged;
             Player.Health.Died -= OnPlayerDied;
             Player.Spaceship.Fuel.ValueChanged -= OnPlayerFueldChanged;

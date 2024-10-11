@@ -1,4 +1,3 @@
-using System;
 using Game.Scripts.Player;
 using UnityEngine;
 
@@ -21,7 +20,7 @@ namespace Game.Scripts.Levels
             {
                 devMode = !devMode;
                 
-                var player = FindObjectOfType<PlayerController>();
+                var player = PlayerController.Player;
 
                 player.Health.Immortal = devMode;
                 player.Spaceship.Fuel.Infinity = devMode;

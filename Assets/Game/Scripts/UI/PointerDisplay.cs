@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using Game.Scripts.Control;
 using Game.Scripts.Player;
 using TMPro;
@@ -33,7 +31,7 @@ namespace Game.Scripts.UI
         private static Camera CameraMain => Camera.main;
         private static float RadiusDisplayArrow => Mathf.Min(Screen.width, Screen.height) * 0.5f;
 
-        private static SpaceshipController Spaceship => PlayerController.Player ? PlayerController.Player.Spaceship : null;
+        private static Spaceship Spaceship => PlayerController.Player ? PlayerController.Player.Spaceship : null;
         
         public override void SetName(string newDisplayName)
         {

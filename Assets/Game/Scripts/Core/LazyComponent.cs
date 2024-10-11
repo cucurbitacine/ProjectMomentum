@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Scripts.Core
 {
     [Serializable]
-    public class LazyComponent<T> : Lazy<T>
+    public class LazyComponent<T> : LazyValue<T>
     {
         public LazyComponent(Func<T> builder) : base(builder)
         {
@@ -16,7 +16,7 @@ namespace Game.Scripts.Core
     }
 
     [Serializable]
-    public class Lazy<T>
+    public class LazyValue<T>
     {
         [SerializeField] private T value;
 
@@ -35,7 +35,7 @@ namespace Game.Scripts.Core
             }
         }
         
-        public Lazy(Func<T> builder)
+        public LazyValue(Func<T> builder)
         {
             this.builder = builder;
         }

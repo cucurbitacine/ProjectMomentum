@@ -16,6 +16,8 @@ namespace Game.Scripts.Interactions
         
         public void BeginInteract()
         {
+            if (IsPaused) return;
+            
             if (interacting) return;
             
             interacting = true;
@@ -62,6 +64,20 @@ namespace Game.Scripts.Interactions
                     
                     OnSetChanged?.Invoke(_interactions);
                 }
+            }
+        }
+
+        public bool IsPaused { get; private set; }
+
+        public void Pause(bool paused)
+        {
+            if (IsPaused == paused) return;
+            
+            IsPaused = paused;
+            
+            if (IsPaused)
+            {
+                EndInteract();
             }
         }
     }

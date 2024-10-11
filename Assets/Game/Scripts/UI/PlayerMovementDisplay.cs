@@ -21,7 +21,7 @@ namespace Game.Scripts.UI
         private static Vector2 ScreenCenter => ScreenSize * 0.5f;
         private static Vector2 WorldPointScreenCenter => CameraMain.ScreenToWorldPoint(ScreenCenter);
 
-        public SpaceshipController Spaceship => player.Spaceship;
+        public Spaceship Spaceship => player.Spaceship;
         
         private static Vector2 WorldToScreenVector(Vector2 vector)
         {
@@ -32,8 +32,8 @@ namespace Game.Scripts.UI
         {
             northImage.rectTransform.rotation = Quaternion.LookRotation(Vector3.forward, WorldToScreenVector(Vector2.up));
 
-            speedText.text = $"{Spaceship.velocity.magnitude:F1} unit/s{(Spaceship.StabilizationPosition ? " Keep" : "")}";
-            angularSpeedText.text = $"{Spaceship.angularVelocity:F1} deg/s{(Spaceship.StabilizationRotation ? " Keep" : "")}";
+            speedText.text = $"{Spaceship.velocity.magnitude:F1} unit/s{(Spaceship.KeepPosition ? " Keep" : "")}";
+            angularSpeedText.text = $"{Spaceship.angularVelocity:F1} deg/s{(Spaceship.KeepRotation ? " Keep" : "")}";
         }
     }
 }

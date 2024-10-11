@@ -7,9 +7,22 @@ namespace Game.Scripts.Core
     [DisallowMultipleComponent]
     public sealed class SmartPrefab : MonoBehaviour
     {
-        public GameObject Prefab { get; private set; }
+        /// <summary>
+        /// Keeps Id of own prefab.
+        /// Id is set after Instantiating and before <see cref="Initialized"/> is invoked.
+        /// Id is taken from <see cref="UnityEngine.Object.GetInstanceID"/>.
+        /// Id equals zero by default.
+        /// </summary>
+        public int PrefabId { get; private set; } = 0;
 
+        /// <summary>
+        /// Invokes after OnEnable
+        /// </summary>
         public event Action Initialized;
+        
+        /// <summary>
+        /// Invokes before OnDisable
+        /// </summary>
         public event Action Uninitialized;
 
         private void Initialize()
@@ -27,39 +40,32 @@ namespace Game.Scripts.Core
             HandleDestroy(this);
         }
 
-        #region Static Pool
+        #region Static Pool Logic
         
-        private const int PoolSize = 32;
-
-        private static readonly Dictionary<GameObject, List<SmartPrefab>> Pool = new Dictionary<GameObject, List<SmartPrefab>>();
+        private static readonly Dictionary<int, SmartPool<SmartPrefab>> Pools = new Dictionary<int, SmartPool<SmartPrefab>>();
         
-        public static void AddToPool(SmartPrefab smartObject)
+        public static bool AddToPool(SmartPrefab smartObject)
         {
-            if (smartObject.Prefab)
+            if (smartObject.PrefabId != 0)
             {
-                var pool = GetPool(smartObject.Prefab);
+                var pool = GetPool(smartObject.PrefabId);
 
-                if (pool.Contains(smartObject)) return;
-
-                if (pool.Count < PoolSize)
-                {
-                    pool.Add(smartObject);
-                }
-                else
-                {
-                    Destroy(smartObject.gameObject);
-                }
+                return pool.Add(smartObject);
             }
+
+            return false;
         }
 
-        public static void RemoveFromPool(SmartPrefab smartObject)
+        public static bool RemoveFromPool(SmartPrefab smartObject)
         {
-            if (smartObject.Prefab)
+            if (smartObject.PrefabId != 0)
             {
-                var pool = GetPool(smartObject.Prefab);
+                var pool = GetPool(smartObject.PrefabId);
 
-                pool.Remove(smartObject);
+                return pool.Remove(smartObject);
             }
+
+            return false;
         }
 
         public static GameObject SmartInstantiate(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
@@ -71,14 +77,14 @@ namespace Game.Scripts.Core
                 return Instantiate(prefab, position, rotation, parent);
             }
 
-            var pool = GetPool(prefab);
+            var pool = GetPool(prefab.GetInstanceID());
 
-            if (pool.Count > 0)
+            if (pool.TryPeek(out var peeked))
             {
                 // There are at least one Smart Object
                 // Return it as new
                 
-                return InstantiateFromPool(pool[0], position, rotation, parent);
+                return InstantiateFromPool(peeked, position, rotation, parent);
             }
 
             // Pool is empty
@@ -89,7 +95,7 @@ namespace Game.Scripts.Core
 
         public static void SmartDestroy(SmartPrefab smartObject)
         {
-            if (smartObject.Prefab)
+            if (smartObject.PrefabId != 0)
             {
                 // Remove its parent and hide it
 
@@ -134,8 +140,7 @@ namespace Game.Scripts.Core
             return SmartInstantiate(prefab, Vector3.zero, Quaternion.identity);
         }
 
-        public static T SmartInstantiate<T>(T prefab, Vector3 position, Quaternion rotation, Transform parent)
-            where T : Component
+        public static T SmartInstantiate<T>(T prefab, Vector3 position, Quaternion rotation, Transform parent) where T : Component
         {
             return SmartInstantiate(prefab.gameObject, position, rotation, parent).GetComponent<T>();
         }
@@ -166,10 +171,10 @@ namespace Game.Scripts.Core
         private static GameObject InstantiateNew(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
         {
             var gameObject = Instantiate(prefab, position, rotation, parent);
-            
+
             if (gameObject.TryGetComponent<SmartPrefab>(out var smartObject))
             {
-                smartObject.Prefab = prefab;
+                smartObject.PrefabId = prefab.GetInstanceID();
 
                 smartObject.Initialize();
             }
@@ -177,13 +182,13 @@ namespace Game.Scripts.Core
             return gameObject;
         }
 
-        private static List<SmartPrefab> GetPool(GameObject prefab)
+        private static SmartPool<SmartPrefab> GetPool(int prefabId)
         {
-            if (Pool.TryGetValue(prefab, out var pool)) return pool;
+            if (Pools.TryGetValue(prefabId, out var pool)) return pool;
 
-            pool = new List<SmartPrefab>();
+            pool = new SmartPool<SmartPrefab>(prefabId);
 
-            Pool.Add(prefab, pool);
+            Pools.Add(prefabId, pool);
 
             return pool;
         }
@@ -194,5 +199,52 @@ namespace Game.Scripts.Core
         }
 
         #endregion
+    }
+
+    public class SmartPool<T> where T : class
+    {
+        public const int DefaultCapacity = 32;
+
+        public readonly int Id;
+
+        private readonly List<T> list = new List<T>();
+
+        public int Count => list.Count;
+
+        public int Capacity { get; private set; }
+
+        public SmartPool(int id, int capacity = DefaultCapacity)
+        {
+            Id = id;
+            Capacity = capacity;
+        }
+
+        public bool TryPeek(out T next)
+        {
+            next = Count > 0 ? list[0] : null;
+
+            return next != null;
+        }
+
+        public bool Contains(T smart)
+        {
+            return list.Contains(smart);
+        }
+
+        public bool Add(T smart)
+        {
+            if (Contains(smart)) return false;
+
+            if (Count >= Capacity) return false;
+
+            list.Add(smart);
+
+            return true;
+        }
+
+        public bool Remove(T smart)
+        {
+            return list.Remove(smart);
+        }
     }
 }

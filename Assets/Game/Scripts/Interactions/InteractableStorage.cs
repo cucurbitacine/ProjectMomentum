@@ -54,6 +54,12 @@ namespace Game.Scripts.Interactions
 
         public void BeginInteraction(GameObject actor)
         {
+            if (!actor.TryGetComponent(out _agentStorage)) return;
+            
+            Load(_agentStorage);
+            
+            return;
+            
             if (interacting) return;
 
             if (!actor.TryGetComponent(out _agentStorage)) return;
@@ -66,6 +72,8 @@ namespace Game.Scripts.Interactions
 
         public void EndInteraction(GameObject actor)
         {
+            return;
+            
             if (!interacting) return;
 
             if (!actor.TryGetComponent<IStorageWithGateway>(out var storage) || storage != _agentStorage) return;

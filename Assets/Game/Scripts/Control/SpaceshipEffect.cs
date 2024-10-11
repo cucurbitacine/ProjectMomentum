@@ -1,12 +1,11 @@
-using System;
 using Game.Scripts.Core;
 using UnityEngine;
 
 namespace Game.Scripts.Control
 {
-    public class SpaceshipEffectController : MonoBehaviour
+    public class SpaceshipEffect : MonoBehaviour
     {
-        [SerializeField] private SpaceshipController spaceship;
+        [SerializeField] private Spaceship spaceship;
         
         [Header("Effects")]
         [SerializeField] private GameObject mainEngineEffect;
@@ -28,17 +27,17 @@ namespace Game.Scripts.Control
         
         private const float EffectTolerance = 0.1f;
         
-        private void HandleJetEngine(float value)
+        private void OnJetChanged(float value)
         {
             mainEngineEffect.PlaySafe(value > 0f);
         }
         
-        private void HandleRotation(float value)
+        private void OnRotationChanged(float value)
         {
             _rotation = value;
         }
 
-        private void HandleMovement(Vector2 value)
+        private void OnMovementChanged(Vector2 value)
         {
             _movement = value;
         }
@@ -47,22 +46,22 @@ namespace Game.Scripts.Control
         {
             if (spaceship == null)
             {
-                spaceship = GetComponentInParent<SpaceshipController>();
+                spaceship = GetComponentInParent<Spaceship>();
             }
         }
 
         private void OnEnable()
         {
-            spaceship.OnJetChanged += HandleJetEngine;
-            spaceship.OnRotationChanged += HandleRotation;
-            spaceship.OnMovementChanged += HandleMovement;
+            spaceship.JetChanged += OnJetChanged;
+            spaceship.RotationChanged += OnRotationChanged;
+            spaceship.MovementChanged += OnMovementChanged;
         }
         
         private void OnDisable()
         {
-            spaceship.OnJetChanged -= HandleJetEngine;
-            spaceship.OnRotationChanged -= HandleRotation;
-            spaceship.OnMovementChanged -= HandleMovement;
+            spaceship.JetChanged -= OnJetChanged;
+            spaceship.RotationChanged -= OnRotationChanged;
+            spaceship.MovementChanged -= OnMovementChanged;
         }
         
         private void Update()
