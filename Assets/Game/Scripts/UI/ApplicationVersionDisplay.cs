@@ -1,5 +1,4 @@
-using System;
-using Game.Scripts.Core;
+using CucuTools;
 using TMPro;
 using UnityEngine;
 

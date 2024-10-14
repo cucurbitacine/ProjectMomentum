@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7743200244032813472}
   - component: {fileID: 4720854678198229897}
   - component: {fileID: 673248741370271628}
-  - component: {fileID: 8980042302200017791}
   - component: {fileID: 1438627168135068206}
   - component: {fileID: 6719174225530593484}
+  - component: {fileID: 5537125199212709250}
   m_Layer: 0
   m_Name: ExplosionEffect
   m_TagString: Untagged
@@ -4913,19 +4913,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8980042302200017791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8709788553154860060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b1380481fb3d044bc82a04336d2f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsFree>k__BackingField: 0
 --- !u!199 &1438627168135068206
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5013,3 +5000,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 2
+--- !u!114 &5537125199212709250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8709788553154860060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974171c4708e4749ad24d3f88c1772de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

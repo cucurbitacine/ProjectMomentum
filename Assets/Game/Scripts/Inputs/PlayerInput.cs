@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 namespace Game.Scripts.Inputs
 {
     [CreateAssetMenu(menuName = "Game/Input/Create PlayerInput", fileName = "PlayerInput", order = 0)]
-    public class PlayerInput : ScriptableObject, GameInput.ISpaceshipActions, GameInput.IInteractionActions, GameInput.ICameraActions
+    public class PlayerInput : ScriptableObject, GameInput.ISpaceshipActions, GameInput.IInteractionActions
     {
         public event Action<Vector2> MoveEvent; 
         public event Action<float> RotateEvent; 
@@ -15,9 +15,6 @@ namespace Game.Scripts.Inputs
         
         public event Action<bool> InteractEvent;
         
-        public event Action<float> ZoomEvent;
-        public event Action ChangeCameraEvent;
-
         private GameInput _gameInput;
         
         public void OnMove(InputAction.CallbackContext context)
@@ -63,19 +60,6 @@ namespace Game.Scripts.Inputs
             }
         }
 
-        public void OnChangeCamera(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                ChangeCameraEvent?.Invoke();
-            }
-        }
-
-        public void OnZoom(InputAction.CallbackContext context)
-        {
-            ZoomEvent?.Invoke(context.ReadValue<float>());
-        }
-        
         private void OnEnable()
         {
             if (_gameInput == null)
@@ -88,9 +72,6 @@ namespace Game.Scripts.Inputs
             
             _gameInput.Interaction.SetCallbacks(this);
             _gameInput.Interaction.Enable();
-            
-            _gameInput.Camera.SetCallbacks(this);
-            _gameInput.Camera.Enable();
         }
 
         private void OnDisable()
@@ -100,9 +81,6 @@ namespace Game.Scripts.Inputs
             
             _gameInput.Interaction.Disable();
             _gameInput.Interaction.RemoveCallbacks(this);
-            
-            _gameInput.Camera.Disable();
-            _gameInput.Camera.RemoveCallbacks(this);
         }
     }
 }

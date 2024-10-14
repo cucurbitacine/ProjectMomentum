@@ -1,12 +1,12 @@
 using System;
-using Game.Scripts.Core;
+using CucuTools;
 using UnityEngine;
 
 namespace Game.Scripts.Control
 {
     [RequireComponent(typeof(Fuel))]
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Spaceship : MonoBehaviour
+    public class Spaceship : MonoBehaviour, IPausable
     {
         [Header("Settings")]
         [SerializeField] private float powerJetEngine = 1f;
@@ -44,6 +44,8 @@ namespace Game.Scripts.Control
         
         public bool IsPaused { get; private set; }
         
+        public event Action<bool> Paused;
+
         public event Action<Vector2> MovementChanged; 
         public event Action<float> RotationChanged; 
         public event Action<float> JetChanged;
@@ -63,11 +65,13 @@ namespace Game.Scripts.Control
             _jet = value;
         }
         
-        public void Pause(bool paused)
+        public void Pause(bool value)
         {
-            if (IsPaused == paused) return;
+            if (IsPaused == value) return;
 
-            IsPaused = paused;
+            IsPaused = value;
+            
+            Paused?.Invoke(value);
         }
         
         private void Update()

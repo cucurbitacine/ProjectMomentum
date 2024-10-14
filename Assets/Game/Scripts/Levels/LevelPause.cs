@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CucuTools;
 using UnityEngine;
 
 namespace Game.Scripts.Levels
@@ -24,19 +25,19 @@ namespace Game.Scripts.Levels
 
         #endregion
         
-        private readonly HashSet<ILevelPausable> _set = new HashSet<ILevelPausable>();
+        private readonly HashSet<IPausable> _set = new HashSet<IPausable>();
 
         private void OnLevelPaused(bool paused)
         {
             foreach (var pausable in _set)
             {
-                pausable.OnLevelPaused(paused);
+                pausable.Pause(paused);
             }
         }
         
         private void Awake()
         {
-            foreach (var pausable in GetComponentsInChildren<ILevelPausable>())
+            foreach (var pausable in GetComponentsInChildren<IPausable>())
             {
                 _set.Add(pausable);
             }
@@ -51,10 +52,5 @@ namespace Game.Scripts.Levels
         {
             LevelPaused -= OnLevelPaused;
         }
-    }
-    
-    public interface ILevelPausable
-    {
-        public bool OnLevelPaused(bool paused);
     }
 }

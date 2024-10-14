@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.cucugamestudio.cucutools": "https://github.com/cucurbitacine/CucuTools.git?path=/Assets/CucuTools#develop",
     "com.unity.cinemachine": "2.10.1",
     "com.unity.collab-proxy": "2.5.1",
     "com.unity.connect.share": "4.2.3",

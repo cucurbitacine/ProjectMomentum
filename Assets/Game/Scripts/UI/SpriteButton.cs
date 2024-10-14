@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using Game.Scripts.Core;
 using UnityEngine;
 using UnityEngine.Events;
+using CucuTools;
 
 namespace Game.Scripts.UI
 {

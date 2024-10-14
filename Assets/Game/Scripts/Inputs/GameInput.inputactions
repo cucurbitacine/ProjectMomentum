@@ -176,7 +176,7 @@
                 {
                     "name": "",
                     "id": "4610b359-31bb-47cb-a842-1cdd5fc39b46",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Game Control Scheme",
@@ -271,39 +271,6 @@
                     "action": "KeepPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "Triggers",
-                    "id": "0d8c1d7b-dbc8-4216-bf85-a444b018167e",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rotate",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "287a2447-fac1-44b4-9da0-97813b5f9726",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Game Control Scheme",
-                    "action": "Rotate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "15fddc87-47a3-48a3-8a7a-ccbcd82b0f2c",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Game Control Scheme",
-                    "action": "Rotate",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         },
@@ -328,6 +295,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "5ad79c5d-895f-4a5c-999c-100883ed8224",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -405,6 +381,28 @@
                     "processors": "",
                     "groups": "Game Control Scheme",
                     "action": "ChangeCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6656c2ec-d241-4c8e-966c-acc2a2ad64f3",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Game Control Scheme",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ba5d4a6-0447-45f1-ba7b-fdf3d35c06ec",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "Normalize(max=0.5),Clamp(max=1)",
+                    "groups": "Game Control Scheme",
+                    "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

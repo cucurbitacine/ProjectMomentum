@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using CucuTools;
 using Game.Scripts.Core;
 using Game.Scripts.Interactions;
 using Game.Scripts.Player;
@@ -325,6 +326,7 @@ namespace Game.Scripts.Levels
         {
             LevelPause.LevelPaused += OnLevelPaused;
             
+            
             Player.Health.ValueChanged += OnPlayerHealthChanged;
             Player.Health.Died += OnPlayerDied;
             Player.Spaceship.Fuel.ValueChanged += OnPlayerFueldChanged;
@@ -334,7 +336,7 @@ namespace Game.Scripts.Levels
 
         private void OnDisable()
         {
-            Time.timeScale = 1f;
+            LevelPause.Pause(false);
             
             LevelPause.LevelPaused -= OnLevelPaused;
             

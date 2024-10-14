@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3940776412022665542}
   - component: {fileID: 838462312121019681}
   - component: {fileID: 3459161809194966049}
-  - component: {fileID: 8798289598137553026}
   - component: {fileID: 3294125207515712094}
   - component: {fileID: 7161227610202280639}
+  - component: {fileID: 5328770058988645826}
   m_Layer: 0
   m_Name: AsteroidDestroyEffect
   m_TagString: Untagged
@@ -4913,19 +4913,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &8798289598137553026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691050554923611487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b1380481fb3d044bc82a04336d2f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsFree>k__BackingField: 0
 --- !u!199 &3294125207515712094
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5013,3 +5000,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 2
+--- !u!114 &5328770058988645826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691050554923611487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974171c4708e4749ad24d3f88c1772de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

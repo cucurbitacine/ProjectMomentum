@@ -1,7 +1,7 @@
 using System;
+using CucuTools;
 using Game.Scripts.Combat;
 using Game.Scripts.Control;
-using Game.Scripts.Core;
 using Game.Scripts.Interactions;
 using UnityEngine;
 
@@ -45,13 +45,6 @@ namespace Game.Scripts.Player
         public Interactor Interactor => (_lazyInteractor ??= new LazyComponent<Interactor>(gameObject)).Value;
 
         public Transform Gateway => Spaceship.transform;
-
-        public void Pause(bool paused)
-        {
-            Spaceship.Pause(paused);
-            
-            Interactor.Pause(paused);
-        }
         
         private void UpdateMass()
         {

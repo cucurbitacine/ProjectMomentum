@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5654591273496390593}
   - component: {fileID: 8952204293646243228}
   - component: {fileID: 514783897297486437}
-  - component: {fileID: 2403256665751763581}
   - component: {fileID: 732986527513935959}
   - component: {fileID: 7361646651868995639}
+  - component: {fileID: 6958748547774112466}
   m_Layer: 0
   m_Name: Hit_Effect
   m_TagString: Untagged
@@ -4930,19 +4930,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &2403256665751763581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3093170610347731322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b1380481fb3d044bc82a04336d2f24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <IsFree>k__BackingField: 0
 --- !u!114 &732986527513935959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4974,3 +4961,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 21125c9491f4f8340a40038289e70094, type: 3}
   - {fileID: 8300000, guid: 2a5bd7c19e13a724bb447e0ba1b4ac7e, type: 3}
   - {fileID: 8300000, guid: 9e82e6a71a68fcd44a7c2b9984a7540c, type: 3}
+--- !u!114 &6958748547774112466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3093170610347731322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974171c4708e4749ad24d3f88c1772de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

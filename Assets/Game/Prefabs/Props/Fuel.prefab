@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1806626894793320200}
   - component: {fileID: 3891611720931401339}
   - component: {fileID: 6892873078722163089}
-  - component: {fileID: 3705900567729684478}
+  - component: {fileID: 8032949259556581078}
   - component: {fileID: 2052098008431518883}
   - component: {fileID: 914759904973101677}
   m_Layer: 6
@@ -61,7 +61,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 1
+  m_Mass: 0.46875
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -76,7 +76,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &3705900567729684478
+--- !u!114 &8032949259556581078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,10 +85,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 197792644461194920}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b1380481fb3d044bc82a04336d2f24, type: 3}
+  m_Script: {fileID: 11500000, guid: 974171c4708e4749ad24d3f88c1772de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsFree>k__BackingField: 0
 --- !u!114 &2052098008431518883
 MonoBehaviour:
   m_ObjectHideFlags: 0

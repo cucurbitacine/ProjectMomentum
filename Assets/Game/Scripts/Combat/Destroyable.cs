@@ -1,4 +1,4 @@
-using Game.Scripts.Core;
+using CucuTools;
 using UnityEngine;
 
 namespace Game.Scripts.Combat

@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using CucuTools;
 using UnityEngine;
 
 namespace Game.Scripts.Interactions
 {
-    public class Interactor : MonoBehaviour
+    public class Interactor : MonoBehaviour, IPausable
     {
         [SerializeField] private bool interacting = false;
         
@@ -68,17 +69,21 @@ namespace Game.Scripts.Interactions
         }
 
         public bool IsPaused { get; private set; }
+        
+        public event Action<bool> Paused;
 
-        public void Pause(bool paused)
+        public void Pause(bool value)
         {
-            if (IsPaused == paused) return;
+            if (IsPaused == value) return;
             
-            IsPaused = paused;
+            IsPaused = value;
             
             if (IsPaused)
             {
                 EndInteract();
             }
+            
+            Paused?.Invoke(IsPaused);
         }
     }
 }

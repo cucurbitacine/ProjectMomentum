@@ -1,4 +1,4 @@
-using Game.Scripts.Core;
+using CucuTools;
 using UnityEngine;
 
 namespace Game.Scripts.Control
@@ -22,6 +22,8 @@ namespace Game.Scripts.Control
         [SerializeField] private GameObject rightFrontEngineEffect;
         [SerializeField] private GameObject rightBackEngineEffect;
         
+        private bool isPaused;
+        
         private float _rotation;
         private Vector2 _movement;
         
@@ -29,6 +31,8 @@ namespace Game.Scripts.Control
         
         private void OnJetChanged(float value)
         {
+            if (isPaused) return;
+            
             mainEngineEffect.PlaySafe(value > 0f);
         }
         
@@ -41,7 +45,28 @@ namespace Game.Scripts.Control
         {
             _movement = value;
         }
-
+        
+        private void OnSpaceshipPaused(bool paused)
+        {
+            isPaused = paused;
+            
+            if (!paused) return;
+            
+            mainEngineEffect.PlaySafe(false);
+            
+            frontLeftEngineEffect.PlaySafe(false);
+            frontRightEngineEffect.PlaySafe(false);
+            
+            backLeftEngineEffect.PlaySafe(false);
+            backRightEngineEffect.PlaySafe(false);
+            
+            leftFrontEngineEffect.PlaySafe(false);
+            leftBackEngineEffect.PlaySafe(false);
+            
+            rightFrontEngineEffect.PlaySafe(false);
+            rightBackEngineEffect.PlaySafe(false);
+        }
+        
         private void Awake()
         {
             if (spaceship == null)
@@ -55,17 +80,23 @@ namespace Game.Scripts.Control
             spaceship.JetChanged += OnJetChanged;
             spaceship.RotationChanged += OnRotationChanged;
             spaceship.MovementChanged += OnMovementChanged;
+
+            spaceship.Paused += OnSpaceshipPaused;
         }
-        
+
         private void OnDisable()
         {
             spaceship.JetChanged -= OnJetChanged;
             spaceship.RotationChanged -= OnRotationChanged;
             spaceship.MovementChanged -= OnMovementChanged;
+            
+            spaceship.Paused -= OnSpaceshipPaused;
         }
         
         private void Update()
         {
+            if (isPaused) return;
+            
             frontLeftEngineEffect.PlaySafe(_movement.y < -EffectTolerance || _rotation > EffectTolerance);
             frontRightEngineEffect.PlaySafe(_movement.y < -EffectTolerance || _rotation < -EffectTolerance);
             
