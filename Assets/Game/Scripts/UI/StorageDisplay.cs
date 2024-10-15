@@ -1,4 +1,4 @@
-using Game.Scripts.Interactions;
+using Game.Scripts.InventorySystem;
 using TMPro;
 using UnityEngine;
 
@@ -15,16 +15,16 @@ namespace Game.Scripts.UI
         [Header("UI")]
         [SerializeField] private TMP_Text amountText;
 
-        private IStorage _storage;
+        private IInventory _inventory;
 
         private void Awake()
         {
-            storage.TryGetComponent(out _storage);
+            storage.TryGetComponent(out _inventory);
         }
 
         private void Update()
         {
-            amountText.text = $"{prefix}{_storage.Amount}{suffix}";
+            amountText.text = $"{prefix}{_inventory.GetItems()}{suffix}";
         }
     }
 }

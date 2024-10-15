@@ -1837,17 +1837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1526600479 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8423645090159422197, guid: 7c1ddaab743472b45ad2b726baae17e8, type: 3}
-  m_PrefabInstance: {fileID: 7505830200368574051}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419624522a1d483bb6909382fdcbdb2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1594087378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2239,7 +2228,7 @@ MonoBehaviour:
   maxPlayerDistance: 525
   lazyPlayer:
     value: {fileID: 1605711405}
-  evacuatedStorage: {fileID: 1526600479}
+  evacuatedStorage: {fileID: 7505830200368574052}
   generatorSystem: {fileID: 987781584}
   shipwrecksSpawners:
   - {fileID: 1723022759}
@@ -2842,6 +2831,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5699911791463495837, guid: 7c1ddaab743472b45ad2b726baae17e8, type: 3}
+      propertyPath: capacityDefault
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5779325449952599997, guid: 7c1ddaab743472b45ad2b726baae17e8, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2855,6 +2848,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c1ddaab743472b45ad2b726baae17e8, type: 3}
+--- !u!114 &7505830200368574052 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5699911791463495837, guid: 7c1ddaab743472b45ad2b726baae17e8, type: 3}
+  m_PrefabInstance: {fileID: 7505830200368574051}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8deb0a41488467a99506c1f72c0a6d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7646894851080903841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2941,8 +2945,8 @@ SceneRoots:
   - {fileID: 2031059846}
   - {fileID: 4228454404340696024}
   - {fileID: 192192118}
+  - {fileID: 751033605}
   - {fileID: 1743377062}
   - {fileID: 775380343}
-  - {fileID: 751033605}
   - {fileID: 7505830200368574051}
   - {fileID: 2368264732839075595}

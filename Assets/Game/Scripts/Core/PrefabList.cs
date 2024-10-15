@@ -72,4 +72,9 @@ namespace Game.Scripts.Core
     {
         public GameObject GetPrefab();
     }
+
+    public interface IIconSource
+    {
+        public Sprite GetIcon();
+    }
 }

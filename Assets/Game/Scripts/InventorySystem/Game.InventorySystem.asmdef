@@ -1,0 +1,18 @@
+{
+    "name": "Game.InventorySystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ae963c2085b110c4d8c867ec0f839788",
+        "GUID:bb9596abc2f0be64d9880dcdd1db2c09",
+        "GUID:eda1fd7f332991e44b1e30358c53b27b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

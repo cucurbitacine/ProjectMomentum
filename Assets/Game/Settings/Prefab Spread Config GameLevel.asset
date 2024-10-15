@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 289237d33f1240cf8caeee94f69d0923, type: 3}
-  m_Name: GameLevel_PrefabSpreadConfig
+  m_Name: Prefab Spread Config GameLevel
   m_EditorClassIdentifier: 
   testWidth: 100
   totalAmount: 1250

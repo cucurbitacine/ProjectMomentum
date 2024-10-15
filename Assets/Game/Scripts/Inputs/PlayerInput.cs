@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 namespace Game.Scripts.Inputs
 {
     [CreateAssetMenu(menuName = "Game/Input/Create PlayerInput", fileName = "PlayerInput", order = 0)]
-    public class PlayerInput : ScriptableObject, GameInput.ISpaceshipActions, GameInput.IInteractionActions
+    public class PlayerInput : ScriptableObject, GameInput.ISpaceshipActions
     {
         public event Action<Vector2> MoveEvent; 
         public event Action<float> RotateEvent; 
@@ -69,18 +69,12 @@ namespace Game.Scripts.Inputs
             
             _gameInput.Spaceship.SetCallbacks(this);
             _gameInput.Spaceship.Enable();
-            
-            _gameInput.Interaction.SetCallbacks(this);
-            _gameInput.Interaction.Enable();
         }
 
         private void OnDisable()
         {
             _gameInput.Spaceship.Disable();
             _gameInput.Spaceship.RemoveCallbacks(this);
-            
-            _gameInput.Interaction.Disable();
-            _gameInput.Interaction.RemoveCallbacks(this);
         }
     }
 }

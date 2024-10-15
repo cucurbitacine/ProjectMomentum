@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Game.Scripts.Interactions;
+using Game.Scripts.InventorySystem;
 using Game.Scripts.Player;
 using TMPro;
 using UnityEngine;
@@ -20,15 +21,15 @@ namespace Game.Scripts.UI
         
         private void UpdateInteractor()
         {
-            interactText.enabled = player.Interactor.Interactions.Any(s => s.IsValid(player.gameObject));
+            interactText.enabled = player.Interactor.SetInteractions.Any(s => s.IsReadyInteractWith(player.gameObject));
         }
         
-        private void HandleInteractor(HashSet<IInteractable> set)
+        private void OnSetUpdated(HashSet<IInteractable> set)
         {
             UpdateInteractor();
         }
         
-        private void HandleStorage(int amount)
+        private void OnInventoryUpdated(IInventory inv, ISlot slt)
         {
             UpdateInteractor();
         }
@@ -41,19 +42,19 @@ namespace Game.Scripts.UI
         
         private void OnEnable()
         {
-            player.Interactor.OnSetChanged += HandleInteractor;
-            player.AmountChanged += HandleStorage;
+            player.Interactor.SetUpdated += OnSetUpdated;
+            player.InventoryUpdated += OnInventoryUpdated;
         }
         
         private void OnDisable()
         {
-            player.Interactor.OnSetChanged -= HandleInteractor;
-            player.AmountChanged -= HandleStorage;
+            player.Interactor.SetUpdated -= OnSetUpdated;
+            player.InventoryUpdated -= OnInventoryUpdated;
         }
 
         private void Start()
         {
-            HandleInteractor(player.Interactor.Interactions);
+            OnSetUpdated(player.Interactor.SetInteractions);
 
             ShowHint(false);
         }

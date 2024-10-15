@@ -8,12 +8,10 @@ namespace Game.Scripts.Interactions
     public class Interactor : MonoBehaviour, IPausable
     {
         [SerializeField] private bool interacting = false;
-        
-        private readonly HashSet<IInteractable> _interactions = new HashSet<IInteractable>();
 
-        public HashSet<IInteractable> Interactions => _interactions;
-        
-        public event Action<HashSet<IInteractable>> OnSetChanged;
+        public HashSet<IInteractable> SetInteractions { get; } = new HashSet<IInteractable>();
+
+        public event Action<HashSet<IInteractable>> SetUpdated;
         
         public void BeginInteract()
         {
@@ -23,9 +21,9 @@ namespace Game.Scripts.Interactions
             
             interacting = true;
             
-            foreach (var interaction in _interactions)
+            foreach (var interaction in SetInteractions)
             {
-                interaction.BeginInteraction(gameObject);
+                interaction.StartInteraction(gameObject);
             }
         }
         
@@ -35,9 +33,9 @@ namespace Game.Scripts.Interactions
             
             interacting = false;
             
-            foreach (var interaction in _interactions)
+            foreach (var interaction in SetInteractions)
             {
-                interaction.EndInteraction(gameObject);
+                interaction.StopInteraction(gameObject);
             }
         }
         
@@ -45,9 +43,9 @@ namespace Game.Scripts.Interactions
         {
             if (other.TryGetComponent<IInteractable>(out var interaction))
             {
-                if (_interactions.Add(interaction))
+                if (SetInteractions.Add(interaction))
                 {
-                    OnSetChanged?.Invoke(_interactions);
+                    SetUpdated?.Invoke(SetInteractions);
                 }
             }
         }
@@ -56,14 +54,14 @@ namespace Game.Scripts.Interactions
         {
             if (other.TryGetComponent<IInteractable>(out var interaction))
             {
-                if (_interactions.Remove(interaction))
+                if (SetInteractions.Remove(interaction))
                 {
                     if (interacting)
                     {
-                        interaction.EndInteraction(gameObject);
+                        interaction.StopInteraction(gameObject);
                     }
                     
-                    OnSetChanged?.Invoke(_interactions);
+                    SetUpdated?.Invoke(SetInteractions);
                 }
             }
         }

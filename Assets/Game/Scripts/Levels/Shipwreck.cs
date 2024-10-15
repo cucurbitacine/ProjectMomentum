@@ -1,18 +1,18 @@
 using System;
-using Game.Scripts.Interactions;
+using Game.Scripts.InventorySystem;
 using UnityEngine;
 
 namespace Game.Scripts.Levels
 {
     public class Shipwreck : MonoBehaviour
     {
-        [SerializeField] private StorageBase storage;
+        [SerializeField] private InventoryBase storage;
         [SerializeField] private Pointer pointer;
 
         [Space]
         [SerializeField] private GameObject silhouette;
         
-        public int Amount => storage?.Amount ?? 0;
+        public int Amount => storage?.CountItems() ?? 0;
         public bool IsCompleted => Amount == 0;
         
         public event Action Rescued;
@@ -24,8 +24,10 @@ namespace Game.Scripts.Levels
             pointer.Show(value);
         }
         
-        private void HandleStorage(int value)
+        private void OnInventoryUpdated(IInventory inv, ISlot slt)
         {
+            var value = inv.CountItems();
+            
             silhouette?.SetActive(value > 0);
             
             if (value == 0)
@@ -38,17 +40,17 @@ namespace Game.Scripts.Levels
         
         private void OnEnable()
         {
-            storage.AmountChanged += HandleStorage;
+            storage.InventoryUpdated += OnInventoryUpdated;
         }
 
         private void OnDisable()
         {
-            storage.AmountChanged -= HandleStorage;
+            storage.InventoryUpdated -= OnInventoryUpdated;
         }
 
         private void Start()
         {
-            HandleStorage(storage.Amount);
+            OnInventoryUpdated(storage, null);
         }
     }
 }

@@ -1,5 +1,6 @@
 using Game.Scripts.Combat;
 using Game.Scripts.Control;
+using Game.Scripts.InventorySystem;
 using Game.Scripts.Player;
 using TMPro;
 using UnityEngine;
@@ -37,29 +38,29 @@ namespace Game.Scripts.UI
             fuelText.text = $"{(fuelSlider.value * 100):F1}%";
         }
         
-        private void HandleStorage(int value)
+        private void OnInventoryUpdated(IInventory inv, ISlot slt)
         {
-            storageText.text = $"{value} On Board";
+            storageText.text = $"{inv.CountItems()} On Board";
         }
         
         private void OnEnable()
         {
             Health.ValueChanged += HandleHealth;
-            player.AmountChanged += HandleStorage;
+            player.InventoryUpdated += OnInventoryUpdated;
             Spaceship.Fuel.ValueChanged += HandleFuel;
         }
         
         private void OnDisable()
         {
             Health.ValueChanged -= HandleHealth;
-            player.AmountChanged -= HandleStorage;
+            player.InventoryUpdated -= OnInventoryUpdated;
             Spaceship.Fuel.ValueChanged -= HandleFuel;
         }
 
         private void Start()
         {
             HandleHealth(Health.Value);
-            HandleStorage(player.Amount);
+            OnInventoryUpdated(player, null);
             HandleFuel(Spaceship.Fuel.Value);
         }
         

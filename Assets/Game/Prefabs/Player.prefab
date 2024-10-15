@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3729598593923265389}
   - component: {fileID: 8544873758124602441}
   - component: {fileID: 3491123879010883996}
+  - component: {fileID: 4879328714031993788}
   - component: {fileID: 8222865002006185753}
   - component: {fileID: 848884882052311599}
   - component: {fileID: 8988216336487497984}
@@ -242,6 +243,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interacting: 0
+--- !u!114 &4879328714031993788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337482985371444798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8deb0a41488467a99506c1f72c0a6d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
+  capacityDefault: 10
 --- !u!114 &8222865002006185753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +269,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9df8228a634a24b8d81439b4a88510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 0
   massShip: 50
   massPerUnit: 5
   massPerFuelPercent: 0.5
@@ -270,7 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4eb1fe5c7678340840b3b24069b08c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomRate: 1
   playerInput: {fileID: 11400000, guid: 66f622a046b69af41a4601ff1c3008d4, type: 2}
 --- !u!114 &8988216336487497984
 MonoBehaviour:

@@ -71,6 +71,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""76c680d7-dc97-490c-aadb-a004bcfb500b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -293,6 +302,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""KeepPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8bdab60e-4471-45dd-b8b7-b9f650ed473e"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Game Control Scheme"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a0ea3c9-1f0e-4507-aaa9-db62922e7a9d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Game Control Scheme"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -425,45 +456,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": ""Normalize(max=0.5),Clamp(max=1)"",
                     ""groups"": ""Game Control Scheme"",
                     ""action"": ""Aim"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Interaction"",
-            ""id"": ""ad07706d-f966-4adb-92be-ae7434946fc3"",
-            ""actions"": [
-                {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""ea216972-e904-47aa-be90-206d620472a0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""cce68054-3d9e-4c43-a83c-abc5d77caf8d"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Game Control Scheme"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a3bfe1fc-6e1b-4e2a-ad1c-34e49fefd010"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Game Control Scheme"",
-                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -870,14 +862,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Spaceship_Jet = m_Spaceship.FindAction("Jet", throwIfNotFound: true);
         m_Spaceship_KeepRotation = m_Spaceship.FindAction("KeepRotation", throwIfNotFound: true);
         m_Spaceship_KeepPosition = m_Spaceship.FindAction("KeepPosition", throwIfNotFound: true);
+        m_Spaceship_Interact = m_Spaceship.FindAction("Interact", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_ChangeCamera = m_Camera.FindAction("ChangeCamera", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
         m_Camera_Aim = m_Camera.FindAction("Aim", throwIfNotFound: true);
-        // Interaction
-        m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
-        m_Interaction_Interact = m_Interaction.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Menu = m_UI.FindAction("Menu", throwIfNotFound: true);
@@ -950,6 +940,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Spaceship_Jet;
     private readonly InputAction m_Spaceship_KeepRotation;
     private readonly InputAction m_Spaceship_KeepPosition;
+    private readonly InputAction m_Spaceship_Interact;
     public struct SpaceshipActions
     {
         private @GameInput m_Wrapper;
@@ -959,6 +950,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Jet => m_Wrapper.m_Spaceship_Jet;
         public InputAction @KeepRotation => m_Wrapper.m_Spaceship_KeepRotation;
         public InputAction @KeepPosition => m_Wrapper.m_Spaceship_KeepPosition;
+        public InputAction @Interact => m_Wrapper.m_Spaceship_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Spaceship; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -983,6 +975,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @KeepPosition.started += instance.OnKeepPosition;
             @KeepPosition.performed += instance.OnKeepPosition;
             @KeepPosition.canceled += instance.OnKeepPosition;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(ISpaceshipActions instance)
@@ -1002,6 +997,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @KeepPosition.started -= instance.OnKeepPosition;
             @KeepPosition.performed -= instance.OnKeepPosition;
             @KeepPosition.canceled -= instance.OnKeepPosition;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(ISpaceshipActions instance)
@@ -1081,52 +1079,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
-
-    // Interaction
-    private readonly InputActionMap m_Interaction;
-    private List<IInteractionActions> m_InteractionActionsCallbackInterfaces = new List<IInteractionActions>();
-    private readonly InputAction m_Interaction_Interact;
-    public struct InteractionActions
-    {
-        private @GameInput m_Wrapper;
-        public InteractionActions(@GameInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Interact => m_Wrapper.m_Interaction_Interact;
-        public InputActionMap Get() { return m_Wrapper.m_Interaction; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
-        public void AddCallbacks(IInteractionActions instance)
-        {
-            if (instance == null || m_Wrapper.m_InteractionActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_InteractionActionsCallbackInterfaces.Add(instance);
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
-        }
-
-        private void UnregisterCallbacks(IInteractionActions instance)
-        {
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
-        }
-
-        public void RemoveCallbacks(IInteractionActions instance)
-        {
-            if (m_Wrapper.m_InteractionActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        public void SetCallbacks(IInteractionActions instance)
-        {
-            foreach (var item in m_Wrapper.m_InteractionActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_InteractionActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    public InteractionActions @Interaction => new InteractionActions(this);
 
     // UI
     private readonly InputActionMap m_UI;
@@ -1213,16 +1165,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnJet(InputAction.CallbackContext context);
         void OnKeepRotation(InputAction.CallbackContext context);
         void OnKeepPosition(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {
         void OnChangeCamera(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
-    }
-    public interface IInteractionActions
-    {
-        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

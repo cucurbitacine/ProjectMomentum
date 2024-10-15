@@ -28,11 +28,11 @@ namespace Game.Scripts.Levels
             {
                 return JsonUtility.FromJson<GameSessionTable>(json);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Debug.LogError(e.Message);
+                // ignored
             }
-            
+
             return null;
         }
 

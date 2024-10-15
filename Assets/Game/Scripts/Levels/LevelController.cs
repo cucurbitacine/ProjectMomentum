@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CucuTools;
-using Game.Scripts.Core;
-using Game.Scripts.Interactions;
+using Game.Scripts.InventorySystem;
 using Game.Scripts.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,7 +18,7 @@ namespace Game.Scripts.Levels
         
         [Header("Game Entities")]
         [SerializeField] private LazyComponent<PlayerController> lazyPlayer;
-        [SerializeField] private StorageBase evacuatedStorage;
+        [SerializeField] private InventoryBase evacuatedStorage;
 
         [Header("Level Building")]
         [SerializeField] private ChunkGenerationSystem generatorSystem;
@@ -43,7 +42,7 @@ namespace Game.Scripts.Levels
         
         public int MaxScore { get; private set; }
         
-        public int Score => evacuatedStorage?.Amount ?? 0;
+        public int Score => evacuatedStorage?.CountItems() ?? 0;
         public float TimeSpent { get; private set; }
         public int HealthSpent { get; private set; }
         public float FuelSpent { get; private set; }
@@ -234,7 +233,7 @@ namespace Game.Scripts.Levels
             StartCoroutine(Dying());
         }
         
-        private void OnEvacuatedStorageAmountChanged(int value)
+        private void OnEvacuatedStorageAmountChanged(IInventory inv, ISlot slt)
         {
             if (State != LevelState.Playing) return;
             if (Score < MaxScore) return;
@@ -331,7 +330,7 @@ namespace Game.Scripts.Levels
             Player.Health.Died += OnPlayerDied;
             Player.Spaceship.Fuel.ValueChanged += OnPlayerFueldChanged;
 
-            evacuatedStorage.AmountChanged += OnEvacuatedStorageAmountChanged;
+            evacuatedStorage.InventoryUpdated += OnEvacuatedStorageAmountChanged;
         }
 
         private void OnDisable()
@@ -344,7 +343,7 @@ namespace Game.Scripts.Levels
             Player.Health.Died -= OnPlayerDied;
             Player.Spaceship.Fuel.ValueChanged -= OnPlayerFueldChanged;
             
-            evacuatedStorage.AmountChanged -= OnEvacuatedStorageAmountChanged;
+            evacuatedStorage.InventoryUpdated -= OnEvacuatedStorageAmountChanged;
         }
 
         private void Start()
@@ -377,7 +376,10 @@ namespace Game.Scripts.Levels
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.DrawWireSphere(evacuatedStorage.transform.position, maxPlayerDistance);
+            if (evacuatedStorage)
+            {
+                Gizmos.DrawWireSphere(evacuatedStorage.transform.position, maxPlayerDistance);
+            }
         }
 
         public enum LevelState
