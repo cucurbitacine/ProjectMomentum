@@ -34,8 +34,10 @@ namespace Game.Scripts.Core
         private void OnTriggerEnter2D(Collider2D other)
         {
             //Debug.Log($"{name} :: Enter {other.name}");
+
+            var root = other.attachedRigidbody ? other.attachedRigidbody.transform : other.transform;
             
-            if (other.TryGetComponent<IRigidbody2D>(out var rigid2d))
+            if (root.TryGetComponent<IRigidbody2D>(out var rigid2d))
             {
                 //Debug.Log($"{name} :: {other.name} is {nameof(IRigidbody2D)}");
                 
@@ -50,7 +52,9 @@ namespace Game.Scripts.Core
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.TryGetComponent<IRigidbody2D>(out var rigid2d))
+            var root = other.attachedRigidbody ? other.attachedRigidbody.transform : other.transform;
+            
+            if (root.TryGetComponent<IRigidbody2D>(out var rigid2d))
             {
                 if (_set.Remove(rigid2d))
                 {

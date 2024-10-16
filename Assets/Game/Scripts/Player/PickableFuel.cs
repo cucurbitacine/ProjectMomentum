@@ -1,11 +1,12 @@
 using CucuTools;
+using Game.Scripts.Control;
 using Game.Scripts.Core;
 using Game.Scripts.Interactions;
 using UnityEngine;
 
 namespace Game.Scripts.Player
 {
-    public class PickableFuel : MonoBehaviour, IPickable
+    public class PickableFuel : MonoBehaviour, IPickable, IInteractable
     {
         [SerializeField] private bool usePercent = false;
         [SerializeField] private float fuelAmount = 100;
@@ -13,7 +14,7 @@ namespace Game.Scripts.Player
         [Space]
         [SerializeField] private GameObject pickupEffectPrefab;
         
-        public bool IsValid(GameObject actor)
+        public bool IsReadyBePicked(GameObject actor)
         {
             if (actor.TryGetComponent<PlayerController>(out var player) && !player.Health.IsDead)
             {
@@ -27,7 +28,7 @@ namespace Game.Scripts.Player
         {
             if (actor.TryGetComponent<PlayerController>(out var player))
             {
-                if(player.Spaceship.Fuel.IsEmpty) player.Spaceship.Fuel.Fill();
+                if (player.Spaceship.Fuel.IsEmpty) player.Spaceship.Fuel.Fill();
                 
                 if (usePercent)
                 {
@@ -49,6 +50,43 @@ namespace Game.Scripts.Player
                     pickupEffect.PlaySafe();
                 }
             }
+        }
+
+        public bool IsReadyBeInteracted(GameObject actor)
+        {
+            return IsReadyBePicked(actor);
+        }
+
+        public void StartInteraction(GameObject actor)
+        {
+            Pickup(actor);
+        }
+
+        public void StopInteraction(GameObject actor)
+        {
+        }
+        
+        private void UpdateMass()
+        {
+            if (TryGetComponent(out Rigidbody2D rigid2d))
+            {
+                rigid2d.useAutoMass = usePercent;
+
+                if (!rigid2d.useAutoMass)
+                {
+                    rigid2d.mass = fuelAmount * Fuel.MassPerUnit * IMass.Mass2Rigid;
+                }
+            }
+        }
+        
+        private void Start()
+        {
+            UpdateMass();
+        }
+
+        private void OnValidate()
+        {
+            UpdateMass();
         }
     }
 }

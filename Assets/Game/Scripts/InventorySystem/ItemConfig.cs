@@ -4,10 +4,13 @@ using UnityEngine;
 namespace Game.Scripts.InventorySystem
 {
     [CreateAssetMenu(menuName = "Game/Inventory/Create Item", fileName = "Item", order = 0)]
-    public class ItemConfig : ScriptableObject, IPrefabSource, IIconSource
+    public class ItemConfig : ScriptableObject, IPrefabSource, IIconSource, IMass
     {
         [field: SerializeField, Min(1)] public int StackMax { get; private set; } = 1;
 
+        [Space]
+        [SerializeField] private float mass = 0f;
+        
         [Space]
         [SerializeField] private GameObject prefab;
         [SerializeField] private Sprite icon;
@@ -30,6 +33,11 @@ namespace Game.Scripts.InventorySystem
         public Sprite GetIcon()
         {
             return icon;
+        }
+
+        public float GetMass()
+        {
+            return mass;
         }
     }
 }

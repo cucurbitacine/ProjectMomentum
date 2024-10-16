@@ -66,7 +66,7 @@ namespace Game.Scripts.UI
         
         private void Update()
         {
-            massText.text = $"{(Spaceship.mass * 100):F1} kg";
+            massText.text = $"{Spaceship.mass:F1} kg";
         }
     }
 }

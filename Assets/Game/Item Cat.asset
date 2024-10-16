@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Item Cat
   m_EditorClassIdentifier: 
   <StackMax>k__BackingField: 10
+  mass: 1
   prefab: {fileID: 8461846431498770739, guid: 79a9936178aca1741ba97012e6fe3e34, type: 3}
   icon: {fileID: 21300000, guid: abdd31297729ea844902f20b578cb8ed, type: 3}

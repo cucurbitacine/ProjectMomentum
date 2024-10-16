@@ -132,7 +132,7 @@ namespace Game.Scripts.Levels
         
         private void StartRescueShipwrecks(int index)
         {
-            if (_selectedStackShipwrecks >= 0)
+            if (0 <= _selectedStackShipwrecks && _selectedStackShipwrecks < _shipwreckStack.Count)
             {
                 var previousShipwrecks = _shipwreckStack[_selectedStackShipwrecks];
 

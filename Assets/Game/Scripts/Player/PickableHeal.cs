@@ -1,11 +1,10 @@
 using CucuTools;
-using Game.Scripts.Core;
 using Game.Scripts.Interactions;
 using UnityEngine;
 
 namespace Game.Scripts.Player
 {
-    public class PickableHeal : MonoBehaviour, IPickable
+    public class PickableHeal : MonoBehaviour, IPickable, IInteractable
     {
         [SerializeField] private bool usePercent = false;
         [SerializeField] [Min(0)] private int healAmount = 100;
@@ -13,7 +12,7 @@ namespace Game.Scripts.Player
         [Space]
         [SerializeField] private GameObject pickupEffectPrefab;
         
-        public bool IsValid(GameObject actor)
+        public bool IsReadyBePicked(GameObject actor)
         {
             if (actor.TryGetComponent<PlayerController>(out var player) && !player.Health.IsDead)
             {
@@ -46,6 +45,20 @@ namespace Game.Scripts.Player
                     pickupEffect.PlaySafe();
                 }
             }
+        }
+
+        public bool IsReadyBeInteracted(GameObject actor)
+        {
+            return IsReadyBePicked(actor);
+        }
+
+        public void StartInteraction(GameObject actor)
+        {
+            Pickup(actor);
+        }
+
+        public void StopInteraction(GameObject actor)
+        {
         }
     }
 }

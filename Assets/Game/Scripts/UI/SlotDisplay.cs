@@ -24,14 +24,7 @@ namespace Game.Scripts.UI
             {
                 root.SetActive(true);
 
-                if (slot.GetItem() is IIconSource iconSource)
-                {
-                    icon.sprite = iconSource.GetIcon();
-                }
-                else
-                {
-                    icon.sprite = null;
-                }
+                icon.sprite = slot.GetItem().GetIcon();
             }
             
             text.text = $"{slot.CountItems}";

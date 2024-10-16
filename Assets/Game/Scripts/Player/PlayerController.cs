@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using CucuTools;
 using Game.Scripts.Combat;
 using Game.Scripts.Control;
@@ -17,23 +18,25 @@ namespace Game.Scripts.Player
 
         [Header("Mass")]
         [SerializeField] [Min(0f)] private float massShip = 50f;
-        [SerializeField] [Min(0f)] private float massPerUnit = 5f;
-        [SerializeField] [Min(0f)] private float massPerFuelPercent = 0.5f;
+
+        private float _inventoryMass;
+        private float _fuelMass;
         
         private LazyComponent<Spaceship> _lazySpaceship;
         private LazyComponent<Health> _lazyHealth;
         private LazyComponent<Interactor> _lazyInteractor;
-        private LazyComponent<IInventory> _lazyInventory;
-
+        
         public Spaceship Spaceship => (_lazySpaceship ??= new LazyComponent<Spaceship>(gameObject)).Value;
         public Health Health => (_lazyHealth ??= new LazyComponent<Health>(gameObject)).Value;
         public Interactor Interactor => (_lazyInteractor ??= new LazyComponent<Interactor>(gameObject)).Value;
-        public IInventory Inventory => (_lazyInventory ??= new LazyComponent<IInventory>(gameObject)).Value;
-
+        
         public Transform Gateway => Spaceship.transform;
         
         #region IInventory
-
+        
+        private LazyComponent<IInventory> _lazyInventory;
+        private IInventory Inventory => (_lazyInventory ??= new LazyComponent<IInventory>(gameObject)).Value;
+        
         public event Action<IInventory, ISlot> InventoryUpdated;
         public int CountSlots => Inventory.CountSlots;
         public ISlot GetSlot(int index)
@@ -45,11 +48,13 @@ namespace Game.Scripts.Player
         
         private void UpdateMass()
         {
-            Spaceship.mass = (massShip + GetStorageMass() + GetFuelMass()) * 0.01f;
+            Spaceship.mass = massShip + _inventoryMass + _fuelMass;
         }
 
         private void OnInventoryUpdated(IInventory inv, ISlot slt)
         {
+            _inventoryMass = GetInventoryMass();
+            
             UpdateMass();
             
             InventoryUpdated?.Invoke(this, slt);
@@ -57,17 +62,19 @@ namespace Game.Scripts.Player
 
         private void HandleFuel(float fuel)
         {
+            _fuelMass = GetFuelMass();
+            
             UpdateMass();
         }
 
-        private float GetStorageMass()
+        private float GetInventoryMass()
         {
-            return Inventory.CountItems() * massPerUnit;
+            return Inventory.GetSlotsWithItems().Select(slot => (slot, item: slot.GetItem())).Sum(x => x.slot.CountItems * x.item.GetMass());
         }
 
         private float GetFuelMass()
         {
-            return 100f * massPerFuelPercent * Spaceship.Fuel.Value / Spaceship.Fuel.Max;
+            return Fuel.MassPerUnit * Spaceship.Fuel.Value;
         }
         
         private void Awake()
@@ -89,6 +96,9 @@ namespace Game.Scripts.Player
         
         private void Start()
         {
+            _inventoryMass = GetInventoryMass();
+            _fuelMass = GetFuelMass();
+            
             UpdateMass();
         }
     }

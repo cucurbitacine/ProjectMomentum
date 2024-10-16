@@ -7,7 +7,7 @@
 -[x] Smart Generating World + World with bounds
 -[x] New Input System (+Gamepad)
 -[x] Inventory (minimum: show how many cats on the board, and max capacity)
--[ ] Rethink over the weight system (just refactor)
+-[x] Rethink over the weight system (just refactor)
 -[ ] UI (more hints/instructions/information)
 -[ ] Initial Animation
 -[ ] Tutorial Level

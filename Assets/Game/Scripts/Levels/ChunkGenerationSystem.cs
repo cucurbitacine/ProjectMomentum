@@ -76,8 +76,8 @@ namespace Game.Scripts.Levels
                             
                 if (doPhysics)
                 {
-                    rigid2d.AddTorque((Random.value * 2f - 1f) * torqueMax, ForceMode2D.Impulse);
-                    rigid2d.AddForce(Random.insideUnitCircle * forceMax, ForceMode2D.Impulse);
+                    rigid2d.AddTorque(rigid2d.mass * (Random.value * 2f - 1f) * torqueMax, ForceMode2D.Impulse);
+                    rigid2d.AddForce(rigid2d.mass * Random.insideUnitCircle * forceMax, ForceMode2D.Impulse);
                 }
             }
         }

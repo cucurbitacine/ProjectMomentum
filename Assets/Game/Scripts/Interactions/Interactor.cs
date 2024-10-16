@@ -9,9 +9,10 @@ namespace Game.Scripts.Interactions
     {
         [SerializeField] private bool interacting = false;
 
-        public HashSet<IInteractable> SetInteractions { get; } = new HashSet<IInteractable>();
+        public IInteractable Selected { get; private set; }
+        public List<IInteractable> Interactions { get; } = new List<IInteractable>();
 
-        public event Action<HashSet<IInteractable>> SetUpdated;
+        public event Action<List<IInteractable>> ListUpdated;
         
         public void BeginInteract()
         {
@@ -20,11 +21,12 @@ namespace Game.Scripts.Interactions
             if (interacting) return;
             
             interacting = true;
+
+            if (Interactions.Count == 0) return;
             
-            foreach (var interaction in SetInteractions)
-            {
-                interaction.StartInteraction(gameObject);
-            }
+            Selected = Interactions[0];
+            
+            Selected.StartInteraction(gameObject);
         }
         
         public void EndInteract()
@@ -33,35 +35,40 @@ namespace Game.Scripts.Interactions
             
             interacting = false;
             
-            foreach (var interaction in SetInteractions)
-            {
-                interaction.StopInteraction(gameObject);
-            }
+            Selected?.StopInteraction(gameObject);
+
+            Selected = null;
         }
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent<IInteractable>(out var interaction))
+            var root = other.attachedRigidbody ? other.attachedRigidbody.transform : other.transform;
+            
+            if (root.TryGetComponent<IInteractable>(out var interaction))
             {
-                if (SetInteractions.Add(interaction))
+                if (!Interactions.Contains(interaction))
                 {
-                    SetUpdated?.Invoke(SetInteractions);
+                    Interactions.Add(interaction);
+                    
+                    ListUpdated?.Invoke(Interactions);
                 }
             }
         }
 
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (other.TryGetComponent<IInteractable>(out var interaction))
+            var root = other.attachedRigidbody ? other.attachedRigidbody.transform : other.transform;
+            
+            if (root.TryGetComponent<IInteractable>(out var interaction))
             {
-                if (SetInteractions.Remove(interaction))
+                if (Interactions.Remove(interaction))
                 {
-                    if (interacting)
+                    if (Selected == interaction)
                     {
-                        interaction.StopInteraction(gameObject);
+                        Selected.StopInteraction(gameObject);
                     }
                     
-                    SetUpdated?.Invoke(SetInteractions);
+                    ListUpdated?.Invoke(Interactions);
                 }
             }
         }

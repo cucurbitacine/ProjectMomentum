@@ -21,15 +21,15 @@ namespace Game.Scripts.UI
         
         private void UpdateInteractor()
         {
-            interactText.enabled = player.Interactor.SetInteractions.Any(s => s.IsReadyInteractWith(player.gameObject));
+            interactText.enabled = player.Interactor.Interactions.Any(s => s.IsReadyBeInteracted(player.gameObject));
         }
         
-        private void OnSetUpdated(HashSet<IInteractable> set)
+        private void OnListUpdated(List<IInteractable> list)
         {
             UpdateInteractor();
         }
         
-        private void OnInventoryUpdated(IInventory inv, ISlot slt)
+        private void OnInventoryUpdated(IInventory inventory, ISlot slot)
         {
             UpdateInteractor();
         }
@@ -42,19 +42,19 @@ namespace Game.Scripts.UI
         
         private void OnEnable()
         {
-            player.Interactor.SetUpdated += OnSetUpdated;
+            player.Interactor.ListUpdated += OnListUpdated;
             player.InventoryUpdated += OnInventoryUpdated;
         }
         
         private void OnDisable()
         {
-            player.Interactor.SetUpdated -= OnSetUpdated;
+            player.Interactor.ListUpdated -= OnListUpdated;
             player.InventoryUpdated -= OnInventoryUpdated;
         }
 
         private void Start()
         {
-            OnSetUpdated(player.Interactor.SetInteractions);
+            OnListUpdated(player.Interactor.Interactions);
 
             ShowHint(false);
         }

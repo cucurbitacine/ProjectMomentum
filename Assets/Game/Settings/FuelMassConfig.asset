@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f88883df83b4315b67a00038d86b7fd, type: 3}
-  m_Name: Template Inventory Shipwreck
+  m_Script: {fileID: 11500000, guid: 16800f442d634d81b6a4dc8661eb308d, type: 3}
+  m_Name: FuelMassConfig
   m_EditorClassIdentifier: 
-  isTemplate: 1
-  slots:
-  - <CountItems>k__BackingField: 10
-    <Item>k__BackingField: {fileID: 11400000, guid: c9470a5d8ce4bc442b0bf25ea0279dab, type: 2}
-  clearInventory: 0
+  <MassPerUnit>k__BackingField: 1
+  <Power>k__BackingField: 1

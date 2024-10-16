@@ -9,7 +9,7 @@ namespace Game.Scripts.Interactions
         {
             if (other.transform.TryGetComponent<IPickable>(out var pickable))
             {
-                if (pickable.IsValid(gameObject))
+                if (pickable.IsReadyBePicked(gameObject))
                 {
                     pickable.Pickup(gameObject);
                 }

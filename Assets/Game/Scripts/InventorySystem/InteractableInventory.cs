@@ -34,7 +34,7 @@ namespace Game.Scripts.InventorySystem
 
         public Transform Gateway => gateway ? gateway.transform : transform;
 
-        public bool IsReadyInteractWith(GameObject actor)
+        public bool IsReadyBeInteracted(GameObject actor)
         {
             if (actor.TryGetComponent<IInventory>(out var outsource))
             {

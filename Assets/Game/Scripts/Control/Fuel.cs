@@ -5,8 +5,11 @@ namespace Game.Scripts.Control
 {
     public class Fuel : MonoBehaviour
     {
-        [field: SerializeField] public float Value { get; private set; } = 1000f;
-        [field: SerializeField] public float Max { get; private set; } = 1000f;
+        public static float MassPerUnit => FuelMassConfig.Instance?.MassPerUnit ?? 0f;
+        public static float Power => FuelMassConfig.Instance?.Power ?? 1f;
+        
+        [field: SerializeField] public float Value { get; private set; } = 100f;
+        [field: SerializeField] public float Max { get; private set; } = 100f;
 
         [field: Space]
         [field: SerializeField] public bool IsEmpty { get; private set; } = false;

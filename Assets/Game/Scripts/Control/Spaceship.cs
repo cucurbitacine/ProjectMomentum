@@ -1,5 +1,6 @@
 using System;
 using CucuTools;
+using Game.Scripts.Core;
 using UnityEngine;
 
 namespace Game.Scripts.Control
@@ -38,8 +39,8 @@ namespace Game.Scripts.Control
         public float angularVelocity => rigid2d.angularVelocity;
         public float mass
         {
-            get => rigid2d.mass;
-            set => rigid2d.mass = value;
+            get => rigid2d.mass / IMass.Mass2Rigid;
+            set => rigid2d.mass = value * IMass.Mass2Rigid;
         }
         
         public bool IsPaused { get; private set; }
@@ -106,12 +107,12 @@ namespace Game.Scripts.Control
         {
             if (IsPaused) return;
             
-            rigid2d.AddForce(rigid2d.transform.TransformVector(_localForce) * powerMovement);
-            rigid2d.AddTorque(_torque * powerRotation);
+            rigid2d.AddForce(rigid2d.transform.TransformVector(_localForce) * (powerMovement * Fuel.Power));
+            rigid2d.AddTorque(_torque * powerRotation * Fuel.Power);
             
             if (_jet > 0f)
             {
-                rigid2d.AddForce(rigid2d.transform.TransformVector(Vector2.up) * powerJetEngine);
+                rigid2d.AddForce(rigid2d.transform.TransformVector(Vector2.up) * (powerJetEngine * Fuel.Power));
             }
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using Game.Scripts.Core;
 using UnityEngine;
 
 namespace Game.Scripts.InventorySystem
@@ -28,7 +29,7 @@ namespace Game.Scripts.InventorySystem
             if (!inventory.IsTemplate) return inventory;
             
             var copy = Inventory.Create(capacityDefault);
-                    
+               
             copy.SilenceCopy(inventory);
                     
             return inventory = copy;

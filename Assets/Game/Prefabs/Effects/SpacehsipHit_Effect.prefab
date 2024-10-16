@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7361646651868995639}
   - component: {fileID: 6958748547774112466}
   m_Layer: 0
-  m_Name: Hit_Effect
+  m_Name: SpacehsipHit_Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -22,7 +22,9 @@ namespace Game.Scripts.Core
         }
 
         public Rigidbody2D Rigid2d => (_lazyRigidbody2D ??= new LazyComponent<Rigidbody2D>(gameObject)).Value;
-        
+
+        public float mass => Rigid2d.mass;
+
         public void AddForce(Vector2 force, ForceMode2D mode)
         {
             var cmd = new AddForceCommand() { rigidbody2D = Rigid2d, force = force, mode = mode };

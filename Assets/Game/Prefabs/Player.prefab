@@ -269,9 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9df8228a634a24b8d81439b4a88510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  massShip: 50
-  massPerUnit: 5
-  massPerFuelPercent: 0.5
+  massShip: 10
 --- !u!114 &848884882052311599
 MonoBehaviour:
   m_ObjectHideFlags: 0
